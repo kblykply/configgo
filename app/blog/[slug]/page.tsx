@@ -104,7 +104,6 @@ function Prose({ content }: { content: PostContent }) {
         "prose-hr:border-white/10",
         "prose-blockquote:border-l-2 prose-blockquote:pl-4 prose-blockquote:text-white/80",
       ].join(" ")}
-      // @ts-expect-error: custom CSS var for prose bullets
       style={{ ["--tw-prose-bullets" as any]: "rgba(255,255,255,0.6)" }}
     >
       {content.map((b, i) => {
