@@ -11,6 +11,56 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 
+// HeroSlider.tsx üstüne (export default'tan önce) ekle
+function SlideOneVisual() {
+  const [vidReady, setVidReady] = useState(false);
+  return (
+    <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+      {/* Büyük video arka planda (hazır olmadan görünmesin) */}
+      <motion.div
+        initial={{ scale: 0.96, opacity: 0 }}
+        animate={{ scale: 1, opacity: vidReady ? 1 : 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="aspect-square w-[clamp(720px,110vmin,1500px)] md:w-[clamp(820px,120vmin,1800px)] transform-gpu will-change-transform"
+      >
+        <video
+          className="w-full h-full object-contain select-none"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+          onCanPlay={() => setVidReady(true)}
+          onLoadedData={() => setVidReady(true)}
+        >
+          <source src="/1.webm" type="video/webm" />
+          <source src="/1video.mp4" type="video/mp4" />
+        </video>
+      </motion.div>
+
+      {/* Küçük poster üstte — video hazır olunca fade out */}
+      <motion.div
+        initial={{ opacity: 1, scale: 0.98 }}
+        animate={{ opacity: vidReady ? 0 : 1, scale: vidReady ? 1 : 0.98 }}
+        transition={{ duration: 0.45, ease: "easeOut" }}
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        style={{ pointerEvents: "none" }}
+      >
+        <Image
+          src="/1.png"
+          alt=""
+          width={900}
+          height={900}
+          className="w-[min(70vmin,900px)] md:w-[min(74vmin,1000px)] h-auto object-contain select-none"
+          priority
+        />
+      </motion.div>
+    </div>
+  );
+}
+
+
 export default function HeroSlider() {
   const swiperRef = useRef<any>(null);
 
@@ -95,67 +145,9 @@ const pagination = useMemo(
         {/* SLIDE 1 */}
       <SwiperSlide>
   <div className="relative h-full w-full">
-    {/* center VIDEO, non-blocking */}
    {/* center VIDEO, anchored to viewport center with small poster overlay */}
-<div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-  {(() => {
-    const [vidReady, setVidReady] = useState(false);
-    return (
-      <>
-        {/* Big video behind (hidden until ready) */}
-        <motion.div
-          initial={{ scale: 0.96, opacity: 0 }}
-          animate={{ scale: 1, opacity: vidReady ? 1 : 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="
-            aspect-square
-            w-[clamp(720px,110vmin,1500px)]
-            md:w-[clamp(820px,120vmin,1800px)]
-            transform-gpu will-change-transform
-          "
-        >
-          <video
-            className="w-full h-full object-contain select-none"
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            // remove poster here to avoid double-poster; overlay handles it
-            aria-hidden="true"
-            onCanPlay={() => setVidReady(true)}
-            onLoadedData={() => setVidReady(true)}
-          >
-            <source src="/1.webm" type="video/webm" />
-            <source src="/1video.mp4"  type="video/mp4" />
-          </video>
-        </motion.div>
+<SlideOneVisual />
 
-        {/* Smaller poster on top (fades out when video is ready) */}
-        <motion.div
-          initial={{ opacity: 1, scale: 0.98 }}
-          animate={{ opacity: vidReady ? 0 : 1, scale: vidReady ? 1 : 0.98 }}
-          transition={{ duration: 0.45, ease: "easeOut" }}
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-          style={{ pointerEvents: "none" }}
-        >
-          <Image
-            src="/1.png"
-            alt=""
-            width={900}
-            height={900}
-            className="
-              w-[min(70vmin,900px)]
-              md:w-[min(74vmin,1000px)]
-              h-auto object-contain select-none
-            "
-            priority
-          />
-        </motion.div>
-      </>
-    );
-  })()}
-</div>
 
 
     {/* content */}
