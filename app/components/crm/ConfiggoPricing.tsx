@@ -312,7 +312,6 @@ export default function ConfiggoPricing() {
 }
 
 /* ---------- helpers ---------- */
-type CellVal = boolean | string;
 
 function PlanCell({ v, highlighted = false }: { v: CellVal; highlighted?: boolean }) {
   const cls = ["px-2 py-2 text-center align-middle"];
