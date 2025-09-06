@@ -2,22 +2,26 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { PageProps } from "next";
 import { getPostBySlug } from "@/data/blogs";
 
 const ACCENT = "#C6F24E";
 
-export function generateStaticParams() {
+export function generateStaticParams(): Array<{ slug: string }> {
   return [
     { slug: "interactive-walkthroughs-mobile" },
     { slug: "digital-twins-for-sales-centers" },
     { slug: "amenities-that-sell" },
-    { slug: "digital-twin-guide-2025" }, // include if you added this post
+    { slug: "digital-twin-guide-2025" },
   ];
 }
 
-export default function BlogDetail({ params }: { params: { slug: string } }) {
-  const post = getPostBySlug(params.slug);
-  if (!post) return notFound();
+export default async function BlogDetail(
+  { params }: PageProps<{ slug: string }>
+) {
+  const { slug } = await params;          // <-- önemli kısım
+  const post = getPostBySlug(slug);
+  if (!post) notFound();
 
   return (
     <main className="min-h-svh bg-[var(--background)] text-white">
