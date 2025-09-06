@@ -46,7 +46,8 @@ const DEFAULT_PROJECTS: Project[] = [
 ];
 
 /* ---------- Variants ---------- */
-const EASE = [0.22, 0.61, 0.36, 1] as const;
+type Bezier = [number, number, number, number];
+const EASE: Bezier = [0.22, 0.61, 0.36, 1];
 const WRAP = {
   hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
   show: {
