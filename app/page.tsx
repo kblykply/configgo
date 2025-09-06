@@ -13,21 +13,13 @@ export default function Page() {
       
       <Hero />
       <Partners 
-        eyebrow="Our Trusted Partners"
-        title="Companies We Collaborate With"
       />
       <PropertyShowcase />
       <AboutUsSection />
       <ImmersiveSection 
-        titleLeft="Explore Our"
-        titleRight="Immersive Virtual Tours"
-        description="Step inside our properties from the comfort of your home. Our immersive virtual tours offer a 360-degree view, allowing you to explore every corner and detail as if you were there in person."
-        mediaSrc="/immersive-tour.jpg"
-        mediaAlt="Immersive Virtual Tour"
-        mediaType="image"
+       
       />
       <WeatherCreationSection 
-        decorSrc="/weather-decor.png"
       />
       <WebSolutionsSection />
       <NewsSection />
