@@ -46,7 +46,7 @@ const DEFAULT_PROJECTS: Project[] = [
 ];
 
 /* ---------- Variants ---------- */
-const EASE: number[] = [0.22, 0.61, 0.36, 1];
+const EASE = [0.22, 0.61, 0.36, 1] as const;
 const WRAP = {
   hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
   show: {
