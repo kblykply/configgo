@@ -1,15 +1,71 @@
 @import "tailwindcss";
 
+/* ---------- Local fonts (minimal, no Next.js font loader) ---------- */
+
+/* Clash Display — 300 */
+@font-face {
+  font-family: "Clash Display";
+  src: url("/fonts/clash-display/ClashDisplay-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  font-synthesis: none;
+}
+
+/* Clash Display — 400 */
+@font-face {
+  font-family: "Clash Display";
+  src: url("/fonts/clash-display/ClashDisplay-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  font-synthesis: none;
+}
+
+/* Clash Display — 500 */
+@font-face {
+  font-family: "Clash Display";
+  src: url("/fonts/clash-display/ClashDisplay-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  font-synthesis: none;
+}
+
+/* Clash Display — 600 */
+@font-face {
+  font-family: "Clash Display";
+  src: url("/fonts/clash-display/ClashDisplay-Semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  font-synthesis: none;
+}
+
+/* DM Sans — 400 */
+@font-face {
+  font-family: "DM Sans";
+  src: url("/fonts/dm-sans/DMSans-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  font-synthesis: none;
+}
+
+/* ---------- Theme + colors (kept from your file) ---------- */
 :root {
-  --background: #ffffff;
+  --background: #040404;
   --foreground: #171717;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  /* Tailwind family mappings (simple) */
+  --font-sans: "DM Sans", Arial, Helvetica, sans-serif;     /* font-sans */
+  --font-heading: "Clash Display", Arial, Helvetica, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +75,72 @@
   }
 }
 
-body {
+/* ---------- Base ---------- */
+html, body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans); /* paragraphs & small text = DM Sans */
+  font-weight: 400;
+   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Headings = Clash Display by default */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1;   /* 100% */
+  letter-spacing: 0;
+  font-weight: 400; /* override per-utility below if needed */
+}
+
+/* ---------- Utilities to match your UI spec ---------- */
+
+/* Clash Display – 70px Light (300) */
+.typo-hero-light {
+  font-family: var(--font-heading);
+  font-weight: 300;
+  font-size: 70px;
+  line-height: 1;
+}
+
+/* Clash Display – 70px Semibold (600) (for highlighted span) */
+.typo-hero-semi {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 70px;
+  line-height: 1;
+}
+
+/* Clash Display – 40px Medium (500) */
+.typo-h2-md {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1;
+}
+
+/* Clash Display – 14px Regular (400) */
+.typo-small-heading {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* DM Sans – Body 20/32 */
+.typo-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 32px; /* exact per UI */
+}
+
+/* DM Sans – Small 12/18 (Justified) */
+.typo-small {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: justify;
 }
