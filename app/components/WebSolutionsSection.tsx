@@ -69,12 +69,12 @@ export default function WebSolutionsSection() {
           </h2>
         </div>
 
-        <motion.div
+   <motion.div
   variants={wrap}
   initial="hidden"
   whileInView="show"
-  viewport={{ once: true, amount: 0.18, margin: "-80px 0px -80px 0px" }}
-  className="space-y-8 md:space-y-10"
+  viewport={{ amount: 0.30, margin: "-100px 0px -100px 0px", /* once: false by default */ }}
+  className="space-y-6 md:space-y-8"
 >
           {/* TOP — CRM Based Archviz System */}
           <motion.div variants={item}>

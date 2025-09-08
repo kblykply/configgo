@@ -99,13 +99,13 @@ export default function NewsSection() {
           </h2>
         </div>
 
-                <motion.div
-          variants={wrap}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2, margin: "-80px 0px -80px 0px" }}
-          className="space-y-6 md:space-y-8"
-        >
+         <motion.div
+  variants={wrap}
+  initial="hidden"
+  whileInView="show"
+  viewport={{ amount: 0.30, margin: "-100px 0px -100px 0px", /* once: false by default */ }}
+  className="space-y-6 md:space-y-8"
+>
           {/* -------- Featured (from BLOGS[0]) -------- */}
           <motion.article
             variants={item}
