@@ -28,10 +28,7 @@ export const FAQS_CONFIGGO: QA[] = [
   { id: "g3", q: "How does Configgo differ from a regular website?", a: "Beyond pages, Configgo provides interactive 3D experiences, unit filtering, live availability, and CRM-backed lead capture." },
   { id: "g4", q: "What integrations are available?", a: "Web forms, Meta Lead Ads, Google Sheets, and common automation platforms (e.g., Zapier/Make). Deeper connectors can be added per project." },
   { id: "g5", q: "Is Configgo cloud-based?", a: "Yes. Most customers use our cloud, but private or on-prem deployments are available for enterprises." },
-  { id: "g6", q: "How is data secured?", a: "Role-based access, encrypted transport, and audit logs. EU/EAA data residency options are available on request." },
-  { id: "g7", q: "Does Configgo support multiple languages and currencies?", a: "Yes. You can localize UI strings and set currency formats per project or per user." },
-  { id: "g8", q: "What’s the onboarding process?", a: "We set up your project, import units and media, connect lead sources, and train your team—usually in a few working days." },
-  { id: "g9", q: "How is Configgo priced?", a: "Pricing is tiered by feature set and monthly active projects/users. Contact us for a quote tailored to your scope." }
+ 
 ];
 
 export const FAQS_DIGITAL_TWIN: QA[] = [
@@ -40,10 +37,7 @@ export const FAQS_DIGITAL_TWIN: QA[] = [
   { id: "dt3", q: "Can buyers filter and select specific units?", a: "Yes. Filter by block, floor, plan, area, price, and availability—then open a unit’s detail with gallery and specs." },
   { id: "dt4", q: "Does it include sun-path and weather simulation?", a: "Yes. You can preview sunlight at different times of day and simulate basic weather conditions for context." },
   { id: "dt5", q: "Can we show first-person or car tours?", a: "Yes. The twin supports FPS/TPS navigation and guided routes to showcase common areas and site circulation." },
-  { id: "dt6", q: "How are nearby locations handled?", a: "Pins and categories (schools, malls, transport, hospitals) with realistic distance and time estimates from the project." },
-  { id: "dt7", q: "Can we embed the Digital Twin on our website?", a: "Yes. Use our React component or a simple embed to place it on landing pages or sales kiosks." },
-  { id: "dt8", q: "Does the Digital Twin sync with the CRM?", a: "Two-way sync is available: unit statuses, pricing, and reservations can flow between the Twin and Configgo CRM." },
-  { id: "dt9", q: "What about performance on mobile devices?", a: "It’s optimized for modern browsers with GPU acceleration and adaptive quality. A fallback media mode is available." }
+  
 ];
 
 export const FAQS_CRM: QA[] = [
@@ -52,10 +46,7 @@ export const FAQS_CRM: QA[] = [
   { id: "crm3", q: "Can we customize pipelines and fields?", a: "Yes. Stages, fields, and permissions are configurable per team or project." },
   { id: "crm4", q: "Does the CRM manage unit availability and reservations?", a: "Yes. Units, prices, and holds/reservations can be tracked, with updates reflected in the Digital Twin." },
   { id: "crm5", q: "Are there notifications and reminders?", a: "You can auto-assign leads, set SLAs, and receive reminders for follow-ups, calls, and meetings." },
-  { id: "crm6", q: "Which channels can we track?", a: "Web, social lead ads, email, phone logs, and offline imports. Optional WhatsApp Business integration is supported." },
-  { id: "crm7", q: "What reporting is available?", a: "Dashboards for leads, conversion, revenue, top-performing campaigns, and agent productivity." },
-  { id: "crm8", q: "Can we integrate with third-party tools?", a: "Yes. We provide APIs and work with popular automation tools; custom integrations are offered on request." },
-  { id: "crm9", q: "How are roles and permissions handled?", a: "Granular roles, team-based access, and audit logs help you control who sees pricing, discounts, or sensitive data." }
+ 
 ];
 
 const FAQS: QA[] = [...FAQS_CONFIGGO, ...FAQS_DIGITAL_TWIN, ...FAQS_CRM];

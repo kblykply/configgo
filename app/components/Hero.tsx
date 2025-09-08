@@ -203,185 +203,238 @@ const pagination = useMemo(
 </SwiperSlide>
 
 
-      {/* === SLIDE 2 (with left-bottom green image) === */}
-  <SwiperSlide>
-<div
-  className="relative w-full h-[calc(100dvh-var(--header))] md:h-[calc(100svh-var(--header))] min-h-0"
-  style={{ ["--header" as any]: "96px" }}
->
+{/* === SLIDE 2 (with left-bottom green image) === */}
+<SwiperSlide className="!h-auto">
+  <div
+    className="relative w-full h-[calc(var(--vh)-var(--header))] md:h-[calc(100svh-var(--header))] min-h-0"
+    style={{ ["--header" as any]: "96px" }}
+  >
+    {/* set --vh locally (MOBILE SAFE) */}
+    {(() => {
+      if (typeof window !== "undefined") {
+        // run once per render; cheap and safe here
+        const set = () =>
+          document.documentElement.style.setProperty("--vh", `${window.innerHeight}px`);
+        set();
+        window.addEventListener("resize", set);
+        window.addEventListener("orientationchange", set);
+        // tidy when slide unmounts
+        // @ts-ignore
+        window.__confogoo_vh_cleanup__ ||= [];
+        // @ts-ignore
+        window.__confogoo_vh_cleanup__.push(() => {
+          window.removeEventListener("resize", set);
+          window.removeEventListener("orientationchange", set);
+        });
+      }
+      return null;
+    })()}
 
-        {/* LEFT-BOTTOM GREEN THINGS as image */}
-      <div className="absolute left-0 bottom-0 z-10 pointer-events-none">
-        <Image
-          src="/2.png"   // put your green beams PNG/SVG in /public
-          alt="Green neon beams"
-          width={500}
-          height={300}
-          className="w-[40vw] max-w-[500px] h-auto select-none"
-          priority
-        />
-      </div>
-
-{/* CONTENT */}
-<div
-  style={{ ["--header" as any]: "96px" }} // your real header height
-  className="relative z-20 mx-auto max-w-[1450px] px-6 md:px-10 h-[calc(100svh-var(--header))] min-h-0"
->
-  <div className="grid grid-cols-12 gap-5 h-full min-h-0">
-    {/* LEFT — vertically centered */}
-    <div className="col-span-12 md:col-span-6 h-full min-h-0 flex flex-col justify-center">
-      <motion.h2
-        initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
-        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        transition={{ duration: 0.7, ease: "easeOut", delay: 0.05 }}
-        className="tracking-[-0.01em]"
-        style={{ fontWeight: 600, fontSize: "clamp(20px, 3vw, 42px)", lineHeight: 1.15 }}
-      >
-        <span className="block">Smart Solutions for the</span>
-        <span className="block">Future of Real Estate</span>
-      </motion.h2>
-  
-      <motion.p
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.55, delay: 0.25 }}
-        className="mt-3 max-w-[55ch] text-[11px] md:text-[13px] text-white/70 leading-relaxed"
-      >
-        From powerful CRM systems to high-quality renders and immersive digital
-        twins, Confogoo provides end-to-end digital solutions that transform how
-        real estate projects are presented, managed, and sold.
-      </motion.p>
-
-      <motion.div
-        initial={{ opacity: 0, y: 6 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        className="mt-5 flex items-center gap-3"
-      >
-        <span className="h-px w-10 bg-white/70" aria-hidden />
-        <Link
-          href="#tools"
-          className="inline-flex items-center gap-1.5 text-[11px] md:text-xs tracking-[.1em] uppercase text-white/80 hover:text-white"
-        >
-          Learn more <span aria-hidden className="inline-block translate-y-[1px]">→</span>
-        </Link>
-      </motion.div>
+    {/* LEFT-BOTTOM GREEN THINGS as image */}
+    <div className="absolute left-0 bottom-0 z-10 pointer-events-none">
+      <Image
+        src="/2.png"
+        alt="Green neon beams"
+        width={500}
+        height={300}
+        className="w-[40vw] max-w-[500px] h-auto select-none"
+        priority
+      />
     </div>
 
-  <div className="col-span-12 md:col-span-6 h-full min-h-0 overflow-hidden">
-<div
-  style={{ ["--header" as any]: "96px" }} // set to your real header px
-  className="
-    grid w-full max-w-[620px] mx-auto
-    grid-cols-2 gap-2 md:gap-3
-    min-h-[calc(100svh-var(--header))]   /* make it as tall as the hero */
-    place-content-center place-items-center
-  "
->
-  {/* r1: text | image */}
-  <div className="self-center w-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-2 md:p-2.5 shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
-    <div className="flex items-start justify-between gap-2">
-      <div className="min-w-0">
-        <h3 className="text-[10px] md:text-[11px] font-medium text-white/90">Digital Twin</h3>
-        <p className="mt-1 text-[9px] md:text-[10px] leading-tight text-white/60"
-           style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
-          Explore projects interactively, simulate environments, and offer clients a complete preview of their future investments.
-        </p>
-      </div>
-      <span className="text-[10px] md:text-xs leading-none text-white/70 pl-1 shrink-0">1</span>
-    </div>
-  </div>
-
-  <div className="self-center mx-auto w-40 sm:w-48 md:w-56 lg:w-64 rounded-2xl overflow-hidden">
-    <Image
-      src="/digitaltwingorsel.png"
-      alt="Digital Twin Illustration"
-      width={520}
-      height={320}
-      className="w-full h-auto object-contain"
-      priority={false}
-    />
-  </div>
-
-  {/* r2: image | text  (← swapped side) */}
-  <div className="self-center mx-auto w-40 sm:w-48 md:w-56 lg:w-64 rounded-2xl overflow-hidden">
-    <Image
-      src="/crmgorsel.png"
-      alt="Interactive Experience"
-      width={520}
-      height={320}
-      className="w-full h-auto object-contain"
-      priority={false}
-    />
-  </div>
-
-  <div className="self-center w-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-2 md:p-2.5 shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
-    <div className="flex items-start justify-between gap-2">
-      <div className="min-w-0">
-        <h3 className="text-[10px] md:text-[11px] font-medium text-white/90">Smart CRM for Real Estate</h3>
-        <p className="mt-1 text-[9px] md:text-[10px] leading-tight text-white/60"
-           style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
-          Automate lead tracking, manage customer relations, and streamline the sales funnel with solutions tailored for construction and real estate.
-        </p>
-      </div>
-      <span className="text-[10px] md:text-xs leading-none text-white/70 pl-1 shrink-0">2</span>
-    </div>
-  </div>
-
-  {/* r3: text | image */}
-  <div className="self-center w-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-2 md:p-2.5 shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
-    <div className="flex items-start justify-between gap-2">
-      <div className="min-w-0">
-        <h3 className="text-[10px] md:text-[11px] font-medium text-white/90">High-Quality Render</h3>
-        <p className="mt-1 text-[9px] md:text-[10px] leading-tight text-white/60"
-           style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
-          Bring your projects to life with realistic renders and cinematic visuals.
-        </p>
-      </div>
-      <span className="text-[10px] md:text-xs leading-none text-white/70 pl-1 shrink-0">3</span>
-    </div>
-  </div>
-
-<div className="mx-auto self-center w-32 sm:w-40 md:w-48 lg:w-28">
-  {/* vertical frame so nothing gets cropped */}
-  <div className="relative aspect-[9/16] rounded-2xl overflow-hidden bg-black/70">
-    <video
-      className="absolute inset-0 w-full h-full object-contain select-none"
-      muted
-      playsInline
-      autoPlay
-      loop
-      preload="metadata"
-      controls={false}
-      onError={(e) => console.error("Video failed:", e.currentTarget.error)}
+    {/* CONTENT */}
+    <div
+      style={{ ["--header" as any]: "96px" }}
+      className="relative z-20 mx-auto max-w-[1450px] px-6 md:px-10 h-full min-h-0"
     >
-      {/* If you also have a .webm, put it first */}
-      {/* <source src="/crm-loop.webm" type="video/webm" /> */}
-      <source src="/kule.mp4" type="video/mp4" />
-    </video>
-  </div>
-</div>
+      <div className="grid grid-cols-12 gap-5 h-full min-h-0">
+        {/* LEFT — vertically centered */}
+        <div className="col-span-12 md:col-span-6 h-full min-h-0 flex flex-col justify-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.05 }}
+            className="tracking-[-0.01em]"
+            style={{ fontWeight: 600, fontSize: "clamp(20px, 3vw, 42px)", lineHeight: 1.15 }}
+          >
+            <span className="block">Smart Solutions for the</span>
+            <span className="block">Future of Real Estate</span>
+          </motion.h2>
 
-</div>
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.25 }}
+            className="mt-3 max-w-[55ch] text-[11px] md:text-[13px] text-white/70 leading-relaxed"
+          >
+            From powerful CRM systems to high-quality renders and immersive digital
+            twins, Confogoo provides end-to-end digital solutions that transform how
+            real estate projects are presented, managed, and sold.
+          </motion.p>
 
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-5 flex items-center gap-3"
+          >
+            <span className="h-px w-10 bg-white/70" aria-hidden />
+            <Link
+              href="#tools"
+              className="inline-flex items-center gap-1.5 text-[11px] md:text-xs tracking-[.1em] uppercase text-white/80 hover:text-white"
+            >
+              Learn more <span aria-hidden className="inline-block translate-y-[1px]">→</span>
+            </Link>
+          </motion.div>
+        </div>
 
+        {/* RIGHT GRID */}
+        <div className="col-span-12 md:col-span-6 h-full min-h-0 overflow-hidden">
+          <div
+            style={{ ["--header" as any]: "96px" }}
+            className="
+              grid w-full max-w-[620px] mx-auto
+              grid-cols-2 gap-2 md:gap-3
+              h-full min-h-0
+              place-content-center place-items-center
+            "
+          >
+            {/* r1: text | image */}
+            <div className="self-center w-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-2 md:p-2.5 shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
+              <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0">
+                  <h3 className="text-[10px] md:text-[11px] font-medium text-white/90">Digital Twin</h3>
+                  <p
+                    className="mt-1 text-[9px] md:text-[10px] leading-tight text-white/60"
+                    style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}
+                  >
+                    Explore projects interactively, simulate environments, and offer clients a complete preview of their future investments.
+                  </p>
+                </div>
+                <span className="text-[10px] md:text-xs leading-none text-white/70 pl-1 shrink-0">1</span>
+              </div>
+            </div>
 
+            <div className="self-center mx-auto w-40 sm:w-48 md:w-56 lg:w-64 rounded-2xl overflow-hidden">
+              <Image
+                src="/digitaltwingorsel.png"
+                alt="Digital Twin Illustration"
+                width={520}
+                height={320}
+                className="w-full h-auto object-contain"
+                priority={false}
+              />
+            </div>
 
-</div>
+            {/* r2: image | text */}
+            <div className="self-center mx-auto w-40 sm:w-48 md:w-56 lg:w-64 rounded-2xl overflow-hidden">
+              <Image
+                src="/crmgorsel.png"
+                alt="Interactive Experience"
+                width={520}
+                height={320}
+                className="w-full h-auto object-contain"
+                priority={false}
+              />
+            </div>
 
-  </div>
-</div>
+            <div className="self-center w-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-2 md:p-2.5 shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
+              <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0">
+                  <h3 className="text-[10px] md:text-[11px] font-medium text-white/90">Smart CRM for Real Estate</h3>
+                  <p
+                    className="mt-1 text-[9px] md:text-[10px] leading-tight text-white/60"
+                    style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}
+                  >
+                    Automate lead tracking, manage customer relations, and streamline the sales funnel with solutions tailored for construction and real estate.
+                  </p>
+                </div>
+                <span className="text-[10px] md:text-xs leading-none text-white/70 pl-1 shrink-0">2</span>
+              </div>
+            </div>
 
+            {/* r3: text | image */}
+            <div className="self-center w-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-2 md:p-2.5 shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
+              <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0">
+                  <h3 className="text-[10px] md:text-[11px] font-medium text-white/90">High-Quality Render</h3>
+                  <p
+                    className="mt-1 text-[9px] md:text-[10px] leading-tight text-white/60"
+                    style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}
+                  >
+                    Bring your projects to life with realistic renders and cinematic visuals.
+                  </p>
+                </div>
+                <span className="text-[10px] md:text-xs leading-none text-white/70 pl-1 shrink-0">3</span>
+              </div>
+            </div>
 
+            <div className="mx-auto self-center w-20 sm:w-40 md:w-48 lg:w-28">
+              <div className="relative aspect-[9/16] rounded-2xl overflow-hidden bg-black/70">
+                <video
+                  className="absolute inset-0 w-full h-full object-contain select-none"
+                  muted
+                  playsInline
+                  autoPlay
+                  loop
+                  preload="metadata"
+                  controls={false}
+                  onError={(e) => console.error("Video failed:", e.currentTarget.error)}
+                >
+                  <source src="/kule.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
 
-
-
+          </div>
+        </div>
+      </div>
     </div>
-  </SwiperSlide>  
+
+    {/* cleanup for the inline listener hack */}
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `
+          (function(){
+            if(window.__confogoo_vh_cleanup__){
+              var f;
+              while((f = window.__confogoo_vh_cleanup__.pop())) try{ f(); }catch(e){}
+            }
+          })();
+        `,
+      }}
+    />
+  </div>
+</SwiperSlide>
+
 
 {/* === SLIDE 3 (with your cube PNG) === */}
-<SwiperSlide>
-  <div className="relative h-full w-full">
+<SwiperSlide className="!h-auto">
+  <div
+    className="relative w-full min-h-0
+               h-[calc(var(--vh)-var(--header))] md:h-[calc(100svh-var(--header))]"
+    style={{ ["--header" as any]: "96px" }}
+  >
+    {/* set --vh locally */}
+    {(() => {
+      if (typeof window !== "undefined") {
+        const set = () =>
+          document.documentElement.style.setProperty("--vh", `${window.innerHeight}px`);
+        set();
+        window.addEventListener("resize", set);
+        window.addEventListener("orientationchange", set);
+        // simple cleanup store
+        // @ts-ignore
+        window.__vh3 ||= [];
+        // @ts-ignore
+        window.__vh3.push(() => {
+          window.removeEventListener("resize", set);
+          window.removeEventListener("orientationchange", set);
+        });
+      }
+      return null;
+    })()}
+
     {/* BACKGROUND CUBE */}
     <div className="pointer-events-none absolute inset-0 z-0 grid place-items-center">
       <motion.div
@@ -391,7 +444,7 @@ const pagination = useMemo(
         className="w-[min(64vmin,600px)] h-[min(64vmin,600px)] translate-y-8"
       >
         <Image
-          src="/4.png"   // <-- your PNG here
+          src="/4.png"
           alt=""
           width={600}
           height={600}
@@ -401,97 +454,131 @@ const pagination = useMemo(
       </motion.div>
     </div>
 
-    {/* TOP: THREE COLUMNS */}
-    <div className="relative z-10 mx-auto max-w-[1280px] px-6 md:px-10">
-      <div className="pt-16 md:pt-20 lg:pt-24 grid gap-10 md:gap-12 md:grid-cols-3">
-        {/* COL 1 */}
-        <div>
-          <h3 className="text-white font-semibold tracking-tight text-[15px] md:text-[16px] leading-tight">
-            Smart Web Presence
-          </h3>
-          <ul className="mt-3 space-y-2 text-white/75 text-[11px] md:text-[12px] leading-[1.6]">
-            {[
-              "Real-time apartment availability map",
-              "Clickable 3D model interface",
-              "Comparison, filtering & online reservation",
-            ].map((t, i) => (
-              <li key={i} className="flex">
-                <span aria-hidden className="mt-[6px] mr-3 inline-block w-[5px] h-[5px] rounded-full bg-white/90" />
-                <span>{t}</span>
-              </li>
-            ))}
-          </ul>
+    {/* CONTENT FRAME */}
+    <div className="relative z-10 h-full min-h-0 flex flex-col">
+      {/* TOP: THREE COLUMNS (scrolls only if needed on small/short screens) */}
+      <div
+        className="mx-auto w-full max-w-[1280px] px-6 md:px-10
+                   pt-14 md:pt-20 lg:pt-24
+                   flex-1 min-h-0
+                   overflow-y-auto md:overflow-visible
+                   [scrollbar-gutter:stable]"
+        style={{ paddingBottom: "clamp(56px,8vh,96px)" }} /* leave room for tagline */
+      >
+        <div className="grid gap-8 md:gap-12 md:grid-cols-3">
+          {/* COL 1 */}
+          <div>
+            <h3 className="text-white font-semibold tracking-tight text-[15px] md:text-[16px] leading-tight">
+              Smart Web Presence
+            </h3>
+            <ul className="mt-3 space-y-2 text-white/75 text-[11px] md:text-[12px] leading-[1.6]">
+              {[
+                "Real-time apartment availability map",
+                "Clickable 3D model interface",
+                "Comparison, filtering & online reservation",
+              ].map((t, i) => (
+                <li key={i} className="flex">
+                  <span aria-hidden className="mt-[6px] mr-3 inline-block w-[5px] h-[5px] rounded-full bg-white/90" />
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* COL 2 */}
+          <div>
+            <h3 className="text-white font-semibold tracking-tight text-[15px] md:text-[16px] leading-tight">
+              Digital Twin Technology
+            </h3>
+            <ul className="mt-3 space-y-2 text-white/75 text-[11px] md:text-[12px] leading-[1.6]">
+              {[
+                "Real-time apartment status accuracy",
+                "Clickable 3D project map",
+                "Sunlight & climate simulations",
+                "User-based entry & behavior tracking",
+                "Automated offer generation",
+              ].map((t, i) => (
+                <li key={i} className="flex">
+                  <span aria-hidden className="mt-[6px] mr-3 inline-block w-[5px] h-[5px] rounded-full bg-white/90" />
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* COL 3 */}
+          <div>
+            <h3 className="text-white font-semibold tracking-tight text-[15px] md:text-[16px] leading-tight">
+              120 Frames of Excellence
+            </h3>
+            <ul className="mt-3 space-y-2 text-white/75 text-[11px] md:text-[12px] leading-[1.6]">
+              {[
+                "120 high-quality architectural renders",
+                "Floor plans & 3D plan visuals",
+                "360° virtual tour & short promotional animation",
+              ].map((t, i) => (
+                <li key={i} className="flex">
+                  <span aria-hidden className="mt-[6px] mr-3 inline-block w-[5px] h-[5px] rounded-full bg-white/90" />
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-        {/* COL 2 */}
-        <div>
-          <h3 className="text-white font-semibold tracking-tight text-[15px] md:text-[16px] leading-tight">
-            Digital Twin Technology
-          </h3>
-          <ul className="mt-3 space-y-2 text-white/75 text-[11px] md:text-[12px] leading-[1.6]">
-            {[
-              "Real-time apartment status accuracy",
-              "Clickable 3D project map",
-              "Sunlight & climate simulations",
-              "User-based entry & behavior tracking",
-              "Automated offer generation",
-            ].map((t, i) => (
-              <li key={i} className="flex">
-                <span aria-hidden className="mt-[6px] mr-3 inline-block w-[5px] h-[5px] rounded-full bg-white/90" />
-                <span>{t}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        {/* COL 3 */}
-        <div>
-          <h3 className="text-white font-semibold tracking-tight text-[15px] md:text-[16px] leading-tight">
-            120 Frames of Excellence
-          </h3>
-          <ul className="mt-3 space-y-2 text-white/75 text-[11px] md:text-[12px] leading-[1.6]">
-            {[
-              "120 high-quality architectural renders",
-              "Floor plans & 3D plan visuals",
-              "360° virtual tour & short promotional animation",
-            ].map((t, i) => (
-              <li key={i} className="flex">
-                <span aria-hidden className="mt-[6px] mr-3 inline-block w-[5px] h-[5px] rounded-full bg-white/90" />
-                <span>{t}</span>
-              </li>
-            ))}
-          </ul>
+      </div>
+
+      {/* BOTTOM: CENTERED TAGLINE (pinned) */}
+      <div
+        className="relative z-10 w-full flex items-center justify-center"
+        style={{
+          paddingBottom:
+            "max(env(safe-area-inset-bottom, 0px), 12px)",
+          paddingTop: "8px",
+        }}
+      >
+        <div className="flex items-center gap-[clamp(18px,3vw,40px)]">
+          <span
+            className="text-white/95"
+            style={{ fontSize: "clamp(18px,2.4vw,34px)", letterSpacing: "-0.01em" }}
+          >
+            One Platform
+          </span>
+          <span
+            aria-hidden
+            className="block"
+            style={{
+              width: "1.25px",
+              height: "clamp(26px,3.2vw,46px)",
+              background:
+                "linear-gradient(to bottom, rgba(255,255,255,.95), rgba(255,255,255,.75))",
+              borderRadius: "1px",
+            }}
+          />
+          <span
+            className="text-white/95"
+            style={{ fontSize: "clamp(18px,2.4vw,34px)", letterSpacing: "-0.01em" }}
+          >
+            Infinite Possibilities
+          </span>
         </div>
       </div>
     </div>
 
-    {/* BOTTOM: CENTERED TAGLINE */}
-    <div className="absolute left-1/2 -translate-x-1/2 bottom-10 md:bottom-12 z-10">
-      <div className="flex items-center gap-[clamp(18px,3vw,40px)]">
-        <span
-          className="text-white/95"
-          style={{  fontSize: "clamp(18px,2.4vw,34px)", letterSpacing: "-0.01em" }}
-        >
-          One Platform
-        </span>
-        <span
-          aria-hidden
-          className="block"
-          style={{
-            width: "1.25px",
-            height: "clamp(26px,3.2vw,46px)",
-            background: "linear-gradient(to bottom, rgba(255,255,255,.95), rgba(255,255,255,.75))",
-            borderRadius: "1px",
-          }}
-        />
-        <span
-          className="text-white/95"
-          style={{   fontSize: "clamp(18px,2.4vw,34px)", letterSpacing: "-0.01em" }}
-        >
-          Infinite Possibilities
-        </span>
-      </div>
-    </div>
+    {/* cleanup for listeners */}
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `
+          (function(){
+            if(window.__vh3){
+              var f; while((f = window.__vh3.pop())) try{ f(); }catch(e){}
+            }
+          })();
+        `,
+      }}
+    />
   </div>
 </SwiperSlide>
+
 
       </Swiper>
 

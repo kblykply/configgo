@@ -172,22 +172,51 @@ export default function Header({
           {/* Right controls */}
 <div className="relative col-start-3 flex items-center gap-3 justify-self-end">
   {/* MOBILE HAMBURGER (inline in header) */}
-  <button
-    aria-label={menuOpen ? "Close menu" : "Open menu"}
-    onClick={() => setMenuOpen((v) => !v)}
-    className="md:hidden ml-auto grid h-10 w-10 place-items-center rounded-xl border border-white/15 backdrop-blur-xl text-white transition active:translate-y-[1px]"
-    style={{
-      background:
-        "linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02))",
-    }}
-  >
-    <span className="sr-only">Menu</span>
-    <div className="relative h-4 w-6">
-      <span className={`absolute left-0 top-0 block h-[2px] w-6 bg-white transition-transform duration-300 ${menuOpen ? "translate-y-[6px] rotate-45" : ""}`} />
-      <span className={`absolute left-0 top-[6px] block h-[2px] w-6 bg-white transition-all duration-300 ${menuOpen ? "opacity-0" : "opacity-100"}`} />
-      <span className={`absolute left-0 top-[12px] block h-[2px] w-6 bg-white transition-transform duration-300 ${menuOpen ? "-translate-y-[6px] -rotate-45" : ""}`} />
-    </div>
-  </button>
+ {/* MOBILE HAMBURGER (inline in header) */}
+<button
+  aria-label={menuOpen ? "Close menu" : "Open menu"}
+  onClick={() => setMenuOpen(v => !v)}
+  className={`
+    md:hidden ml-auto grid h-10 w-10 place-items-center rounded-xl
+    backdrop-blur-xl text-white transition active:translate-y-[1px]
+    ring-1 ring-white/15
+    hover:scale-[1.03]
+    focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30
+  `}
+  style={{
+    background:
+      "linear-gradient(145deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03))",
+    boxShadow:
+      "inset 0 1px 0 rgba(255,255,255,0.08), 0 10px 26px rgba(0,0,0,0.35)",
+  }}
+>
+  <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
+
+  {/* icon: two dots morph into a cross */}
+  <div className="relative h-5 w-5">
+    <span
+      className={`absolute left-1/2 top-1/2 h-[6px] w-[6px] -translate-x-[10px] -translate-y-1/2 rounded-full bg-white
+                  transition-all duration-300 will-change-transform
+                  ${menuOpen ? "translate-x-0 rotate-45 scale-125" : ""}
+      `}
+    />
+    <span
+      className={`absolute left-1/2 top-1/2 h-[6px] w-[6px] translate-x-[10px] -translate-y-1/2 rounded-full bg-white
+                  transition-all duration-300 will-change-transform
+                  ${menuOpen ? "-translate-x-0 -rotate-45 scale-125" : ""}
+      `}
+    />
+    {/* soft aura */}
+    <span
+      aria-hidden
+      className={`absolute inset-0 rounded-xl transition-opacity duration-300
+                  ${menuOpen ? "opacity-60" : "opacity-30"}
+      `}
+      style={{ boxShadow: "0 0 18px 5px rgba(255,255,255,0.08)" }}
+    />
+  </div>
+</button>
+
 
               {/* DESKTOP: Contact + Notifications */}
               <div className="hidden md:flex items-center gap-3">
@@ -391,37 +420,35 @@ export default function Header({
       </header>
 
       {/* FLOATING HAMBURGER — desktop only after scroll */}
-      <button
-        aria-label={menuOpen ? "Close menu" : "Open menu"}
-        onClick={() => setMenuOpen((v) => !v)}
-        className={`hidden md:block fixed right-4 top-4 z-40 h-12 w-12 rounded-full
-                    border border-white/15 backdrop-blur-xl text-white transition
-                    shadow-[0_8px_30px_rgba(0,0,0,0.35)]
-                    ${showHamb ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02))",
-        }}
-      >
-        <span className="sr-only">Menu</span>
-        <div className="relative mx-auto h-4 w-6">
-          <span
-            className={`absolute left-0 top-0 block h-[2px] w-6 bg-white transition-transform duration-300 ${
-              menuOpen ? "translate-y-[6px] rotate-45" : ""
-            }`}
-          />
-          <span
-            className={`absolute left-0 top-[6px] block h-[2px] w-6 bg-white transition-all duration-300 ${
-              menuOpen ? "opacity-0" : "opacity-100"
-            }`}
-          />
-          <span
-            className={`absolute left-0 top-[12px] block h-[2px] w-6 bg-white transition-transform duration-300 ${
-              menuOpen ? "-translate-y-[6px] -rotate-45" : ""
-            }`}
-          />
-        </div>
-      </button>
+<button
+  aria-label={menuOpen ? "Close menu" : "Open menu"}
+  onClick={() => setMenuOpen((v) => !v)}
+  className={`fixed right-4 top-4 z-40 h-12 w-12 rounded-2xl
+              backdrop-blur-xl transition
+              shadow-[0_8px_25px_rgba(0,0,0,0.35)]
+              ${showHamb ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
+              hover:scale-105 hover:shadow-[0_12px_32px_rgba(0,0,0,0.45)]`}
+  style={{
+    background:
+      "linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))",
+    border: "1px solid rgba(255,255,255,0.12)",
+  }}
+>
+  <span className="sr-only">Menu</span>
+  <div className="relative mx-auto flex h-6 w-6 items-center justify-center">
+    {/* DOTS → CROSS */}
+    <span
+      className={`absolute h-[6px] w-[6px] rounded-full bg-white transition-all duration-300
+                  ${menuOpen ? "rotate-45 scale-125" : "-translate-x-2"}`}
+    />
+    <span
+      className={`absolute h-[6px] w-[6px] rounded-full bg-white transition-all duration-300
+                  ${menuOpen ? "-rotate-45 scale-125" : "translate-x-2"}`}
+    />
+  </div>
+</button>
+
+
 
       {/* CENTERED GLASS MODAL MENU */}
       <div
