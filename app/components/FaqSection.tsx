@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { motion, AnimatePresence, Variants, useAnimation, useInView } from "framer-motion";
+import { motion, AnimatePresence, Variants, useAnimation } from "framer-motion";
 
 /* ---------------- Motion ---------------- */
 const wrap: Variants = {
@@ -20,10 +20,8 @@ const item: Variants = {
 };
 
 /* ---------------- Data ---------------- */
-// types
 export type QA = { id: string; q: string; a: string };
 
-/* -------------------- Configgo (General) -------------------- */
 export const FAQS_CONFIGGO: QA[] = [
   { id: "g1", q: "What is Configgo?", a: "Configgo is a suite of tools for real-estate and AEC teams to showcase projects, manage leads, and analyze sales performance." },
   { id: "g2", q: "Who is Configgo for?", a: "Developers, brokers, marketing teams, and sales offices that need interactive 3D presentations and an integrated CRM." },
@@ -36,7 +34,6 @@ export const FAQS_CONFIGGO: QA[] = [
   { id: "g9", q: "How is Configgo priced?", a: "Pricing is tiered by feature set and monthly active projects/users. Contact us for a quote tailored to your scope." }
 ];
 
-/* -------------------- Configgo Digital Twin -------------------- */
 export const FAQS_DIGITAL_TWIN: QA[] = [
   { id: "dt1", q: "What is the Digital Twin module?", a: "An interactive 3D experience to explore units, views, sun-path, amenities, and surroundings in real time." },
   { id: "dt2", q: "Which 3D formats are supported?", a: "Typical workflows use glTF/GLB or FBX; BIM via IFC can be converted. We’ll validate your assets during onboarding." },
@@ -49,7 +46,6 @@ export const FAQS_DIGITAL_TWIN: QA[] = [
   { id: "dt9", q: "What about performance on mobile devices?", a: "It’s optimized for modern browsers with GPU acceleration and adaptive quality. A fallback media mode is available." }
 ];
 
-/* -------------------- Configgo CRM -------------------- */
 export const FAQS_CRM: QA[] = [
   { id: "crm1", q: "What does Configgo CRM include?", a: "Lead capture, contact & deal management, tasking, pipelines, campaign tracking, documents, and analytics." },
   { id: "crm2", q: "How do leads enter the CRM?", a: "Via web forms, Digital Twin inquiries, Meta Lead Ads, imports from CSV/Sheets, or API/automation platforms." },
@@ -62,28 +58,46 @@ export const FAQS_CRM: QA[] = [
   { id: "crm9", q: "How are roles and permissions handled?", a: "Granular roles, team-based access, and audit logs help you control who sees pricing, discounts, or sensitive data." }
 ];
 
-/* ---- merged list used by the component ---- */
 const FAQS: QA[] = [...FAQS_CONFIGGO, ...FAQS_DIGITAL_TWIN, ...FAQS_CRM];
 
 /* ---------------- Component ---------------- */
 export default function FaqSection() {
   const [openId, setOpenId] = useState<string>(FAQS[0]?.id ?? "");
 
-  // entrance on view
-  const rootRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(rootRef, { amount: 0.35, margin: "-10% 0px -10% 0px" });
-  const controls = useAnimation();
-  useEffect(() => {
-    inView ? controls.start("show") : controls.set("hidden");
-  }, [inView, controls]);
-
-  // split into 2 columns (balanced)
+  // balanced columns
   const [left, right] = useMemo(() => {
     const mid = Math.ceil(FAQS.length / 2);
     return [FAQS.slice(0, mid), FAQS.slice(mid)];
   }, []);
 
-  // ---------- Green fog mouse-follow (section-level smooth) ----------
+  // --- Animation control + fallbacks
+  const rootRef = useRef<HTMLDivElement>(null);
+  const controls = useAnimation();
+
+  useEffect(() => {
+    // Respect reduced motion: show immediately
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    if (reduce) {
+      controls.set("show");
+      return;
+    }
+
+    // Mobile first-paint fallback: if already in viewport, reveal
+    const isTouch =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(pointer: coarse)")?.matches;
+
+    if (isTouch && rootRef.current) {
+      const rect = rootRef.current.getBoundingClientRect();
+      const vh = window.innerHeight || 0;
+      const alreadyOnScreen = rect.top < vh * 0.85 && rect.bottom > vh * 0.15;
+      if (alreadyOnScreen) controls.set("show");
+    }
+  }, [controls]);
+
+  // ---------- Green fog (mouse + touch) ----------
   const fogWrapRef = useRef<HTMLDivElement>(null);
   const rowsRef = useRef<HTMLDivElement[]>([]);
   const registerRow = (i: number) => (el: HTMLDivElement | null) => { if (el) rowsRef.current[i] = el; };
@@ -116,7 +130,8 @@ export default function FaqSection() {
     raf.current = requestAnimationFrame(tick);
   };
   const startLoop = () => { if (!s.current.running) { s.current.running = true; raf.current = requestAnimationFrame(tick); } };
-  const onMove: React.MouseEventHandler<HTMLDivElement> = (e) => {
+
+  const onMouseMove: React.MouseEventHandler<HTMLDivElement> = (e) => {
     const w = fogWrapRef.current; if (!w) return;
     const r = w.getBoundingClientRect();
     s.current.tx = e.clientX - r.left;
@@ -124,7 +139,19 @@ export default function FaqSection() {
     s.current.to = 1;
     startLoop();
   };
-  const onLeave = () => { s.current.to = 0; startLoop(); };
+  const onMouseLeave = () => { s.current.to = 0; startLoop(); };
+
+  // Touch support for fog
+  const onTouchMove: React.TouchEventHandler<HTMLDivElement> = (e) => {
+    const w = fogWrapRef.current; if (!w) return;
+    const r = w.getBoundingClientRect();
+    const t = e.touches[0];
+    s.current.tx = t.clientX - r.left;
+    s.current.ty = t.clientY - r.top;
+    s.current.to = 1;
+    startLoop();
+  };
+  const onTouchEnd: React.TouchEventHandler<HTMLDivElement> = () => { s.current.to = 0; startLoop(); };
 
   return (
     <section ref={rootRef} className="relative overflow-hidden py-16 md:py-24">
@@ -150,39 +177,48 @@ export default function FaqSection() {
           </h2>
         </div>
 
-        {/* Grid with two columns; fog wrapper tracks mouse for all rows */}
+        {/* Grid with two columns; fog wrapper tracks mouse/touch for all rows */}
         <motion.div
           variants={wrap}
           initial="hidden"
           animate={controls}
+          whileInView="show"
+          viewport={{
+            once: false,              // animate in/out as it enters/leaves
+            amount: 0.25,             // threshold
+            margin: "-10% 0% -10% 0%" // percentage margins = iOS-friendly
+          }}
           ref={fogWrapRef}
-          onMouseMove={onMove}
-          onMouseEnter={onMove}
-          onMouseLeave={onLeave}
+          onMouseMove={onMouseMove}
+          onMouseEnter={onMouseMove}
+          onMouseLeave={onMouseLeave}
+          onTouchStart={onTouchMove}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
           className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8"
         >
           {/* Left column */}
-          <motion.div variants={item} className="lg:col-span-6 space-y-3">
+          <motion.div variants={item} className="lg:col-span-6 space-y-3 will-change-[transform,opacity,filter]">
             {left.map((qa, idx) => (
               <FaqRow
                 key={qa.id}
                 qa={qa}
                 open={openId === qa.id}
                 onToggle={() => setOpenId((o) => (o === qa.id ? "" : qa.id))}
-                refCb={registerRow(idx)} // 0..left.length-1
+                refCb={registerRow(idx)}
               />
             ))}
           </motion.div>
 
           {/* Right column */}
-          <motion.div variants={item} className="lg:col-span-6 space-y-3">
+          <motion.div variants={item} className="lg:col-span-6 space-y-3 will-change-[transform,opacity,filter]">
             {right.map((qa, rIdx) => (
               <FaqRow
                 key={qa.id}
                 qa={qa}
                 open={openId === qa.id}
                 onToggle={() => setOpenId((o) => (o === qa.id ? "" : qa.id))}
-                refCb={registerRow(left.length + rIdx)} // continue indexing
+                refCb={registerRow(left.length + rIdx)}
               />
             ))}
           </motion.div>
@@ -209,10 +245,11 @@ function FaqRow({
       ref={refCb}
       className="relative group rounded-xl overflow-hidden ring-1 ring-white/10
                  bg-[linear-gradient(180deg,rgba(255,255,255,0.06)_0%,rgba(0,0,0,0.12)_100%)]
-                 shadow-[0_1px_0_rgba(255,255,255,0.06)_inset,0_16px_40px_rgba(0,0,0,0.45)]"
+                 shadow-[0_1px_0_rgba(255,255,255,0.06)_inset,0_16px_40px_rgba(0,0,0,0.45)]
+                 will-change-[transform,opacity,filter]"
       style={{ WebkitTapHighlightColor: "transparent" }}
     >
-      {/* Green fog layer — stays behind content; non-interactive */}
+      {/* Green fog layer */}
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
@@ -243,15 +280,7 @@ function FaqRow({
       >
         <span className="text-[14px] md:text-[15px] font-medium">{qa.q}</span>
         <span className="shrink-0 grid place-items-center w-8 h-8 rounded-md ring-1 ring-white/10 text-white/80">
-          {/* plus/minus */}
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            className={"transition-transform " + (open ? "rotate-180" : "")}
-            aria-hidden
-          >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className={"transition-transform " + (open ? "rotate-180" : "")} aria-hidden>
             {open ? (
               <path d="M6 12h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
             ) : (
