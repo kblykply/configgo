@@ -3,27 +3,34 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import { motion, useAnimation, useInView, Variants } from "framer-motion";
+import { motion, useAnimation, Variants } from "framer-motion";
 
+/* ---------- Motion (same style as ImmersiveSection) ---------- */
 const wrap: Variants = {
   hidden: { opacity: 0, y: 18, filter: "blur(6px)" },
   show: {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.5, ease: [0.22, 0.61, 0.36, 1], staggerChildren: 0.06, when: "beforeChildren" },
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 0.61, 0.36, 1],
+      when: "beforeChildren",
+      staggerChildren: 0.06,
+    },
   },
 };
+
 const item: Variants = {
   hidden: { opacity: 0, y: 10 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 0.61, 0.36, 1] } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: [0.22, 0.61, 0.36, 1] },
+  },
 };
 
 const LOGOS = [
-
-
-
-  
   { src: "/shelton-logo-beyaz.png", alt: "Shelton" },
   { src: "/ONYX-PORTREbeyaz.png", alt: "Onyx Portre" },
   { src: "/zirvebeton-LOGO-beyaz.png", alt: "Zirve Beton" },
@@ -35,7 +42,34 @@ const LOGOS = [
 
 export default function WebSolutionsSection() {
   const rootRef = useRef<HTMLDivElement>(null);
-  
+  const controls = useAnimation();
+
+  /* --- Respect reduced motion & mobile-initial-viewport fallback --- */
+  useEffect(() => {
+    // Reduced motion: show immediately
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      controls.set("show");
+      return;
+    }
+
+    // Touch devices sometimes render inside viewport; ensure visible
+    const isTouch =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(pointer: coarse)").matches;
+
+    if (isTouch && rootRef.current) {
+      const rect = rootRef.current.getBoundingClientRect();
+      const vh = window.innerHeight || 0;
+      const alreadyOnScreen = rect.top < vh * 0.85 && rect.bottom > vh * 0.15;
+      if (alreadyOnScreen) controls.set("show");
+    }
+  }, [controls]);
+
   return (
     <section ref={rootRef} className="relative overflow-hidden py-16 md:py-24">
       {/* ambient lights */}
@@ -53,15 +87,14 @@ export default function WebSolutionsSection() {
         <div className="mb-6 md:mb-8">
           <div className="flex items-center gap-4 mb-2">
             <span className="text-white/50 text-sm">Who are We?</span>
-           <span
-  aria-hidden
-  className="h-px flex-1"
-  style={{
-    background:
-      "linear-gradient(90deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.22) 40%, rgba(255,255,255,0.35) 100%)",
-  }}
-/>
-
+            <span
+              aria-hidden
+              className="h-px flex-1"
+              style={{
+                background:
+                  "linear-gradient(90deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.22) 40%, rgba(255,255,255,0.35) 100%)",
+              }}
+            />
           </div>
 
           <h2 className="text-[28px] md:text-[40px] font-semibold tracking-[-0.02em] text-white">
@@ -69,13 +102,19 @@ export default function WebSolutionsSection() {
           </h2>
         </div>
 
-   <motion.div
-  variants={wrap}
-  initial="hidden"
-  whileInView="show"
-  viewport={{ amount: 0.30, margin: "-100px 0px -100px 0px", /* once: false by default */ }}
-  className="space-y-6 md:space-y-8"
->
+        {/* Animated body — switch to whileInView for mobile reliability */}
+        <motion.div
+          variants={wrap}
+          initial="hidden"
+          animate={controls}
+          whileInView="show"
+          viewport={{
+            once: false,             // animate in/out as it enters/leaves
+            amount: 0.25,            // 25% threshold
+            margin: "-10% 0% -10% 0%"// iOS prefers percentage margins
+          }}
+          className="space-y-6 md:space-y-8 will-change-[transform,opacity,filter]"
+        >
           {/* TOP — CRM Based Archviz System */}
           <motion.div variants={item}>
             <div
@@ -110,14 +149,13 @@ export default function WebSolutionsSection() {
                     }}
                   />
                   <Image
-                    src="/suncity/Suncity.jpg" // replace with your graph composite
+                    src="/suncity/Suncity.jpg"
                     alt="Analytics"
                     fill
                     className="object-cover"
                     sizes="(min-width:1450px) 800px, (min-width:1024px) 60vw, 100vw"
                     priority
                   />
-                  {/* frame */}
                   <div className="pointer-events-none absolute inset-0 rounded-2xl ring-2 ring-white/90" />
                 </div>
               </div>
@@ -125,10 +163,7 @@ export default function WebSolutionsSection() {
           </motion.div>
 
           {/* BOTTOM — two equal-height cards */}
-          <motion.div
-            variants={item}
-            className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-stretch"
-          >
+          <motion.div variants={item} className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-stretch">
             {/* Left card — 360 walk */}
             <div className="md:col-span-6 flex">
               <div
@@ -139,7 +174,7 @@ export default function WebSolutionsSection() {
                 <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden mb-5">
                   <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-white/60" />
                   <Image
-                    src="/mega/Mega1453.jpg" // replace with your interior
+                    src="/mega/Mega1453.jpg"
                     alt="360 walk preview"
                     fill
                     className="object-cover"
@@ -147,16 +182,13 @@ export default function WebSolutionsSection() {
                   />
                 </div>
 
-               <div className="text-[#C6F24E] text-[12px] tracking-wide mb-1">DIGITAL TWIN</div>
-<h4 className="text-white text-[20px] md:text-[22px] leading-tight mb-2">
-  360° Immersive Walkthrough
-</h4>
-<p className="text-white/70 text-[14px] leading-6 mb-4">
-  Step inside your future apartment before it’s even built. Our Digital Twin 
-  technology allows clients to explore every corner in full detail, 
-  experience layouts in real scale, and make confident decisions without 
-  leaving their seat.
-</p>
+                <div className="text-[#C6F24E] text-[12px] tracking-wide mb-1">DIGITAL TWIN</div>
+                <h4 className="text-white text-[20px] md:text-[22px] leading-tight mb-2">360° Immersive Walkthrough</h4>
+                <p className="text-white/70 text-[14px] leading-6 mb-4">
+                  Step inside your future apartment before it’s even built. Our Digital Twin technology allows clients to
+                  explore every corner in full detail, experience layouts in real scale, and make confident decisions
+                  without leaving their seat.
+                </p>
 
                 <div className="mt-auto">
                   <button
@@ -183,42 +215,38 @@ export default function WebSolutionsSection() {
                            ring-1 ring-white/10 shadow-[0_1px_0_rgba(255,255,255,0.06)_inset,0_24px_60px_rgba(0,0,0,0.45)]"
               >
                 {/* faint squares background */}
-                <div className="grid grid-cols-4 gap-4 opacity-[0.10] absolute inset-0 p-6 md:p-7">
+                <div className="grid grid-cols-4 gap-4 opacity-[0.10] absolute inset-0 p-6 md:p-7 pointer-events-none">
                   {Array.from({ length: 12 }).map((_, i) => (
                     <div key={i} className="rounded-xl bg-white/00" />
                   ))}
                 </div>
 
-            {/* logo grid and text */}
-<div className="relative grid grid-cols-2 sm:grid-cols-3 gap-5 mb-6">
-  {LOGOS.slice(0, 6).map((l) => (
-    <div
-      key={l.alt}
-      className="relative aspect-[3/1] rounded-xl bg-white/5 ring-1 ring-white/10 
-                 flex items-center justify-center px-6 py-4"
-    >
-      <Image
-        src={l.src}
-        alt={l.alt}
-        width={160}   // ✅ constrain width
-        height={48}   // ✅ constrain height
-        className="object-contain opacity-90 max-h-[40px] md:max-h-[48px] w-auto"
-      />
-    </div>
-  ))}
-</div>
+                {/* logo grid and text */}
+                <div className="relative grid grid-cols-2 sm:grid-cols-3 gap-5 mb-6">
+                  {LOGOS.slice(0, 6).map((l) => (
+                    <div
+                      key={l.alt}
+                      className="relative aspect-[3/1] rounded-xl bg-white/5 ring-1 ring-white/10 
+                                 flex items-center justify-center px-6 py-4"
+                    >
+                      <Image
+                        src={l.src}
+                        alt={l.alt}
+                        width={160}
+                        height={48}
+                        className="object-contain opacity-90 max-h-[40px] md:max-h-[48px] w-auto"
+                      />
+                    </div>
+                  ))}
+                </div>
 
-
-             <div className="text-[#C6F24E] text-[12px] tracking-wide mb-1">CRM INTEGRATION</div>
-<h4 className="text-white text-[20px] md:text-[22px] leading-tight mb-2">
-  Connected Client Experience
-</h4>
-<p className="text-white/70 text-[14px] leading-6 max-w-[60ch]">
-  Our CRM-based Digital Twin system goes beyond visualization. 
-  Every tour, inquiry, and interaction is tracked directly into your CRM, 
-  creating a seamless workflow from first impression to final deal. 
-  Manage leads, follow up faster, and deliver a premium sales journey.
-</p>
+                <div className="text-[#C6F24E] text-[12px] tracking-wide mb-1">CRM INTEGRATION</div>
+                <h4 className="text-white text-[20px] md:text-[22px] leading-tight mb-2">Connected Client Experience</h4>
+                <p className="text-white/70 text-[14px] leading-6 max-w-[60ch]">
+                  Our CRM-based Digital Twin system goes beyond visualization. Every tour, inquiry, and interaction is
+                  tracked directly into your CRM, creating a seamless workflow from first impression to final deal.
+                  Manage leads, follow up faster, and deliver a premium sales journey.
+                </p>
               </div>
             </div>
           </motion.div>
