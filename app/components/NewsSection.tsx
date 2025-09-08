@@ -60,12 +60,6 @@ function mapBlogToPost(b: BlogPost): Post {
 /* ---------------- Component ---------------- */
 export default function NewsSection() {
   const rootRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(rootRef, { amount: 0.35, margin: "-10% 0px -10% 0px" });
-  const controls = useAnimation();
-  useEffect(() => {
-    if (inView) controls.start("show");
-    else controls.set("hidden");
-  }, [inView, controls]);
 
   // pull data from /data/blogs.ts
   const blogs = getAllPosts(); // already sorted by date desc in your helper
@@ -77,7 +71,7 @@ export default function NewsSection() {
 
   return (
     <section ref={rootRef} className="relative overflow-hidden py-12 md:py-16">
-      {/* ambient wash */}
+            {/* ambient wash */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -88,7 +82,7 @@ export default function NewsSection() {
       />
 
       <div className="mx-auto max-w-[1450px] px-6 md:px-10">
-        {/* header row */}
+                {/* header row */}
         <div className="mb-6 md:mb-8">
           <div className="flex items-center gap-4 mb-3">
             <span className="text-white/50 text-sm">Blog</span>
@@ -105,7 +99,13 @@ export default function NewsSection() {
           </h2>
         </div>
 
-        <motion.div variants={wrap} initial="hidden" animate={controls} className="space-y-6 md:space-y-8">
+                <motion.div
+          variants={wrap}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2, margin: "-80px 0px -80px 0px" }}
+          className="space-y-6 md:space-y-8"
+        >
           {/* -------- Featured (from BLOGS[0]) -------- */}
           <motion.article
             variants={item}

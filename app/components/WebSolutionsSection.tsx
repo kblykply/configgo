@@ -35,13 +35,7 @@ const LOGOS = [
 
 export default function WebSolutionsSection() {
   const rootRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(rootRef, { amount: 0.35, margin: "-10% 0px -10% 0px" });
-  const controls = useAnimation();
-  useEffect(() => {
-    if (inView) controls.start("show");
-    else controls.set("hidden");
-  }, [inView, controls]);
-
+  
   return (
     <section ref={rootRef} className="relative overflow-hidden py-16 md:py-24">
       {/* ambient lights */}
@@ -75,7 +69,13 @@ export default function WebSolutionsSection() {
           </h2>
         </div>
 
-        <motion.div variants={wrap} initial="hidden" animate={controls} className="space-y-8 md:space-y-10">
+        <motion.div
+  variants={wrap}
+  initial="hidden"
+  whileInView="show"
+  viewport={{ once: true, amount: 0.18, margin: "-80px 0px -80px 0px" }}
+  className="space-y-8 md:space-y-10"
+>
           {/* TOP — CRM Based Archviz System */}
           <motion.div variants={item}>
             <div
