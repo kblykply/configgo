@@ -171,48 +171,45 @@ export default function Header({
 
           {/* Right controls */}
 <div className="relative col-start-3 flex items-center gap-3 justify-self-end">
-  {/* MOBILE HAMBURGER (inline in header) */}
- {/* MOBILE HAMBURGER (inline in header) */}
+{/* MOBILE HAMBURGER (inline in header) */}
 <button
   aria-label={menuOpen ? "Close menu" : "Open menu"}
   onClick={() => setMenuOpen(v => !v)}
   className={`
     md:hidden ml-auto grid h-10 w-10 place-items-center rounded-xl
-    backdrop-blur-xl text-white transition active:translate-y-[1px]
+    backdrop-blur-xl transition active:translate-y-[1px]
     ring-1 ring-white/15
-    hover:scale-[1.03]
+    hover:scale-[1.04]
     focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30
+    ${menuOpen ? "bg-white/10" : ""}
   `}
   style={{
     background:
-      "linear-gradient(145deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03))",
+      "linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))",
     boxShadow:
-      "inset 0 1px 0 rgba(255,255,255,0.08), 0 10px 26px rgba(0,0,0,0.35)",
+      "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 22px rgba(0,0,0,0.35)",
   }}
 >
   <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
 
-  {/* icon: two dots morph into a cross */}
-  <div className="relative h-5 w-5">
+  <div className="relative h-5 w-6">
+    {/* Line 1 */}
     <span
-      className={`absolute left-1/2 top-1/2 h-[6px] w-[6px] -translate-x-[10px] -translate-y-1/2 rounded-full bg-white
-                  transition-all duration-300 will-change-transform
-                  ${menuOpen ? "translate-x-0 rotate-45 scale-125" : ""}
+      className={`absolute left-0 top-0 h-[2px] w-6 rounded-full bg-white transition-all duration-300
+        ${menuOpen ? "top-[9px] rotate-45" : ""}
       `}
     />
+    {/* Line 2 */}
     <span
-      className={`absolute left-1/2 top-1/2 h-[6px] w-[6px] translate-x-[10px] -translate-y-1/2 rounded-full bg-white
-                  transition-all duration-300 will-change-transform
-                  ${menuOpen ? "-translate-x-0 -rotate-45 scale-125" : ""}
+      className={`absolute left-0 top-[9px] h-[2px] w-6 rounded-full bg-white transition-all duration-300
+        ${menuOpen ? "opacity-0" : "opacity-100"}
       `}
     />
-    {/* soft aura */}
+    {/* Line 3 */}
     <span
-      aria-hidden
-      className={`absolute inset-0 rounded-xl transition-opacity duration-300
-                  ${menuOpen ? "opacity-60" : "opacity-30"}
+      className={`absolute left-0 top-[18px] h-[2px] w-6 rounded-full bg-white transition-all duration-300
+        ${menuOpen ? "top-[9px] -rotate-45" : ""}
       `}
-      style={{ boxShadow: "0 0 18px 5px rgba(255,255,255,0.08)" }}
     />
   </div>
 </button>
@@ -497,15 +494,40 @@ export default function Header({
           Menu
         </span>
       </div>
-      <button
-        onClick={() => setMenuOpen(false)}
-        aria-label="Close menu"
-        className="grid h-10 w-10 place-items-center rounded-xl border border-white/15 bg-white/10 hover:bg-white/15 transition"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M18 6L6 18M6 6l12 12" />
-        </svg>
-      </button>
+<button
+  onClick={() => setMenuOpen(false)}
+  aria-label="Close menu"
+  className={`
+    grid h-10 w-10 place-items-center rounded-xl
+    backdrop-blur-xl transition
+    ring-1 ring-white/15
+    hover:scale-[1.05] hover:bg-white/10
+    focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30
+  `}
+  style={{
+    background:
+      "linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))",
+    boxShadow:
+      "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 22px rgba(0,0,0,0.35)",
+  }}
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#ffffff"   // ✅ force white stroke
+    strokeWidth="2.2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="transition-transform duration-300 group-hover:rotate-90"
+  >
+    <path d="M18 6L6 18M6 6l12 12" />
+  </svg>
+</button>
+
+
     </div>
 
     {/* search (fixed) */}
