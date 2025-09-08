@@ -2,11 +2,13 @@
 "use client";
 
 import Image from "next/image";
+import type React from "react";
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useAnimation, useInView, Variants } from "framer-motion";
+import { motion, useAnimation, useInView, Variants } from "framer-motion";
 
 type Mode = "snow" | "fog" | "cloud" | "precip";
 
+/* ---------------- Motion ---------------- */
 const wrap: Variants = {
   hidden: { opacity: 0, y: 18, filter: "blur(6px)" },
   show: {
@@ -21,12 +23,13 @@ const item: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 0.61, 0.36, 1] } },
 };
 
+/* ---------------- Data ---------------- */
 // swap with your real images/videos
 const PREVIEWS: Record<Mode, string> = {
-  snow: "/weather/kar.png",
-  fog: "/weather/rain.png",
-  cloud: "/weather/cloud.png",
-  precip: "/weather/fırtına.png",
+  snow: "/weather/snow.jpg",
+  fog: "/weather/fog.jpg",
+  cloud: "/weather/cloud.jpg",
+  precip: "/weather/precipitation.jpg",
 };
 
 export default function WeatherCreationSection() {
@@ -40,6 +43,8 @@ export default function WeatherCreationSection() {
     if (inView) controls.start("show");
     else controls.set("hidden");
   }, [inView, controls]);
+
+  const pickMode = (next: Mode) => setMode((curr) => (curr === next ? curr : next));
 
   return (
     <section ref={rootRef} className="relative overflow-hidden py-14 md:py-20">
@@ -77,56 +82,95 @@ export default function WeatherCreationSection() {
                 </p>
               </div>
 
-              <div
-                role="radiogroup"
-                aria-label="Weather modes"
-                className="mt-7 grid grid-cols-2 gap-3"
-              >
-                <ModeButton label="Snow" icon={<IconSnow />} active={mode === "snow"} onClick={() => setMode("snow")} />
-                <ModeButton label="Fog" icon={<IconFog />} active={mode === "fog"} onClick={() => setMode("fog")} />
-                <ModeButton label="Cloud" icon={<IconCloud />} active={mode === "cloud"} onClick={() => setMode("cloud")} />
+              <div role="radiogroup" aria-label="Weather modes" className="mt-7 grid grid-cols-2 gap-3">
+                <ModeButton label="Snow" icon={<IconSnow />} active={mode === "snow"} onClick={() => pickMode("snow")} />
+                <ModeButton label="Fog" icon={<IconFog />} active={mode === "fog"} onClick={() => pickMode("fog")} />
+                <ModeButton
+                  label="Cloud"
+                  icon={<IconCloud />}
+                  active={mode === "cloud"}
+                  onClick={() => pickMode("cloud")}
+                />
                 <ModeButton
                   label="Precipitation"
                   icon={<IconPrecip />}
                   active={mode === "precip"}
-                  onClick={() => setMode("precip")}
+                  onClick={() => pickMode("precip")}
                 />
               </div>
             </div>
           </motion.div>
 
-          {/* RIGHT PREVIEW */}
+          {/* RIGHT PREVIEW (cross-fade, no black flash) */}
           <motion.div variants={item} className="lg:col-span-7 xl:col-span-8 flex">
             <div className="relative rounded-[22px] overflow-hidden w-full h-full min-h-[320px]">
               {/* frame */}
               <div className="pointer-events-none absolute inset-0 rounded-[22px] ring-2 ring-white/95 shadow-[0_30px_70px_rgba(0,0,0,0.5)]" />
-              {/* fill the available height; image covers */}
-              <div className="relative w-full h-full">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={mode}
-                    initial={{ opacity: 0, scale: 0.985, filter: "blur(6px)" }}
-                    animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                    exit={{ opacity: 0, scale: 0.992, filter: "blur(4px)" }}
-                    transition={{ duration: 0.45, ease: [0.22, 0.61, 0.36, 1] }}
-                    className="absolute inset-0 will-change-[opacity,transform,filter]"
-                  >
-                    <Image
-                      src={PREVIEWS[mode]}
-                      alt={`${mode} preview`}
-                      fill
-                      className="object-cover"
-                      sizes="(min-width:1450px) 920px, (min-width:1024px) 58vw, 100vw"
-                      priority
-                    />
-                  </motion.div>
-                </AnimatePresence>
-              </div>
+              {/* cross-fade layers */}
+              <CrossfadeImage src={PREVIEWS[mode]} alt={`${mode} preview`} />
             </div>
           </motion.div>
         </motion.div>
       </div>
     </section>
+  );
+}
+
+/* ============== Cross-fade helper ============== */
+function CrossfadeImage({ src, alt }: { src: string; alt: string }) {
+  const [current, setCurrent] = useState(src);
+  const [previous, setPrevious] = useState<string | null>(null);
+
+  // when src changes, keep old one as "previous" and fade it out underneath
+  useEffect(() => {
+    if (src === current) return;
+    setPrevious(current);
+    setCurrent(src);
+  }, [src, current]);
+
+  return (
+    <div className="relative w-full h-full bg-black">
+      {/* current (fades in) */}
+      <motion.div
+        key={current + "-in"}
+        initial={{ opacity: previous ? 0 : 1 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.45, ease: [0.22, 0.61, 0.36, 1] }}
+        className="absolute inset-0"
+      >
+        <Image
+          src={current}
+          alt={alt}
+          fill
+          className="object-cover"
+          sizes="(min-width:1450px) 920px, (min-width:1024px) 58vw, 100vw"
+          priority
+          placeholder="empty"
+        />
+      </motion.div>
+
+      {/* previous (fades out, then unmounts) */}
+      {previous && (
+        <motion.div
+          key={previous + "-out"}
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 0 }}
+          transition={{ duration: 0.45, ease: [0.22, 0.61, 0.36, 1] }}
+          className="absolute inset-0"
+          onAnimationComplete={() => setPrevious(null)}
+        >
+          <Image
+            src={previous}
+            alt="previous"
+            fill
+            className="object-cover"
+            sizes="(min-width:1450px) 920px, (min-width:1024px) 58vw, 100vw"
+            priority
+            placeholder="empty"
+          />
+        </motion.div>
+      )}
+    </div>
   );
 }
 

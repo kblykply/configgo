@@ -551,42 +551,67 @@ export default function Header({
     {/* content grid (scrolls) */}
     <div className="px-5 py-5 overflow-y-auto grow">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-12">
-        {/* primary nav */}
-        <div className="md:col-span-7">
-          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {NAV.map((item) => (
-              <li key={item.label}>
-                <Link
-                  href={item.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="group block rounded-2xl border border-white/15 bg-white/10 p-4 transition hover:bg-white/15"
-                >
-                  <div
-                    className="text-[15px] text-white/90 group-hover:text-white"
-                    style={{ fontFamily: "var(--font-heading)" }}
-                  >
-                    {item.label}
-                  </div>
-                  <div className="mt-1 text-[12px] text-white/60">
-                    {item.label === "Projects" && "Case studies & real deployments"}
-                    {item.label === "CRM" && "Configgo CRM overview"}
-                    {item.label === "Digital Twins" && "Interactive 3D + live availability"}
-                    {item.label === "About" && "Team, story, careers"}
-                    {item.label === "Blog" && "Product updates & learnings"}
-                  </div>
-                  <div className="mt-3 flex items-center gap-2 text-[12px] text-white/75">
-                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#C6F24E]" />
-                    Open
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M7 17L17 7" />
-                      <path d="M7 7h10v10" />
-                    </svg>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+       {/* primary nav */}
+<div className="md:col-span-7">
+  <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 [grid-auto-rows:1fr]">
+    {NAV.map((item) => (
+      <li key={item.label} className="h-full">
+        <Link
+          href={item.href}
+          onClick={() => setMenuOpen(false)}
+          className="group flex h-full flex-col rounded-2xl border border-white/15 bg-white/10 p-4 transition hover:bg-white/15"
+        >
+          <div
+            className="text-[15px] text-white/90 group-hover:text-white"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
+            {item.label}
+          </div>
+
+          {/* subtitle — clamp to 2 lines so all tiles equalize */}
+          <div
+            className="mt-1 text-[12px] leading-[1.45] text-white/60"
+            style={{
+              display: "-webkit-box",
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+              minHeight: "calc(1em * 1.45 * 2)", // reserve space for 2 lines
+            }}
+          >
+            {item.label === "Projects" && "Case studies & real deployments"}
+            {item.label === "CRM" && "Configgo CRM overview"}
+            {item.label === "Digital Twins" && "Interactive 3D + live availability"}
+            {item.label === "About" && "Team, story, careers"}
+            {item.label === "Blog" && "Product updates & learnings"}
+          </div>
+
+          {/* footer — stuck to bottom */}
+          <div className="mt-auto pt-3 flex items-center gap-2 text-[12px] text-white/75">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#C6F24E]" />
+            Open
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="opacity-90"
+            >
+              <path d="M7 17L17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
+          </div>
+        </Link>
+      </li>
+    ))}
+  </ul>
+</div>
+
 
         {/* quick actions / highlights */}
         <div className="md:col-span-5 space-y-3">
