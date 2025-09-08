@@ -438,221 +438,170 @@ export default function Header({
           }`}
         />
 
-        {/* dialog */}
-        <div className="absolute inset-0 flex items-start md:items-center justify-center p-4 md:p-6">
-          <div
-            className={`w-full max-w-[720px] overflow-hidden rounded-3xl border border-white/15
-                        shadow-[0_30px_100px_rgba(0,0,0,0.55)]
-                        backdrop-blur-2xl
-                        transition-[transform,opacity,filter] duration-300
-                        ${menuOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-[0.98] -translate-y-2"}`}
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 100%)",
-              filter: menuOpen ? "blur(0px)" : "blur(1px)",
-            }}
-            role="dialog"
-            aria-modal="true"
-          >
-            {/* header row inside dialog */}
-            <div className="flex items-center justify-between gap-3 px-5 pt-5">
-              <div className="flex items-center gap-3">
-                <img
-                  src="/configgo-yeni-logo-beyaz.png"
-                  alt="Configgo"
-                  className="h-6 w-auto"
-                />
-                <span
-                  className="rounded-full border border-white/15 bg-white/10 px-2 py-0.5 text-[11px] text-white/85"
-                  style={{ fontFamily: "var(--font-heading)" }}
-                >
-                  Menu
-                </span>
-              </div>
-              <button
-                onClick={() => setMenuOpen(false)}
-                aria-label="Close menu"
-                className="grid h-10 w-10 place-items-center rounded-xl border border-white/15 bg-white/10 hover:bg-white/15 transition"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M18 6L6 18M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
+       {/* dialog */}
+<div className="absolute inset-0 flex items-start md:items-center justify-center p-0 md:p-6">
+  <div
+    className={`overflow-hidden flex flex-col
+                w-screen h-[100dvh] rounded-none border-0
+                md:w-full md:max-w-[720px] md:max-h-[90dvh] md:rounded-3xl md:border md:border-white/15
+                shadow-[0_30px_100px_rgba(0,0,0,0.55)]
+                backdrop-blur-2xl
+                transition-[transform,opacity,filter] duration-300
+                ${menuOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-[0.98] -translate-y-2"}`}
+    style={{
+      background:
+        "linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 100%)",
+      // notch-safe padding on iOS
+      paddingTop: "env(safe-area-inset-top)",
+      paddingBottom: "env(safe-area-inset-bottom)",
+      filter: menuOpen ? "blur(0px)" : "blur(1px)",
+    }}
+    role="dialog"
+    aria-modal="true"
+  >
+    {/* header row inside dialog (fixed) */}
+    <div className="flex items-center justify-between gap-3 px-5 pt-5 shrink-0">
+      <div className="flex items-center gap-3">
+        <img src="/configgo-yeni-logo-beyaz.png" alt="Configgo" className="h-6 w-auto" />
+        <span
+          className="rounded-full border border-white/15 bg-white/10 px-2 py-0.5 text-[11px] text-white/85"
+          style={{ fontFamily: "var(--font-heading)" }}
+        >
+          Menu
+        </span>
+      </div>
+      <button
+        onClick={() => setMenuOpen(false)}
+        aria-label="Close menu"
+        className="grid h-10 w-10 place-items-center rounded-xl border border-white/15 bg-white/10 hover:bg-white/15 transition"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M18 6L6 18M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
 
-            {/* search */}
-            <div className="px-5 pt-3">
-              <div className="flex items-center gap-2 rounded-2xl border border-white/15 bg-white/10 px-4 py-3">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-white/70"
-                >
-                  <circle cx="11" cy="11" r="8" />
-                  <path d="m21 21-4.3-4.3" />
-                </svg>
-                <input
-                  placeholder="Search pages…"
-                  className="w-full bg-transparent text-[14px] text-white placeholder:text-white/50 outline-none"
-                  autoFocus
-                />
-                <span className="rounded-md border border-white/15 bg-white/10 px-2 py-0.5 text-[10px] text-white/65">
-                  ⌘K
-                </span>
-              </div>
-            </div>
+    {/* search (fixed) */}
+    <div className="px-5 pt-3 shrink-0">
+      <div className="flex items-center gap-2 rounded-2xl border border-white/15 bg-white/10 px-4 py-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white/70">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
+        <input
+          placeholder="Search pages…"
+          className="w-full bg-transparent text-[14px] text-white placeholder:text-white/50 outline-none"
+          autoFocus
+        />
+        <span className="rounded-md border border-white/15 bg-white/10 px-2 py-0.5 text-[10px] text-white/65">
+          ⌘K
+        </span>
+      </div>
+    </div>
 
-            {/* content grid */}
-            <div className="grid grid-cols-1 gap-4 px-5 py-5 md:grid-cols-12">
-              {/* primary nav */}
-              <div className="md:col-span-7">
-                <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                  {NAV.map((item) => (
-                    <li key={item.label}>
-                      <Link
-                        href={item.href}
-                        onClick={() => setMenuOpen(false)}
-                        className="group block rounded-2xl border border-white/15 bg-white/10 p-4 transition hover:bg-white/15"
-                      >
-                        <div
-                          className="text-[15px] text-white/90 group-hover:text-white"
-                          style={{ fontFamily: "var(--font-heading)" }}
-                        >
-                          {item.label}
-                        </div>
-                        <div className="mt-1 text-[12px] text-white/60">
-                          {item.label === "Projects" &&
-                            "Case studies & real deployments"}
-                          {item.label === "CRM" && "Configgo CRM overview"}
-                          {item.label === "Digital Twins" &&
-                            "Interactive 3D + live availability"}
-                          {item.label === "About" && "Team, story, careers"}
-                          {item.label === "Blog" && "Product updates & learnings"}
-                        </div>
-                        <div className="mt-3 flex items-center gap-2 text-[12px] text-white/75">
-                          <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#C6F24E]" />
-                          Open
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="14"
-                            height="14"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="M7 17L17 7" />
-                            <path d="M7 7h10v10" />
-                          </svg>
-                        </div>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* quick actions / highlights */}
-              <div className="md:col-span-5 space-y-3">
+    {/* content grid (scrolls) */}
+    <div className="px-5 py-5 overflow-y-auto grow">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-12">
+        {/* primary nav */}
+        <div className="md:col-span-7">
+          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {NAV.map((item) => (
+              <li key={item.label}>
                 <Link
-                  href="/contact"
+                  href={item.href}
                   onClick={() => setMenuOpen(false)}
-                  className="relative block overflow-hidden rounded-2xl border border-white/15 p-4 transition hover:opacity-95"
-                  style={{
-                    background:
-                      "linear-gradient(180deg,#C6F24E1F,rgba(255,255,255,0.06))",
-                  }}
+                  className="group block rounded-2xl border border-white/15 bg-white/10 p-4 transition hover:bg-white/15"
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="text-white/90">
-                      <div className="text-[13px]">Talk to sales</div>
-                      <div
-                        className="text-[20px] leading-6"
-                        style={{ fontFamily: "var(--font-heading)" }}
-                      >
-                        Book a demo
-                      </div>
-                    </div>
-                    <span className="inline-grid h-10 w-10 place-items-center rounded-xl bg-black/30 text-white ring-1 ring-white/15">
-                      ↗
-                    </span>
+                  <div
+                    className="text-[15px] text-white/90 group-hover:text-white"
+                    style={{ fontFamily: "var(--font-heading)" }}
+                  >
+                    {item.label}
                   </div>
-                  <div className="mt-2 text-[11px] text-white/70">
-                    First response within 24h (TRT)
+                  <div className="mt-1 text-[12px] text-white/60">
+                    {item.label === "Projects" && "Case studies & real deployments"}
+                    {item.label === "CRM" && "Configgo CRM overview"}
+                    {item.label === "Digital Twins" && "Interactive 3D + live availability"}
+                    {item.label === "About" && "Team, story, careers"}
+                    {item.label === "Blog" && "Product updates & learnings"}
+                  </div>
+                  <div className="mt-3 flex items-center gap-2 text-[12px] text-white/75">
+                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#C6F24E]" />
+                    Open
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17L17 7" />
+                      <path d="M7 7h10v10" />
+                    </svg>
                   </div>
                 </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-                <div className="grid grid-cols-2 gap-3">
-                  <Link
-                    href="/crm#pricing"
-                    onClick={() => setMenuOpen(false)}
-                    className="rounded-2xl border border-white/15 bg-white/10 p-3 text-[13px] text-white/85 hover:bg-white/15"
-                  >
-                    Pricing
-                  </Link>
-                  <Link
-                    href="/about-us#careers"
-                    onClick={() => setMenuOpen(false)}
-                    className="rounded-2xl border border-white/15 bg-white/10 p-3 text-[13px] text-white/85 hover:bg-white/15"
-                  >
-                    Careers
-                  </Link>
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-3 text-[12px] text-white/70">
-                  <div className="mb-1 text-white/85">Contact</div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <a
-                      href="mailto:hello@configgo.com"
-                      className="underline-offset-2 hover:underline"
-                    >
-                      hello@configgo.com
-                    </a>
-                    <span>·</span>
-                    <a
-                      href="tel:+903120000000"
-                      className="underline-offset-2 hover:underline"
-                    >
-                      +90 312 000 00 00
-                    </a>
-                  </div>
+        {/* quick actions / highlights */}
+        <div className="md:col-span-5 space-y-3">
+          <Link
+            href="/contact"
+            onClick={() => setMenuOpen(false)}
+            className="relative block overflow-hidden rounded-2xl border border-white/15 p-4 transition hover:opacity-95"
+            style={{ background: "linear-gradient(180deg,#C6F24E1F,rgba(255,255,255,0.06))" }}
+          >
+            <div className="flex items-center justify-between">
+              <div className="text-white/90">
+                <div className="text-[13px]">Talk to sales</div>
+                <div className="text-[20px] leading-6" style={{ fontFamily: "var(--font-heading)" }}>
+                  Book a demo
                 </div>
               </div>
+              <span className="inline-grid h-10 w-10 place-items-center rounded-xl bg-black/30 text-white ring-1 ring-white/15">
+                ↗
+              </span>
             </div>
+            <div className="mt-2 text-[11px] text-white/70">First response within 24h (TRT)</div>
+          </Link>
 
-            {/* footer of dialog */}
-            <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 px-5 py-4 text-[12px] text-white/70 md:flex-row">
-              <div>© {new Date().getFullYear()} Configgo</div>
-              <div className="flex items-center gap-3">
-                <Link href="/legal/privacy" onClick={() => setMenuOpen(false)} className="hover:text-white">
-                  Privacy
-                </Link>
-                <span>·</span>
-                <Link href="/legal/terms" onClick={() => setMenuOpen(false)} className="hover:text-white">
-                  Terms
-                </Link>
-              </div>
+          <div className="grid grid-cols-2 gap-3">
+            <Link
+              href="/crm#pricing"
+              onClick={() => setMenuOpen(false)}
+              className="rounded-2xl border border-white/15 bg-white/10 p-3 text-[13px] text-white/85 hover:bg-white/15"
+            >
+              Pricing
+            </Link>
+            <Link
+              href="/about-us#careers"
+              onClick={() => setMenuOpen(false)}
+              className="rounded-2xl border border-white/15 bg-white/10 p-3 text-[13px] text-white/85 hover:bg-white/15"
+            >
+              Careers
+            </Link>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-3 text-[12px] text-white/70">
+            <div className="mb-1 text-white/85">Contact</div>
+            <div className="flex flex-wrap items-center gap-2">
+              <a href="mailto:hello@configgo.com" className="underline-offset-2 hover:underline">hello@configgo.com</a>
+              <span>·</span>
+              <a href="tel:+903120000000" className="underline-offset-2 hover:underline">+90 312 000 00 00</a>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    {/* footer (fixed) */}
+    <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 px-5 py-4 text-[12px] text-white/70 md:flex-row shrink-0">
+      <div>© {new Date().getFullYear()} Configgo</div>
+      <div className="flex items-center gap-3">
+        <Link href="/legal/privacy" onClick={() => setMenuOpen(false)} className="hover:text-white">Privacy</Link>
+        <span>·</span>
+        <Link href="/legal/terms" onClick={() => setMenuOpen(false)} className="hover:text-white">Terms</Link>
+      </div>
+    </div>
+  </div>
+</div>
+
       </div>
     </>
   );
