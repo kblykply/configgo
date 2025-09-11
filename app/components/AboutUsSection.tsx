@@ -132,7 +132,7 @@ export default function AboutUsSection() {
 
             <motion.p
               variants={item}
-              className="text-justify text-[14px] leading-[22px] text-white/70 md:text-[15px] md:leading-[24px]"
+              className="text-justify text-[14px] leading-[21px] text-white/70 md:text-[15px] md:leading-[24px]"
             >
               We build CRM-integrated Archviz & Digital Twin tools for construction and real estate teams—so you can
               visualize faster, sell smarter, and operate with clarity.

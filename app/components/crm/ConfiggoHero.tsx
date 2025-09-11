@@ -12,24 +12,45 @@ const ITEM = {
   hidden: { opacity: 0, y: 20, filter: "blur(6px)" },
   show:   { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.6, ease: EASE } },
 };
-const VISUAL = {
-  hidden: { opacity: 0, y: 20, scale: 0.985 },
-  show:   { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: EASE, delay: 0.05 } },
-};
+
+const VISUAL_INVIEW_THRESHOLD = 0.45;
 
 export default function ConfiggoHero() {
-  // Retrigger animation whenever the hero re-enters the viewport
-  const ref = useRef<HTMLElement | null>(null);
-  const inView = useInView(ref, { amount: 0.45, margin: "-15% 0px -25% 0px" });
+  // Section visibility to retrigger LEFT copy (Framer Motion)
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const inView = useInView(sectionRef, { amount: VISUAL_INVIEW_THRESHOLD, margin: "-15% 0px -25% 0px" });
   const controls = useAnimation();
+
   useEffect(() => {
     if (inView) controls.start("show");
     else controls.set("hidden");
   }, [inView, controls]);
 
+  // RIGHT visual: re-run CSS animation each time in-view (no framer-motion)
+  const visualRef = useRef<HTMLImageElement | null>(null);
+  useEffect(() => {
+    const el = visualRef.current;
+    if (!el) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // retrigger animation
+          el.classList.remove("animate-in");
+          void el.offsetWidth; // force reflow
+          el.classList.add("animate-in");
+        }
+      },
+      { threshold: VISUAL_INVIEW_THRESHOLD }
+    );
+
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section
-      ref={ref}
+      ref={sectionRef}
       className="relative"
       style={{
         paddingTop: "calc(var(--header-h, 72px) + 96px)",
@@ -51,9 +72,16 @@ export default function ConfiggoHero() {
           >
             <p className="typo-small-heading text-white/70">Configgo Real Estate CRM</p>
 
-            <h1 className="typo-hero-light mt-4 text-transparent bg-clip-text bg-gradient-to-r from-white to-[#C6F24E] md:text-[84px]">
-              One CRM for Leads, Inventory & Sales
-            </h1>
+            <motion.h1
+              initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+              className="tracking-[-0.01em]"
+              style={{ fontWeight: 600, fontSize: "clamp(28px, 4.5vw, 64px)", lineHeight: 1.08 }}
+            >
+              <span className="block">One CRM for Leads</span>
+              <span className="block">Inventory & Sales</span>
+            </motion.h1>
 
             <p className="typo-small mt-4 max-w-[640px] text-white/70">
               Configgo unifies lead capture, sales pipelines, unit availability, and omnichannel
@@ -91,43 +119,42 @@ export default function ConfiggoHero() {
             </div>
           </motion.div>
 
-          {/* RIGHT — visual */}
-          <motion.div
-            variants={VISUAL}
-            initial="hidden"
-            animate={controls}
-            className="md:col-span-6"
-          >
-            <div className="-rotate-1 transition-transform duration-500 hover:rotate-0">
-              <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] shadow-[0_40px_100px_rgba(0,0,0,0.6)]">
-                {/* window bar */}
-                <div className="flex h-9 items-center gap-2 border-b border-white/10 bg-white/5 px-4">
-                  <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
-                  <span className="h-3 w-3 rounded-full bg-[#FFBD2E]" />
-                  <span className="h-3 w-3 rounded-full bg-[#28C840]" />
-                </div>
-
-                <div className="relative aspect-[16/9]">
-                  <Image
-                    src="/configgo/hero.jpg" // put a CRM screenshot here
-                    alt="Configgo CRM — dashboard"
-                    fill
-                    priority
-                    sizes="(min-width: 1024px) 720px, 100vw"
-                    className="object-cover"
-                  />
-                  {/* soft reflection + ring */}
-                  <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0)_42%)] mix-blend-soft-light" />
-                  <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
-                </div>
-              </div>
-            </div>
-          </motion.div>
+          {/* RIGHT — visual (no bg/ring/shadow; re-animates each time in view) */}
+          <div className="md:col-span-6">
+            {/* Use <img> to avoid optimizer and keep exact behavior; swap to <Image> if you prefer */}
+            <img
+              ref={visualRef}
+              src="/concon.png?v=5"
+              alt="Configgo CRM — dashboard"
+              className="block w-full h-auto object-contain"
+              decoding="async"
+              loading="eager"
+            />
+          </div>
         </div>
 
         {/* small anchor for the “See it in action” link */}
         <div id="video" className="h-10" />
       </div>
+
+      {/* Animation styles scoped to this component */}
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(24px) scale(0.985);
+            filter: blur(6px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+          }
+        }
+        .animate-in {
+          animation: fadeInUp 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+        }
+      `}</style>
     </section>
   );
 }

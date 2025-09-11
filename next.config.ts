@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'i.imgur.com', pathname: '/**' },        // example
     ],
   },
+      unoptimized: true,
 };
 
 export default nextConfig;

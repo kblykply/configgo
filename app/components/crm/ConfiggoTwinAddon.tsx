@@ -129,7 +129,7 @@ export default function ConfiggoTwinAddon() {
               <div className="relative aspect-[16/9]">
                 {/* your screenshot/video here */}
                 <Image
-                  src="/digital-twin/hero.jpg"
+                  src="/frame1-min.jpeg"
                   alt="Digital twin embedded preview"
                   fill
                   sizes="(min-width: 1024px) 740px, 100vw"
@@ -139,22 +139,7 @@ export default function ConfiggoTwinAddon() {
                 <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
 
                 {/* HUD chips */}
-                <HUDChip style={{ left: 16, top: 16 }}>
-                  <MapPin className="h-3.5 w-3.5" />
-                  Tower A • 12F
-                </HUDChip>
-                <HUDChip style={{ left: 16, bottom: 16 }}>
-                  <Box className="h-3.5 w-3.5" />
-                  2+1 • 94 m²
-                </HUDChip>
-                <HUDChip style={{ right: 16, top: 16 }}>
-                  <DollarSign className="h-3.5 w-3.5" />
-                  From $120K
-                </HUDChip>
-                <HUDChip style={{ right: 16, bottom: 16 }}>
-                  <Eye className="h-3.5 w-3.5" />
-                  Available <Check className="ml-1 h-3.5 w-3.5 text-[#C6F24E]" />
-                </HUDChip>
+                
 
                 {/* CTA */}
                 <button

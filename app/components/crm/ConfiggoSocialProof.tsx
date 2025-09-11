@@ -11,14 +11,35 @@ type Props = {
   brands?: Brand[];
   metrics?: Array<{ label: string; value: number; suffix?: string }>;
 };
+const PARTNERS: Partner[] = [
+  { name: "Nata Holding", src: "/NATA-logobeyaz.png" },
+  { name: "Zirve Beton", src: "/zirvebeton-LOGO-beyaz.png" },
+  { name: "TR Holding", src: "/trholdingbeyazlogo.png" },
+  { name: "Shelton", src: "/shelton-logo-beyaz.png" },
+  { name: "Gallardo", src: "/gallardologobeyaz.png" },
+  { name: "Onyx Portre", src: "/ONYX-PORTREbeyaz.png" },
 
+  { name: "Nata Yaşam", src: "/natayasamlogo-beyaz.png" },
+  { name: "Onyx Ankara", src: "/onyxlogobeyaz.png" },
+  { name: "Sun City Antalya", src: "/suncitylogo-beyaz.png" },
+  { name: "Vega Center", src: "/vegacenter-beyaz-logo.png" },
+  { name: "Vis Botanik", src: "/image.png" },
+  { name: "Marin Castro", src: "/marecastralogo-03.png" },
+
+  { name: "Criter Rezidans", src: "/criter.png" },
+  { name: "Villa İncekten", src: "/incek.png" },
+  { name: "VIP Tower", src: "/vip.png" },
+  { name: "Vkesif", src: "/kesif.png" },
+  { name: "Orion Towers", src: "/orionlogo-beyaz.png" },
+  { name: "Strada", src: "/stradalogo-beyaz.png" },
+];
 const DEFAULT_BRANDS: Brand[] = [
-  { name: "NATA Holding", logo: "/brands/nata.svg" },
-  { name: "Trinvest",     logo: "/brands/trinvest.svg" },
-  { name: "Kosavalı",     logo: "/brands/kosavali.svg" },
-  { name: "DND",          logo: "/brands/dnd.svg" },
-  { name: "ONYX",         logo: "/brands/onyx.svg" },
-  { name: "VisVadi",      logo: "/brands/visvadi.svg" },
+  { name: "NATA Holding", logo: "/NATA-logobeyaz.png" },
+  { name: "Trinvest",     logo: "/zirvebeton-LOGO-beyaz.png" },
+  { name: "Kosavalı",     logo: "/trholdingbeyazlogo.png" },
+  { name: "DND",          logo: "/shelton-logo-beyaz.png" },
+  { name: "ONYX",         logo: "/gallardologobeyaz.png" },
+  { name: "VisVadi",      logo: "/ONYX-PORTREbeyaz.png" },
 ];
 
 const DEFAULT_METRICS = [

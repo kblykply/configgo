@@ -34,28 +34,12 @@ function SlideOneVisual() {
           onCanPlay={() => setVidReady(true)}
           onLoadedData={() => setVidReady(true)}
         >
-          <source src="/1.webm" type="video/webm" />
-          <source src="/1video.mp4" type="video/mp4" />
+          <source src="/3video10.mp4" type="video/mp4" />
         </video>
       </motion.div>
 
       {/* Küçük poster üstte — video hazır olunca fade out */}
-      <motion.div
-        initial={{ opacity: 1, scale: 0.98 }}
-        animate={{ opacity: vidReady ? 0 : 1, scale: vidReady ? 1 : 0.98 }}
-        transition={{ duration: 0.45, ease: "easeOut" }}
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        style={{ pointerEvents: "none" }}
-      >
-        <Image
-          src="/1.png"
-          alt=""
-          width={900}
-          height={900}
-          className="w-[min(70vmin,900px)] md:w-[min(74vmin,1000px)] h-auto object-contain select-none"
-          priority
-        />
-      </motion.div>
+ 
     </div>
   );
 }

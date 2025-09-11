@@ -39,7 +39,7 @@ const CASES: CaseStudy[] = [
   {
     id: "vega",
     company: "Vega Center",
-    logo: "/logos/vega.svg",
+    logo: "/vegacenter-beyaz-logo.png",
     city: "Ankara",
     cover: "/projects/vega.jpg",
     quote: "Lead response time dropped by half in our first month. Pipelines finally match how our team sells.",
@@ -55,7 +55,7 @@ const CASES: CaseStudy[] = [
   {
     id: "orion",
     company: "Orion Tower",
-    logo: "/logos/orion.svg",
+    logo: "/orionlogo-beyaz.png",
     city: "Istanbul",
     cover: "/covers/oriontower.jpg",
     quote: "Inventory sync + WhatsApp inbox made us 10x faster on hot units.",
@@ -86,11 +86,13 @@ const CASES: CaseStudy[] = [
   },
 ];
 
+
+
 /* ---- testimonials (small cards) ---- */
 const TESTIMONIALS = [
   {
     company: "VisVadi",
-    logo: "/logos/visvadi.svg",
+    logo: "/image.png",
     quote: "Configgo let us route leads by office & project automatically. Zero manual triage.",
     person: "Ece Y.",
     role: "Project Director",
@@ -98,7 +100,7 @@ const TESTIMONIALS = [
   },
   {
     company: "Trinvest",
-    logo: "/logos/trinvest.svg",
+    logo: "/trholdingbeyazlogo.png",
     quote: "From spreadsheets to a clean CRM in a week. Our team actually enjoys using it.",
     person: "Baran T.",
     role: "Head of Sales",
@@ -106,7 +108,7 @@ const TESTIMONIALS = [
   },
   {
     company: "ZirveBeton",
-    logo: "/logos/zirve.svg",
+    logo: "/zirvebeton-LOGO-beyaz.png",
     quote: "Digital Twin add-on helped us convert web traffic into booked tours.",
     person: "Gülin A.",
     role: "Marketing Lead",
@@ -114,7 +116,7 @@ const TESTIMONIALS = [
   },
 ];
 
-export default function ConfiggoCaseStudies() {
+export default function   ConfiggoCaseStudies() {
   return (
     <section
       id="case-studies"
@@ -210,12 +212,14 @@ export default function ConfiggoCaseStudies() {
           </motion.div>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
             {[
-              "/logos/vega.svg",
-              "/logos/orion.svg",
-              "/logos/mega.svg",
-              "/logos/visvadi.svg",
-              "/logos/trinvest.svg",
-              "/logos/zirve.svg",
+
+           
+              "/natayasamlogo-beyaz.png",
+              "/onyxlogobeyaz.png",
+              "/suncitylogo-beyaz.png",
+              "/vegacenter-beyaz-logo.png",
+              "/image.png",
+              "/marecastralogo-03.png",
             ].map((src, i) => (
               <LogoBox key={src} delay={i * 0.03} src={src} />
             ))}
