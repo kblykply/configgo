@@ -32,10 +32,10 @@ const VISUAL = {
 };
 
 export default function DTCrmOverview({
-  mediaSrc = "/digital-twin/overview.jpg",
+  mediaSrc = "/digitaltwin-acilis2-min.png",
   videoSrc,
-  unrealLogoSrc = "/digital-twin/unreal.svg",
-  icloneLogoSrc = "/digital-twin/iclone.svg",
+  unrealLogoSrc = "/UE-Primary-Logo-2023-Vertical-White.png",
+  icloneLogoSrc = "/iClone7.png",
 }: Props) {
   const ref = useRef<HTMLElement | null>(null);
   const inView = useInView(ref, { amount: 0.4, margin: "-15% 0px -25% 0px" });
@@ -51,9 +51,9 @@ export default function DTCrmOverview({
     ref={ref}
     className="relative"
    style={{
-    paddingTop: "calc(var(--header-h, 72px) + 24px)",
+    paddingTop: "calc(var(--header-h, 15px) + 24px)",
      // if you ever anchor-link to this section, this prevents being hidden under the header
-      scrollMarginTop: "calc(var(--header-h, 72px) + 24px)",
+      scrollMarginTop: "calc(var(--header-h, 20px) + 12px)",
      }}
   >
       {/* subtle vignette / swirl */}
@@ -67,7 +67,7 @@ export default function DTCrmOverview({
           animate={controls}
           className="mb-10 text-center md:mb-14"
         >
-          <motion.h2 variants={ITEM} className="typo-h2-md text-white/70">
+          <motion.h2 variants={ITEM} className="typo-h1-light text-lime-200">
             CRM Based
           </motion.h2>
           <motion.h1 variants={ITEM} className="typo-hero-light mt-2 text-white md:text-[72px]">
@@ -98,31 +98,24 @@ export default function DTCrmOverview({
             {/* Logos */}
             <motion.div variants={WRAP} className="mt-8 flex items-center gap-10">
               <motion.div variants={ITEM} className="flex items-center gap-3">
-                <div className="grid h-14 w-14 place-items-center rounded-full bg-white/6 ring-1 ring-white/10">
-                  <Image src={unrealLogoSrc} alt="Unreal Engine" width={32} height={32} />
+                <div className="grid h-14 w-14 place-items-center rounded-full ">
+                  <Image src={unrealLogoSrc} alt="Unreal Engine" width={54} height={54} />
                 </div>
-                <span className="typo-small text-white/75">UNREAL<br />ENGINE</span>
               </motion.div>
 
               <motion.div variants={ITEM} className="flex items-center gap-3">
-                <div className="grid h-14 w-14 place-items-center rounded-full bg-white/6 ring-1 ring-white/10">
-                  <Image src={icloneLogoSrc} alt="iClone" width={32} height={32} />
+                <div className="grid h-17 w-17 place-items-center rounded-full ">
+                  <Image src={icloneLogoSrc} alt="iClone" width={64} height={64} />
                 </div>
-                <span className="typo-small text-white/75">iClone</span>
               </motion.div>
             </motion.div>
           </motion.div>
 
           {/* Right visual */}
           <motion.div variants={VISUAL} initial="hidden" animate={controls} className="md:col-span-7">
-            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-[0_40px_100px_rgba(0,0,0,0.6)]">
+            <div className="relative overflow-hidden rounded-2xl ">
               {/* window chrome */}
-              <div className="flex h-9 items-center gap-2 border-b border-white/10 bg-white/5 px-4">
-                <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
-                <span className="h-3 w-3 rounded-full bg-[#FFBD2E]" />
-                <span className="h-3 w-3 rounded-full bg-[#28C840]" />
-              </div>
-
+           
               <div className="relative aspect-[16/9]">
                 {videoSrc ? (
                   <video
@@ -144,7 +137,6 @@ export default function DTCrmOverview({
                     priority
                   />
                 )}
-                <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
               </div>
             </div>
           </motion.div>

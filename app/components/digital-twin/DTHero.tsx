@@ -8,87 +8,108 @@ import { useState, useEffect, useRef } from "react";
 const FILTERS = ["All Units", "Available", "1+1", "2+1"] as const;
 type Filter = (typeof FILTERS)[number];
 
-/* --- Animation variants --- */
-const EASE = [0.22, 0.61, 0.36, 1] as const;
+// UPDATE THESE PATHS TO REAL FILES
+const MEDIA: Record<Filter, string> = {
+  "All Units": "/units/allunit.png",
+  "Available": "/units/blue.png",
+  "1+1": "/units/green.png",
+  "2+1": "/units/purple.png",
+};
 
+const EASE = [0.22, 0.61, 0.36, 1] as const;
 const ITEM = {
   hidden: { opacity: 0, y: 20, filter: "blur(6px)" },
-  show: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.6, ease: EASE },
-  },
+  show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.6, ease: EASE } },
 };
-
 const VISUAL = {
   hidden: { opacity: 0, y: 20, scale: 0.98 },
-  show: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.6, ease: EASE },
-  },
+  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: EASE } },
 };
+
+function preload(src: string, timeout = 1500) {
+  return new Promise<void>((resolve) => {
+    const img = new window.Image();
+    const done = () => resolve();
+    img.onload = done;
+    img.onerror = done; // resolve even if 404 -> we still finish the transition
+    img.src = src;
+    // safety net: never block forever
+    window.setTimeout(done, timeout);
+  });
+}
 
 export default function DTHero() {
   const [active, setActive] = useState<Filter>("All Units");
 
-  // retrigger-on-enter: watch the whole section
+  // crossfade layers
+  const [baseSrc, setBaseSrc] = useState(MEDIA["All Units"]); // visible layer
+  const [topSrc, setTopSrc] = useState<string | null>(null);   // fades in over base
+  const [topVisible, setTopVisible] = useState(false);         // controls opacity
+  const [isSwitching, setIsSwitching] = useState(false);
+
+  // retrigger-on-enter
   const sectionRef = useRef<HTMLElement | null>(null);
   const inView = useInView(sectionRef, { amount: 0.45, margin: "-15% 0px -25% 0px" });
   const controls = useAnimation();
 
+  useEffect(() => { inView ? controls.start("show") : controls.set("hidden"); }, [inView, controls]);
+
+  // warm cache
   useEffect(() => {
-    if (inView) controls.start("show");
-    else controls.set("hidden");
-  }, [inView, controls]);
+    Object.values(MEDIA).forEach((src) => { const i = new window.Image(); i.src = src; });
+  }, []);
+
+  async function handleTab(label: Filter) {
+    if (label === active || isSwitching) return;
+
+    setActive(label);                 // highlight button immediately
+    setIsSwitching(true);
+
+    const next = MEDIA[label];
+
+    // preload next (with timeout fallback)
+    await preload(next);
+
+    // mount top layer and fade it in
+    setTopSrc(next);
+    // wait one microtask so the transition class applies
+    requestAnimationFrame(() => setTopVisible(true));
+
+    // after fade completes, swap base to next and clear top
+    window.setTimeout(() => {
+      setBaseSrc(next);
+      setTopVisible(false);
+      // small delay to let opacity go back to 0 before unmount
+      window.setTimeout(() => { setTopSrc(null); setIsSwitching(false); }, 40);
+    }, 220); // match duration-200 below
+  }
 
   return (
     <section
       ref={sectionRef}
       className="relative z-0"
-      style={{
-        // 20vh reserved for fixed header, 80vh for the hero content
-        minHeight: "calc(100svh - 20vh)",
-        paddingTop: "20vh",
-      }}
+      style={{ minHeight: "calc(100svh - 20vh)", paddingTop: "20vh", backgroundColor: "#000000",}}
     >
-      {/* soft backdrop swirl */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_40%_at_70%_0%,rgba(255,255,255,0.05),rgba(0,0,0,0)_62%)]" />
 
-      {/* content grid */}
       <div className="relative z-[1] mx-auto grid max-w-[1450px] grid-cols-1 items-center gap-12 px-6 pb-20 pt-6 md:grid-cols-12 md:gap-12 md:pb-28">
-        {/* left copy (new style) */}
-        <motion.div
-          variants={ITEM}
-          initial="hidden"
-          animate={controls}
-          className="md:col-span-5"
-        >
-          {/* accent bar + stacked titles */}
+        {/* LEFT */}
+        <motion.div variants={ITEM} initial="hidden" animate={controls} className="md:col-span-5 relative z-10">
           <div className="relative pl-6">
             <span className="absolute left-0 top-1 h-[88%] w-[3px] rounded-full bg-gradient-to-b from-[#C6F24E] to-white/30" />
-            <h1 className="typo-hero-light mb-2 text-transparent bg-gradient-to-r from-white to-[#C6F24E] bg-clip-text md:text-[84px]">
-              Digital Twins
-            </h1>
-            <p className="typo-small-heading mb-2 text-white/70">
-              Instantly view available units with a single click
-            </p>
+         <motion.h1 variants={ITEM} className="typo-hero-light mt-2 text-white md:text-[72px]">
+                    Digital Twin
+                  </motion.h1>
+            <p className="typo-small-heading mb-2 text-white/70">Instanly view available units with a single click</p>
           </div>
 
-          <h2 className="typo-h2-md mt-4 mb-4 text-white/95">
-            Effortless Apartment Filtering and Availability
-          </h2>
+          <h2 className="typo-h2-md mt-4 mb-4 text-white/95">Effortless Apartment Filtering and Availability</h2>
 
           <p className="typo-small max-w-[560px] text-white/70">
-            Simplify the search process by offering filtering options based on
-            apartment types. With just one click, clients can instantly view
-            available units, streamlining decision-making and enhancing the user
-            experience.
+            Simplify the search process by offering filtering options based on apartment types. With one click,
+            clients can instantly view available units.
           </p>
 
-          {/* glowing segmented filter */}
           <div className="mt-8 flex flex-wrap gap-3">
             {FILTERS.map((label) => {
               const isActive = active === label;
@@ -96,8 +117,8 @@ export default function DTHero() {
                 <button
                   key={label}
                   type="button"
+                  onClick={() => handleTab(label)}
                   aria-pressed={isActive}
-                  onClick={() => setActive(label)}
                   className={[
                     "rounded-full px-5 py-3 text-sm transition shadow-sm border backdrop-blur-sm",
                     isActive
@@ -112,39 +133,39 @@ export default function DTHero() {
           </div>
         </motion.div>
 
-        {/* right visual (tilted window style) */}
-        <motion.div
-          variants={VISUAL}
-          initial="hidden"
-          animate={controls}
-          className="md:col-span-7"
-        >
-          <div className="-rotate-1 transition-transform duration-500 hover:rotate-0">
-            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] shadow-[0_30px_80px_rgba(0,0,0,0.55)]">
-              {/* window top bar */}
-              <div className="flex h-9 items-center gap-2 border-b border-white/10 bg-white/5 px-4">
-                <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
-                <span className="h-3 w-3 rounded-full bg-[#FFBD2E]" />
-                <span className="h-3 w-3 rounded-full bg-[#28C840]" />
-              </div>
+      {/* RIGHT — full image, no crop/zoom, no shadow/border */}
+<motion.div variants={VISUAL} initial="hidden" animate={controls} className="md:col-span-7">
+  <div className="relative"> 
+    <div
+      className="relative w-full" 
+      style={{ height: "min(70vh, 720px)" }} // adjust if you want taller/shorter
+    >
+      {/* Base image (always visible) */}
+      <Image
+        src={baseSrc}
+        alt={`${active} — Digital twin`}
+        fill
+        priority={active === "All Units"}
+        sizes="(min-width: 1024px) 740px, 100vw"
+        className="object-contain"  // <- show full image, no crop
+      />
 
-              {/* hero image/video */}
-              <div className="relative aspect-[16/9]">
-                <Image
-                  src="/digital-twin/hero.jpg"
-                  alt="Digital twin showcase"
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 740px, 100vw"
-                  className="object-cover"
-                />
-                {/* subtle reflection */}
-                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0)_40%)] mix-blend-soft-light" />
-                <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
-              </div>
-            </div>
-          </div>
-        </motion.div>
+      {/* Top image (simple cross-fade) */}
+      {topSrc && (
+        <Image
+          src={topSrc}
+          alt="Transition"
+          fill
+          sizes="(min-width: 1024px) 740px, 100vw"
+          className={`object-contain transition-opacity duration-200 ease-linear ${
+            topVisible ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      )}
+    </div>
+  </div>
+</motion.div>
+
       </div>
     </section>
   );
