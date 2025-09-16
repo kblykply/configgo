@@ -54,13 +54,13 @@ const VISUAL = {
 };
 
 export default function DTFutureIntegration({
-  mediaSrc = "/digital-twin/integration.jpg",
+  mediaSrc = "/yarrak-twin/integration.jpg",
   videoSrc,
   rightTitle = "Future Focused Integration",
 }: Props) {
   const ref = useRef<HTMLElement | null>(null);
   const inView = useInView(ref, { amount: 0.4, margin: "-15% 0px -25% 0px" });
-  const controls = useAnimation();
+  const controls = useAnimation();   
 
   useEffect(() => {
     if (inView) controls.start("show");
