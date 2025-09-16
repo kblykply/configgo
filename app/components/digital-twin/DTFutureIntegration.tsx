@@ -56,7 +56,7 @@ const VISUAL = {
 export default function DTFutureIntegration({
   mediaSrc = "/digital-twin/integration.jpg",
   videoSrc,
-  rightTitle = "Lorem Ipsum Dolor Sit Amet",
+  rightTitle = "Future Focused Integration",
 }: Props) {
   const ref = useRef<HTMLElement | null>(null);
   const inView = useInView(ref, { amount: 0.4, margin: "-15% 0px -25% 0px" });

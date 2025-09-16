@@ -36,8 +36,8 @@ const VISUAL = {
 };
 
 export default function DTDigitalCity({
-  mediaSrc = "/digital-twin/city.jpg",
-  rightTitle = "Lorem Ipsum Dolor Sit Amet",
+  mediaSrc = "/digitalcitygörsel.jpg",
+  rightTitle = "Everything from a single building to an entire city",
 }: Props) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const inView = useInView(sectionRef, { amount: 0.4, margin: "-15% 0px -25% 0px" });

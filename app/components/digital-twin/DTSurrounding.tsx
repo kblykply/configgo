@@ -34,7 +34,7 @@ const VISUAL = {
 };
 
 export default function DTSurrounding({
-  mediaSrc = "/digital-twin/surrounding.jpg",
+  mediaSrc = "/surr.jpg",
   videoSrc,
 }: Props) {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -70,12 +70,7 @@ export default function DTSurrounding({
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-12">
           {/* LEFT — media window */}
           <motion.div variants={VISUAL} initial="hidden" animate={controls} className="md:col-span-7">
-            <div className="rounded-2xl border border-white/10 bg-black/40 shadow-[0_40px_100px_rgba(0,0,0,0.6)] overflow-hidden">
-              <div className="flex h-9 items-center gap-2 border-b border-white/10 bg-white/5 px-4">
-                <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
-                <span className="h-3 w-3 rounded-full bg-[#FFBD2E]" />
-                <span className="h-3 w-3 rounded-full bg-[#28C840]" />
-              </div>
+          
 
               <div className="relative aspect-[16/9]">
                 {videoSrc ? (
@@ -94,13 +89,12 @@ export default function DTSurrounding({
                     alt="Surrounding context view"
                     fill
                     sizes="(min-width: 1024px) 820px, 100vw"
-                    className="object-cover"
+                    className="object-contain"
                     priority
                   />
                 )}
-                <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
+                <div className="pointer-events-none absolute inset-0" />
               </div>
-            </div>
           </motion.div>
 
           {/* RIGHT — numbered cards */}

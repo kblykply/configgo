@@ -39,7 +39,7 @@ const VISUAL = {
 };
 
 export default function DTAuthenticity({
-  mediaSrc = "/digital-twin/auth.jpg", // put your image here
+  mediaSrc = "/auth.jpg", // put your image here
   videoSrc, // e.g. "/digital-twin/auth.mp4"
 }: Props) {
   const ref = useRef<HTMLElement | null>(null);
@@ -92,44 +92,39 @@ export default function DTAuthenticity({
               </motion.li>
             ))}
           </motion.ul>
+{/* Right — media window */}
+<motion.div
+  variants={VISUAL}
+  initial="hidden"
+  animate={controls}
+  className="md:col-span-7"
+>
+  <div className="relative w-full min-h-[550px] md:min-h-[650px] rounded-2xl overflow-hidden shadow-lg ">
+    {videoSrc ? (
+      <video
+        src={videoSrc}
+        poster={mediaSrc}
+        className="absolute inset-0 h-full w-full object-contain"
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
+    ) : (
+      <Image
+        src={mediaSrc}
+        alt="Authenticity showcase"
+        fill
+        sizes="(min-width: 1024px) 1200px, 100vw"
+        className="object-contain"
+        priority
+      />
+    )}
+    <div className="pointer-events-none absolute inset-0 " />
+  </div>
+</motion.div>
 
-          {/* Right — media window */}
-          <motion.div variants={VISUAL} initial="hidden" animate={controls} className="md:col-span-7">
-            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-[0_40px_100px_rgba(0,0,0,0.6)]">
-              {/* window bar */}
-              <div className="flex h-9 items-center gap-2 border-b border-white/10 bg-white/5 px-4">
-                <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
-                <span className="h-3 w-3 rounded-full bg-[#FFBD2E]" />
-                <span className="h-3 w-3 rounded-full bg-[#28C840]" />
-              </div>
 
-              <div className="relative aspect-[16/9]">
-                {videoSrc ? (
-                  <video
-                    src={videoSrc}
-                    poster={mediaSrc}
-                    className="absolute inset-0 h-full w-full object-cover"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                  />
-                ) : (
-                  <>
-                    <Image
-                      src={mediaSrc}
-                      alt="Authenticity showcase"
-                      fill
-                      sizes="(min-width: 1024px) 740px, 100vw"
-                      className="object-cover"
-                      priority
-                    />
-                  </>
-                )}
-                <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
-              </div>
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>
