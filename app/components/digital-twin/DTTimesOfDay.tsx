@@ -49,8 +49,8 @@ export default function DTTimesOfDay({
   ext = ".jpg",
   startIndex = 1,
   endIndex = 120,
-  mediaSrc,                       // if not provided we build from first tab frame
-  modeFrameAsFilename,            // e.g. { day: 34, night: 100 }
+  mediaSrc,
+  modeFrameAsFilename,
   fps = 24,
   preloadAhead = 12,
 }: Props) {
@@ -112,7 +112,6 @@ export default function DTTimesOfDay({
       const img = new window.Image();
       img.decoding = "async";
       img.src = urls[i];
-      // prefer decode() if available (avoids flicker)
       if (img.decode) {
         img.decode().catch(() => {}).finally(() => { cache.current.set(i, img); resolve(); });
       } else {
@@ -138,7 +137,6 @@ export default function DTTimesOfDay({
   const swapTo = (i: number) => {
     const ready = cache.current.get(i);
     if (ready && imgRef.current) {
-      // @ts-expect-error: natural width exists after decode
       imgRef.current.src = ready.src;
       frameRef.current = i;
     }
@@ -251,7 +249,9 @@ export default function DTTimesOfDay({
                 <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
                 <span className="h-3 w-3 rounded-full bg-[#FFBD2E]" />
                 <span className="h-3 w-3 rounded-full bg-[#28C840]" />
-                <span className="ml-3 text-xs text-white/60">This is a simplified web demo; the full product runs in Unreal Engine.</span>
+                <span className="ml-3 text-xs text-white/60">
+                  This is a simplified web demo; the full product runs in Unreal Engine.
+                </span>
               </div>
 
               <div className="relative aspect-[16/9]">
