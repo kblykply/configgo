@@ -24,7 +24,7 @@ const item: Variants = {
 const DECOR_SRC = "/3d.png"; // put your PNG here (e.g. /decor-3d.png)
 
 export default function ImmersiveSection() {
-  const [tab, setTab] = useState<TabKey>("filter");
+  const [tab, setTab] = useState<TabKey>("details");
 
   // re-trigger animations on every re-entry
   const rootRef = useRef<HTMLDivElement>(null);

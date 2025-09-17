@@ -54,7 +54,7 @@ const VISUAL = {
 };
 
 export default function DTFutureIntegration({
-  mediaSrc = "/yarrak-twin/integration.jpg",
+  mediaSrc = "/futurefocus1.jpg",
   videoSrc,
   rightTitle = "Future Focused Integration",
 }: Props) {
@@ -112,18 +112,9 @@ export default function DTFutureIntegration({
             animate={controls}
             className="md:col-span-6 md:self-center"
           >
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-8 shadow-[0_40px_100px_rgba(0,0,0,0.6)] md:p-12">
-              <h4 className="text-center text-[#C6F24E] font-[400] md:text-[28px]">
-                {rightTitle}
-              </h4>
-
-              <div className="mt-6 overflow-hidden rounded-xl border border-black/10 bg-black/80 p-3 shadow-lg">
+          
                 {/* window chrome */}
-                <div className="mb-3 flex items-center gap-2">
-                  <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
-                  <span className="h-3 w-3 rounded-full bg-[#FFBD2E]" />
-                  <span className="h-3 w-3 rounded-full bg-[#28C840]" />
-                </div>
+            
 
                 <div className="relative aspect-[16/9] overflow-hidden rounded-[12px]">
                   {videoSrc ? (
@@ -147,8 +138,6 @@ export default function DTFutureIntegration({
                     />
                   )}
                 </div>
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>
