@@ -58,6 +58,8 @@
   --foreground: #171717;
 }
 
+
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -144,3 +146,5 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 18px;
   text-align: justify;
 }
+
+

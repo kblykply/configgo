@@ -68,7 +68,7 @@ export default function ConfiggoHero() {
             variants={ITEM}
             initial="hidden"
             animate={controls}
-            className="md:col-span-6"
+            className="md:col-span-5"
           >
             <p className="typo-small-heading text-white/70">Configgo Real Estate CRM</p>
 
@@ -120,16 +120,18 @@ export default function ConfiggoHero() {
           </motion.div>
 
           {/* RIGHT — visual (no bg/ring/shadow; re-animates each time in view) */}
-          <div className="md:col-span-6">
+          <div className="md:col-span-7">
             {/* Use <img> to avoid optimizer and keep exact behavior; swap to <Image> if you prefer */}
-            <img
-              ref={visualRef}
-              src="/crmgörsel2-min.png?v=5"
-              alt="Configgo CRM — dashboard"
-              className="block w-full h-auto object-contain"
-              decoding="async"
-              loading="eager"
-            />
+    <Image
+  src="/crmgörsel2-min.png?v=5"
+  alt="Configgo CRM — dashboard"
+  width={3000}
+  height={2800}
+  quality={100}
+  priority
+  sizes="100vw"  // always take full viewport width
+  className="w-full h-auto object-contain"
+/>
           </div>
         </div>
 

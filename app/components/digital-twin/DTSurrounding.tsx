@@ -34,7 +34,7 @@ const VISUAL = {
 };
 
 export default function DTSurrounding({
-  mediaSrc = "/surr.jpg",
+  mediaSrc = "/surrounding_3.jpg",
   videoSrc,
 }: Props) {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -49,7 +49,7 @@ export default function DTSurrounding({
   return (
     <section ref={sectionRef} className="relative">
       {/* soft vignette */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_120%_at_60%_0%,rgba(255,255,255,0.05),rgba(0,0,0,0)_60%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[#000000]" />
 
       <div className="relative z-[1] mx-auto max-w-[1450px] px-6 py-16 md:py-24">
         {/* Heading */}
@@ -84,14 +84,20 @@ export default function DTSurrounding({
                     playsInline
                   />
                 ) : (
-                  <Image
-                    src={mediaSrc}
-                    alt="Surrounding context view"
-                    fill
-                    sizes="(min-width: 1024px) 820px, 100vw"
-                    className="object-contain"
-                    priority
-                  />
+         <Image
+  src={mediaSrc}
+  alt="Surrounding context view"
+  fill
+  // Realistic rendered widths by breakpoint
+  sizes="(min-width:1536px) 1100px,
+         (min-width:1280px) 1000px,
+         (min-width:1024px) 900px,
+         100vw"
+  quality={90}            // 90 is visually lossless, smaller file than 100
+  priority
+  fetchPriority="high"
+  className="object-contain"
+/>
                 )}
                 <div className="pointer-events-none absolute inset-0" />
               </div>

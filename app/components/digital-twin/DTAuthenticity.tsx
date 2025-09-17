@@ -57,7 +57,7 @@ export default function DTAuthenticity({
       className="relative"
     >
       {/* subtle swirl / vignette */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_120%_at_20%_0%,rgba(255,255,255,0.05),rgba(0,0,0,0)_60%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[#030303]" />
 
       <div className="relative z-[1] mx-auto max-w-[1450px] px-6 py-20 md:py-28">
         {/* Heading */}
