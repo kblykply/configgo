@@ -2,7 +2,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, useAnimation, useInView, Variants, AnimatePresence } from "framer-motion";
 
 type TabKey = "filter" | "weather" | "details" | "locations";
@@ -24,6 +24,7 @@ const item: Variants = {
 const DECOR_SRC = "/3d.png"; // put your PNG here (e.g. /decor-3d.png)
 
 export default function ImmersiveSection() {
+  // FIX: removed trailing space
   const [tab, setTab] = useState<TabKey>("details");
 
   // re-trigger animations on every re-entry
@@ -71,18 +72,32 @@ export default function ImmersiveSection() {
     }
     rafRef.current = requestAnimationFrame(tick);
   };
+
   const startLoop = () => {
     if (!s.current.running) {
       s.current.running = true;
       rafRef.current = requestAnimationFrame(tick);
     }
   };
+
   const onMove: React.MouseEventHandler<HTMLDivElement> = (e) => {
     const w = fogWrapRef.current; if (!w) return;
     const r = w.getBoundingClientRect();
-    s.current.tx = e.clientX - r.left; s.current.ty = e.clientY - r.top; s.current.to = 1; startLoop();
+    s.current.tx = e.clientX - r.left;
+    s.current.ty = e.clientY - r.top;
+    s.current.to = 1;
+    startLoop();
   };
+
   const onLeave = () => { s.current.to = 0; startLoop(); };
+
+  // cleanup RAF on unmount
+  useEffect(() => {
+    return () => {
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+      s.current.running = false;
+    };
+  }, []);
 
   // preview image per tab (drop your files in /public/digitaltwin/)
   const src =
@@ -169,7 +184,7 @@ export default function ImmersiveSection() {
               <FogButton
                 refCb={registerBtn(1)}
                 active={tab === "weather"}
-                label={<>See Different<br/>Weather &amp; Sunlight</>}
+                label={<>See Different<br />Weather &amp; Sunlight</>}
                 onClick={() => setTab("weather")}
               />
               <FogButton
@@ -200,7 +215,7 @@ export default function ImmersiveSection() {
                     animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                     exit={{ opacity: 0, scale: 0.992, filter: "blur(4px)" }}
                     transition={{ duration: 0.45, ease: [0.22, 0.61, 0.36, 1] }}
-                    className="absolute inset-0 will-change-transform will-change-opacity"
+                    className="absolute inset-0"
                   >
                     <Image
                       src={src}
@@ -235,13 +250,12 @@ function FogButton({
   onClick?: () => void;
   refCb: (el: HTMLButtonElement | null) => void;
 }) {
-// replace the `base` string inside FogButton with this:
-const base =
-  "relative z-0 h-auto min-h-[64px] md:min-h-[56px] rounded-[12px] px-4 py-3 " +
-  "text-[13px] md:text-[14px] leading-[1.25] whitespace-normal break-words " +
-  "transition overflow-hidden select-none pointer-events-auto cursor-pointer " +
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C6F24E]/70";
-
+  // base button styles
+  const base =
+    "relative z-0 h-auto min-h-[64px] md:min-h-[56px] rounded-[12px] px-4 py-3 " +
+    "text-[13px] md:text-[14px] leading-[1.25] whitespace-normal break-words " +
+    "transition overflow-hidden select-none pointer-events-auto cursor-pointer " +
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C6F24E]/70";
 
   return (
     <button
