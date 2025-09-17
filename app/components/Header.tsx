@@ -144,13 +144,13 @@ export default function Header({
         <div className="relative" style={{ height: headerHeight }}>
           <div className="mx-auto grid h-full max-w-[1400px] grid-cols-[auto_1fr_auto] items-center px-6">
             {/* Logo — always visible */}
-            <Link href="/" aria-label="Home" className="inline-flex items-center">
-              <img
-                src="/configgo-yeni-logo-beyaz.png"
-                alt="Logo"
-                className="block h-9 md:h-10 w-auto"
-              />
-            </Link>
+       <Link href="/" aria-label="Home" className="inline-flex items-center">
+  <img
+    src="/configgo-yeni-logo-beyaz.png"
+    alt="Logo"
+    className="block h-6 md:h-7 w-auto" // smaller height
+  />
+</Link>
 
             {/* Center Nav — desktop only */}
             <nav className="hidden md:flex justify-center">
