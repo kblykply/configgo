@@ -122,14 +122,17 @@ export default function ConfiggoHero() {
           {/* RIGHT — visual (no bg/ring/shadow; re-animates each time in view) */}
           <div className="md:col-span-6">
             {/* Use <img> to avoid optimizer and keep exact behavior; swap to <Image> if you prefer */}
-            <img
-              ref={visualRef}
-              src="/concon.png?v=5"
-              alt="Configgo CRM — dashboard"
-              className="block w-full h-auto object-contain"
-              decoding="async"
-              loading="eager"
-            />
+         
+<Image
+  src="/crmgörsel2-min.png?v=5"
+  alt="Configgo CRM — dashboard"
+  width={7000}
+  height={4800}
+  quality={100}
+  priority
+  sizes="100vw"  // always take full viewport width
+  className="w-full h-auto object-contain"
+/>
           </div>
         </div>
 
