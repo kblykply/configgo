@@ -32,7 +32,7 @@ const VISUAL = {
 };
 
 export default function DTCrmOverview({
-  mediaSrc = "/digitaltwin-acilis2-min.png",
+  mediaSrc = "/digitalhero.png",
   videoSrc,
   unrealLogoSrc = "/UE-Primary-Logo-2023-Vertical-White.png",
   icloneLogoSrc = "/iClone7.png",

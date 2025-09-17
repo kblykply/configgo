@@ -68,7 +68,7 @@ export default function ConfiggoHero() {
             variants={ITEM}
             initial="hidden"
             animate={controls}
-            className="md:col-span-5"
+            className="md:col-span-6"
           >
             <p className="typo-small-heading text-white/70">Configgo Real Estate CRM</p>
 
@@ -120,7 +120,7 @@ export default function ConfiggoHero() {
           </motion.div>
 
           {/* RIGHT — visual (no bg/ring/shadow; re-animates each time in view) */}
-          <div className="md:col-span-7">
+          <div className="md:col-span-6">
             {/* Use <img> to avoid optimizer and keep exact behavior; swap to <Image> if you prefer */}
     <Image
   src="/crmgörsel2-min.png?v=5"
