@@ -65,7 +65,7 @@ const SHOUTS: Shout[] = [
 ];
 
 /* ----- component ----- */
-export default function AboutCommunity() {
+export default function   AboutCommunity() {
   const stats = useMemo(
     () => [
       { k: "3.4k+", l: "Community members", icon: <Users className="h-4 w-4 text-[#C6F24E]" /> },
@@ -225,20 +225,7 @@ export default function AboutCommunity() {
           </motion.div>
         </div>
 
-        {/* row 2: testimonials grid */}
-        <motion.ul
-          variants={WRAP}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.25, margin: "-10% 0px -20% 0px" }}
-          className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2"
-        >
-          {SHOUTS.map((s) => (
-            <motion.li key={s.id} variants={ITEM}>
-              <Testimonial s={s} />
-            </motion.li>
-          ))}
-        </motion.ul>
+  
 
         {/* footer badge strip */}
         <motion.div

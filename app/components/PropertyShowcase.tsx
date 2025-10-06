@@ -32,17 +32,17 @@ type ProjectDetail = {
 /* ---------- Sample data ---------- */
 const PROJECTS: Project[] = [
   { id: "p1", title: "Vega Center", developer: "NATA Holding", city: "Ankara", image: "/projects/vega.jpg", href: "#" },
-  { id: "p2", title: "SheltonVisalia", developer: "Shelton", city: "Ankara", image: "/projects/Shelton.jpg", href: "#" },
+  { id: "p2", title: "SheltonVisalia", developer: "Shelton", city: "Muğla", image: "/projects/Shelton.jpg", href: "#" },
   { id: "p3", title: "Paryal Bağlıca", developer: "ZirveBeton", city: "Ankara", image: "/projects/zirve.jpg", href: "#" },
   { id: "p4", title: "VisVadi", developer: "VisVadi", city: "Ankara", image: "/covers/visvadi.jpeg", href: "#" },
   { id: "p6", title: "Ruby Strada", developer: "Vizör", city: "Ankara", image: "/covers/strada.jpg", href: "#" },
   { id: "p7", title: "ONYX Potre", developer: "ONYX", city: "Ankara", image: "/covers/onyx.jpg", href: "#" },
   { id: "p9", title: "Criter Bağlıca", developer: "Criter", city: "Ankara", image: "/covers/criter.jpg", href: "#" },
   { id: "p10", title: "Lagoon", developer: "DND", city: "Cyprus", image: "/covers/laggon.jpg", href: "#" },
-  { id: "p11", title: "Mega1453", developer: "Trinvest", city: "Istanbul", image: "/covers/mega1453.jpg", href: "#" },
-  { id: "p12", title: "Orion Tower", developer: "Kosavalı", city: "Istanbul", image: "/covers/oriontower.jpg", href: "#" },
+  { id: "p11", title: "Mega1453", developer: "Trinvest", city: "Ankara", image: "/covers/mega1453.jpg", href: "#" },
+  { id: "p12", title: "Orion Tower", developer: "Kosavalı", city: "Ankara", image: "/covers/oriontower.jpg", href: "#" },
   { id: "p13", title: "Suncity 2", developer: "Trinvest", city: "Antalya", image: "/covers/suncity.jpg", href: "#" },
-  { id: "p16", title: "Park Rest", developer: "Unknown", city: "Ankara", image: "/covers/prr.jpg", href: "#" },
+  { id: "p16", title: "Park Rest", developer: "Elite", city: "Cyprus", image: "/covers/prr.jpg", href: "#" },
 ];
 
 /* Map details per project id (add your real text/images) */
@@ -178,6 +178,20 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       { title: "Drive-Through Experience", image: "/lagoon/drive.jpg", caption: "Explore access roads, parking flows, and drop-off areas by car." },
       { title: "Weather Simulation", image: "/lagoon/weather.jpg", caption: "Inspect the project under rain, snow, fog, and clear skies to assess usability." },
       { title: "Nearby Places & Distances", image: "/lagoon/nearby.jpg", caption: "See schools, malls, transit, and estimated travel times from the project." },
+    ],
+  },
+  p16: {
+    description:
+      "Bu proje; kentsel yaşamı akıllı altyapı, yeşil alanlar ve karma kullanımla birleştiren yeni nesil bir yerleşim yaklaşımı sunar. İlk etap; 3 blok, 240 konut ve zemin katta 18 ticari birimden oluşur. Güneye bakan geniş cepheler, rüzgâr ve ışık optimizasyonu için kademeli bir kütleyle çözülmüştür. Sosyal tesislerde kapalı havuz, çok amaçlı salon, çalışma alanları ve 7/24 güvenlik bulunmaktadır. Bağlantı yollarına 3 dk, metroya yürüme mesafesi…",
+    slides: [
+      { title: "See All Project Details", image: "/prr/1.jpg", caption: "Access all architectural and technical information of the project from a single panel" },
+      { title: "Filter Apartments", image: "/prr/2.jpg", caption: "Filter the apartments and choose the apartment that best suits your client." },
+      { title: "Apartment Interior Tour", image: "/prr/3.jpg", caption: "Enter a selected apartment and walk through every room with an interactive 3D tour." },
+      { title: "Sunlight by Hour", image: "/prr/5.jpg", caption: "Simulate sun position across the day to analyze light and shade in each room." },
+      { title: "Explore Site Amenities", image: "/prr/6.jpg", caption: "Browse gyms, pools, playgrounds, and shared spaces at a glance." },
+      { title: "Weather Simulation", image: "/prr/7.jpg", caption: "Inspect the project under rain, snow, fog, and clear skies to assess usability." },
+            { title: "Explore the Floor Plan", image: "/prr/8.jpg", caption: "Zoom, pan, and highlight rooms, dimensions, and orientation on the apartment plan." },
+
     ],
   },
 };
@@ -500,9 +514,10 @@ function ProjectModal({
                 See Full Details
               </a>
 
-              <p className="mt-3 text-white/60 text-xs">
-                Ok tuşlarıyla slaytlar arasında gezinebilir, <span className="text-white">Esc</span> ile kapatabilirsiniz.
-              </p>
+          <p className="mt-3 text-white/60 text-xs">
+  You can navigate between slides with the arrow keys, and close with <span className="text-white">Esc</span>.
+</p>
+
             </div>
 
             {/* bottom subtle system bar */}

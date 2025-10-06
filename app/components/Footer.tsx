@@ -8,46 +8,30 @@ type LinkGroup = { title: string; links: LinkItem[] };
 
 const GROUPS: LinkGroup[] = [
   {
-    title: "Projects",
+    title: "General",
     links: [
-      { label: "Vega Center", href: "/projects#vega-center" },
-      { label: "Shelton Visalia", href: "/projects#shelton-visalia" },
-      { label: "Paryal Bağlıca", href: "/projects#paryal-baglica" },
-      { label: "Vis Vadi", href: "/projects#vis-vadi" },
-      { label: "Suare", href: "/projects#suare" },
+      { label: "Home Page", href: "/" },
+           { label: "Contact", href: "/contact" },
+
+      { label: "About", href: "/about-us" },
     ],
   },
   {
-    title: "Interactive Sales Tools",
+    title: "Products",
     links: [
-      { label: "Unit Filtering & Availability", href: "/digital_twins#filter" },
-      { label: "Apartment Detail & Gallery", href: "/digital_twins#unit-detail" },
-      { label: "Sun-Path & Weather", href: "/digital_twins#sunpath" },
-      { label: "Nearby Places & Distances", href: "/digital_twins#nearby" },
-      { label: "View & Orientation Explorer", href: "/digital_twins#views" },
+       { label: "CRM", href: "/crm" },
+      { label: "Digital Twins", href: "/digital_twins" },
     ],
   },
   {
-    title: "Digital Twins",
+    title: "Others",
     links: [
-      { label: "Overview & Demo", href: "/digital_twins" },
-      { label: "Embeddable Viewer", href: "/digital_twins#embed" },
-      { label: "Mobile/Tablet Optimizations", href: "/digital_twins#mobile" },
-      { label: "BIM/IFC & GLB Pipeline", href: "/digital_twins#bim" },
-      { label: "Performance & Streaming", href: "/digital_twins#performance" },
-    ],
-  },
-  {
-    title: "Digital Experience Center",
-    links: [
-      { label: "Kiosk Mode (Attract Loop)", href: "/digital_twins#kiosk" },
-      { label: "Tablet Sales Flow", href: "/digital_twins#tablet" },
-      { label: "Agent Handoff & Notes", href: "/crm#handoff" },
-      { label: "Offline Cache & Sync", href: "/digital_twins#offline" },
-      { label: "Multi-Screen Setup", href: "/digital_twins#multiscreen" },
+      { label: "Blog", href: "/blog" },
     ],
   },
 ];
+
+
 
 export default function ContactAndFooter() {
   return (
@@ -69,8 +53,8 @@ export default function ContactAndFooter() {
               <div className="mt-8 space-y-4 text-[13.5px]">
                 <div>
                   <div className="text-white/50">Phone</div>
-                  <Link href="tel:+000000000000" className="text-white/70 hover:text-white">
-                    +00 000 000 00 00
+                  <Link href="tel:+1 (617) 319-8242" className="text-white/70 hover:text-white">
+                    +1 (617) 319-8242
                   </Link>
                 </div>
                 <div>
@@ -204,22 +188,13 @@ export default function ContactAndFooter() {
             </ul>
             {/* green icons */}
             <div className="flex items-center gap-2 text-[#C6F24E]">
-              <Social href="#" label="YouTube">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                  <path d="M19.6 7.2a3 3 0 0 1 2.1 2.1c.3 1.1.3 3.3.3 3.3s0 2.2-.3 3.3a3 3 0 0 1-2.1 2.1C18.5 18.6 12 18.6 12 18.6s-6.5 0-7.6-.6a3 3 0 0 1-2.1-2.1C2 14.8 2 12.6 2 12.6s0-2.2.3-3.3A3 3 0 0 1 4.4 7.2C5.5 6.6 12 6.6 12 6.6s6.5 0 7.6.6Zm-9.6 2.5v5l4.9-2.5-4.9-2.5Z"/>
-                </svg>
-              </Social>
-              <Social href="#" label="Facebook">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                  <path d="M13 10h3V7h-3c-1.7 0-3 1.3-3 3v2H8v3h2v6h3v-6h3l1-3h-4v-2c0-.6.4-1 1-1Z"/>
-                </svg>
-              </Social>
-              <Social href="#" label="LinkedIn">
+        
+              <Social href="https://tr.linkedin.com/company/configgo" label="LinkedIn">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                   <path d="M6.94 8.5H4V20h3V8.5ZM5.5 7.1a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6ZM20 20h-3v-6.2c0-3-3.6-2.8-3.6 0V20H10V8.5h3v1.8c1.4-2.6 7-2.8 7 2.5V20Z"/>
                 </svg>
               </Social>
-              <Social href="#" label="Instagram">
+              <Social href="https://www.instagram.com/configgo/" label="Instagram">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                   <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2ZM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z"/>
                 </svg>

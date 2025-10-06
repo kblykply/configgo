@@ -36,7 +36,7 @@ const VISUAL = {
 };
 
 export default function DTDigitalCity({
-  mediaSrc = "/digitalcitygörsel.jpg",
+  mediaSrc = "/mega/ui.jpg",
   rightTitle = "Everything from a single building to an entire city",
 }: Props) {
   const sectionRef = useRef<HTMLElement | null>(null);

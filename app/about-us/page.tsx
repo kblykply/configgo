@@ -26,14 +26,11 @@ export default function Page() {
         <AboutHero />
         <AboutMission />
         <AboutPillars />    
-        <AboutImpact />
         <AboutTimeline />
         <AboutTeam />   
         <AboutValues />
         <AboutOffices />
         <AboutSecurity />
-        <AboutPress />
-        <AboutInvestors />
         <AboutCareers />
         <AboutCommunity />
         <AboutContact />

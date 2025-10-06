@@ -35,7 +35,6 @@ export default function ConfiggoHero() {
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // retrigger animation
           el.classList.remove("animate-in");
           void el.offsetWidth; // force reflow
           el.classList.add("animate-in");
@@ -53,16 +52,18 @@ export default function ConfiggoHero() {
       ref={sectionRef}
       className="relative"
       style={{
-        paddingTop: "calc(var(--header-h, 72px) + 96px)",
-        scrollMarginTop: "calc(var(--header-h, 72px) + 96px)",
-        minHeight: "calc(100svh - var(--header-h, 72px))",
+        height: "100svh",                 // <- exact 100vh (small-viewport unit for mobile)
+        scrollMarginTop: "var(--header-h, 72px)",
       }}
     >
+      {/* top offset so content clears the sticky header */}
+      <div className="h-[var(--header-h,72px)]" />
+
       {/* subtle background swirl */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_130%_at_60%_0%,rgba(255,255,255,0.05),rgba(0,0,0,0)_60%)]" />
 
-      <div className="relative z-[1] mx-auto max-w-[1450px] px-6">
-        <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-12 md:gap-12">
+      <div className="relative z-[1] mx-auto flex h-[calc(100%-var(--header-h,72px))] max-w-[1450px] items-center px-6">
+        <div className="grid w-full grid-cols-1 items-center gap-12 md:grid-cols-12 md:gap-12">
           {/* LEFT — copy */}
           <motion.div
             variants={ITEM}
@@ -119,25 +120,25 @@ export default function ConfiggoHero() {
             </div>
           </motion.div>
 
-          {/* RIGHT — visual (no bg/ring/shadow; re-animates each time in view) */}
+          {/* RIGHT — visual (re-animates each time in view) */}
           <div className="md:col-span-6">
-            {/* Use <img> to avoid optimizer and keep exact behavior; swap to <Image> if you prefer */}
-    <Image
-  src="/crmgörsel2-min.png?v=5"
-  alt="Configgo CRM — dashboard"
-  width={3000}
-  height={2800}
-  quality={100}
-  priority
-  sizes="100vw"  // always take full viewport width
-  className="w-full h-auto object-contain"
-/>
+            <Image
+              ref={visualRef}
+              src="/crmgörsel2-min.png?v=5"
+              alt="Configgo CRM — dashboard"
+              width={3000}
+              height={2800}
+              quality={100}
+              priority
+              sizes="100vw"
+              className="w-full h-auto object-contain animate-in"
+            />
           </div>
         </div>
-
-        {/* small anchor for the “See it in action” link */}
-        <div id="video" className="h-10" />
       </div>
+
+      {/* small anchor for the “See it in action” link */}
+      <div id="video" className="h-10" />
 
       {/* Animation styles scoped to this component */}
       <style jsx>{`

@@ -82,7 +82,7 @@ export default function WeatherCreationSection() {
                 </p>
               </div>
 
-              <div role="radiogroup" aria-label="Weather modes" className="mt-7 grid grid-cols-2 gap-3">
+              <div role="radiogroup" aria-label="Weather modes" className="mt-7 grid grid-cols-2 gap-3 min-w-0">
                 <ModeButton label="Snow" icon={<IconSnow />} active={mode === "snow"} onClick={() => pickMode("snow")} />
                 <ModeButton label="Fog" icon={<IconFog />} active={mode === "fog"} onClick={() => pickMode("fog")} />
                 <ModeButton
@@ -92,7 +92,13 @@ export default function WeatherCreationSection() {
                   onClick={() => pickMode("cloud")}
                 />
                 <ModeButton
-                  label="Precipitation"
+                  ariaLabel="Precipitation"
+                  label={
+                    <>
+                      <span className="hidden md:inline">Precipitation</span>
+                      <span className="md:hidden inline">Precip</span>
+                    </>
+                  }
                   icon={<IconPrecip />}
                   active={mode === "precip"}
                   onClick={() => pickMode("precip")}
@@ -180,22 +186,25 @@ function ModeButton({
   icon,
   active,
   onClick,
+  ariaLabel,
 }: {
-  label: string;
+  label: React.ReactNode; // now accepts responsive nodes
   icon: React.ReactNode;
   active: boolean;
   onClick: () => void;
+  ariaLabel?: string; // for accessibility when label is a node
 }) {
   return (
     <button
       type="button"
       role="radio"
       aria-checked={active}
+      aria-label={ariaLabel || (typeof label === "string" ? label : undefined)}
       onClick={onClick}
       className={
-        "group relative flex items-center gap-2 rounded-xl px-4 h-[44px] text-[14px] " +
-        "transition-colors select-none focus-visible:outline-none " +
-        "focus-visible:ring-2 focus-visible:ring-[#C6F24E]/70 " +
+        "group relative flex items-center gap-1.5 md:gap-2 rounded-xl px-3 md:px-4 h-[44px] " +
+        "text-[13px] md:text-[14px] transition-colors select-none focus-visible:outline-none " +
+        "focus-visible:ring-2 focus-visible:ring-[#C6F24E]/70 min-w-0 " +
         (active
           ? "text-[#C6F24E] bg-black/20 ring-1 ring-[#C6F24E] "
           : "text-white/80 ring-1 ring-white/10 hover:text-white hover:bg-white/5")
@@ -216,8 +225,8 @@ function ModeButton({
         />
       </span>
       {/* icon + label */}
-      <span className="opacity-90">{icon}</span>
-      <span className="leading-none">{label}</span>
+      <span className="opacity-90 flex-shrink-0">{icon}</span>
+      <span className="leading-none truncate">{label}</span>
     </button>
   );
 }

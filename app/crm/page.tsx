@@ -16,7 +16,6 @@ import ConfiggoTwinAddon from "../components/crm/ConfiggoTwinAddon";
 import ConfiggoImplementation from "../components/crm/ConfiggoImplementation";
 import ConfiggoSecurity from "../components/crm/ConfiggoSecurity";
 import ConfiggoPricing from "../components/crm/ConfiggoPricing";
-import ConfiggoCaseStudies from "../components/crm/ConfiggoCaseStudies";
 import ConfiggoFAQ from "../components/crm/ConfiggoFAQ";
 import ConfiggoFinalCTA from "../components/crm/ConfiggoFinalCTA";
 
@@ -41,15 +40,20 @@ export default function Page() {
         <ConfiggoDocuments />
         <ConfiggoReporting />
         <ConfiggoTeams />
+       
         <ConfiggoIntegrations />
-        <ConfiggoTwinAddon />   
+        <ConfiggoTwinAddon /> 
+
+        
+          
         <ConfiggoImplementation />
         <ConfiggoSecurity />
         <ConfiggoPricing />
-        <ConfiggoCaseStudies />
-        <ConfiggoFAQ />
-        <ConfiggoFinalCTA />
-      {/* TODO: add the rest of the sections you want (overview, features, pricing, etc.) */}
+    <ConfiggoFAQ />
+     <ConfiggoFinalCTA />
+
+
+     
     </main>
   );
 }

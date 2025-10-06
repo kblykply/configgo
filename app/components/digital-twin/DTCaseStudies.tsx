@@ -26,6 +26,10 @@ export type Project = {
 
 type Props = { projects?: Project[] };
 
+
+
+
+
 /* ---------- Data (yours) ---------- */
 const DEFAULT_PROJECTS: Project[] = [
   { id: "p1", title: "Vega Center", developer: "NATA Holding", city: "Ankara", image: "/projects/vega.jpg", href: "#" },
@@ -35,14 +39,12 @@ const DEFAULT_PROJECTS: Project[] = [
   { id: "p5", title: "Suare", developer: "Suare", city: "Ankara", image: "/covers/visvadi.jpg", href: "#" },
   { id: "p6", title: "Ruby Strada", developer: "Vizör", city: "Ankara", image: "/covers/strada.jpg", href: "#" },
   { id: "p7", title: "ONYX Potre", developer: "ONYX", city: "Ankara", image: "/covers/onyx.jpg", href: "#" },
-  { id: "p8", title: "Fema", developer: "Conart / Emin Delim", city: "Ankara", image: "/covers/fema.jpg", href: "#" },
   { id: "p9", title: "Criter Bağlıca", developer: "Criter", city: "Ankara", image: "/covers/criter.jpg", href: "#" },
   { id: "p10", title: "Lagoon", developer: "DND", city: "Cyprus", image: "/covers/laggon.jpg", href: "#" },
-  { id: "p11", title: "Mega1453", developer: "Trinvest", city: "Istanbul", image: "/covers/mega1453.jpg", href: "#" },
-  { id: "p12", title: "Orion Tower", developer: "Kosavalı", city: "Istanbul", image: "/covers/oriontower.jpg", href: "#" },
+  { id: "p11", title: "Mega1453", developer: "Trinvest", city: "Ankara", image: "/covers/mega1453.jpg", href: "#" },
+  { id: "p12", title: "Orion Tower", developer: "Kosavalı", city: "Ankara", image: "/covers/oriontower.jpg", href: "#" },
   { id: "p13", title: "Suncity 2", developer: "Trinvest", city: "Antalya", image: "/covers/suncity.jpg", href: "#" },
-  { id: "p15", title: "Kıyı Kışlacık", developer: "NATA?", city: "Muğla", image: "/covers/kiyikislacik.jpg", href: "#" },
-  { id: "p16", title: "Park Rest", developer: "Unknown", city: "Ankara", image: "/covers/prr.jpg", href: "#" },
+  { id: "p16", title: "Park Rest", developer: "Elite", city: "Cyprus", image: "/covers/prr.jpg", href: "#" },
 ];
 
 /* ---------- Variants ---------- */
