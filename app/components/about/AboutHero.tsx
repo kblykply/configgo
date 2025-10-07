@@ -36,7 +36,12 @@ export default function AboutHero() {
     <section
       id="about-hero"
       className="relative"
-      style={{ paddingTop: HEADER_OFFSET, scrollMarginTop: HEADER_OFFSET }}
+      style={{
+        paddingTop: HEADER_OFFSET,
+        scrollMarginTop: HEADER_OFFSET,
+        // Make the section exactly viewport height minus the header offset
+        minHeight: `calc(100svh - ${HEADER_OFFSET})`,
+      }}
     >
       {/* background */}
       <div className="pointer-events-none absolute inset-0">
@@ -44,13 +49,16 @@ export default function AboutHero() {
         <div className="absolute inset-0 opacity-[0.07] [background-image:linear-gradient(rgba(255,255,255,.15)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.15)_1px,transparent_1px)] [background-size:28px_28px]" />
       </div>
 
-      <div className="relative z-[1] mx-auto max-w-[1450px] px-6 pb-16 md:pb-24">
+      <div
+        className="relative z-[1] mx-auto max-w-[1450px] px-6 pb-16 md:pb-24 flex items-center"
+        style={{ minHeight: "inherit" }} // ensure inner wraps to the section's 100vh height
+      >
         <motion.div
           variants={WRAP}
           initial={false}
           whileInView="show"
           viewport={{ once: false, amount: 0.2, margin: "-12% 0px -12% 0px" }}
-          className="grid grid-cols-1 items-center gap-10 md:grid-cols-12 md:gap-12"
+          className="grid w-full grid-cols-1 items-center gap-10 md:grid-cols-12 md:gap-12"
         >
           {/* Copy */}
           <motion.div variants={ITEM} className="md:col-span-7">

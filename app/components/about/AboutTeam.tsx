@@ -8,10 +8,34 @@ import { useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { Users, Linkedin, Github, Globe, Mail } from "lucide-react";
 
-/* header offset (20vh fixed header) */
+/**
+ * Put images under /public/team using these exact filenames:
+ * deniz-oktay-tuncay.jpg
+ * ulas-turgut.jpg
+ * salih-kaan-koc.jpg
+ * ezgi-akyol.jpg
+ * buse-ozsari.jpg
+ * nur-bahar.jpg
+ * fatih-gurbuz.jpg
+ * furkan-uysal.jpg
+ * mehmet-emin-guzel.jpg
+ * tanay-ozdemir.jpg
+ * kubilay-kuplay.jpg
+ * munevver-verim.jpg
+ * yasin-sefa-aksoy.jpg
+ * batuhan-muzafferoglu.jpg
+ * ege-moroglu.jpg
+ * melike-doga-kacaner.jpg
+ * beyza-sezer.jpg
+ * mert-cayli.jpg
+ * mehmet-nazim-gunay.jpg
+ * yunus-yilmaz.jpg
+ * yagiz-atilay-tuncay.jpg
+ * bora-sik.jpg
+ */
+
 const HEADER_OFFSET = "20vh";
 
-/* animations (per-block; no external controls) */
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 const WRAP = {
   hidden: { opacity: 0, y: 18, filter: "blur(6px)" },
@@ -27,7 +51,15 @@ const CARD = {
   show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: EASE } },
 };
 
-type Dept = "Engineering" | "Product" | "Design" | "Sales" | "Operations";
+type Dept =
+  | "Leadership"
+  | "Architecture"
+  | "Game Engine"
+  | "CRM & Web"
+  | "Design"
+  | "Customer Relations"
+  | "Rendering";
+
 type Member = {
   id: string;
   name: string;
@@ -35,6 +67,7 @@ type Member = {
   dept: Dept;
   image?: string;
   location?: string;
+  badges?: string[];
   socials?: Partial<{
     linkedin: string;
     github: string;
@@ -43,18 +76,207 @@ type Member = {
   }>;
 };
 
-const DEPARTMENTS = ["All", "Engineering", "Product", "Design", "Sales", "Operations"] as const;
+const DEPARTMENTS = [
+  "All",
+  "Leadership",
+  "Architecture",
+  "Game Engine",
+  "CRM & Web",
+  "Design",
+  "Customer Relations",
+  "Rendering",
+] as const;
 
-/* demo data (replace images/links) */
+const img = (file: string) => `/team/${file}`;
+
 const TEAM: Member[] = [
-  { id: "m1", name: "Ayşe Demir", role: "Head of Product", dept: "Product", image: "/team/ayse.jpg", location: "Istanbul", socials: { linkedin: "#", website: "#" } },
-  { id: "m2", name: "Mert Yılmaz", role: "Founding Engineer", dept: "Engineering", image: "/team/mert.jpg", location: "Ankara", socials: { github: "#", linkedin: "#" } },
-  { id: "m3", name: "Elif Kaya", role: "Design Lead", dept: "Design", image: "/team/elif.jpg", location: "Izmir", socials: { linkedin: "#", website: "#" } },
-  { id: "m4", name: "Can Aydın", role: "Solutions Architect", dept: "Engineering", image: "/team/can.jpg", location: "Istanbul", socials: { linkedin: "#", email: "mailto:can@example.com" } },
-  { id: "m5", name: "Selin Aras", role: "Growth & Partnerships", dept: "Sales", image: "/team/selin.jpg", location: "Ankara", socials: { linkedin: "#", website: "#" } },
-  { id: "m6", name: "Kerem Aksoy", role: "Operations Manager", dept: "Operations", image: "/team/kerem.jpg", location: "Ankara", socials: { linkedin: "#", email: "mailto:ops@example.com" } },
-  { id: "m7", name: "Derya Uçar", role: "Product Manager", dept: "Product", image: "/team/derya.jpg", location: "Remote (TR)", socials: { linkedin: "#" } },
-  { id: "m8", name: "Baran Koç", role: "Frontend Engineer", dept: "Engineering", image: "/team/baran.jpg", location: "Bursa", socials: { github: "#", linkedin: "#" } },
+  // Leadership
+  {
+    id: "deniz-oktay-tuncay",
+    name: "Deniz Oktay Tuncay",
+    role: "Founder",
+    dept: "Leadership",
+    image: img("deniz-oktay-tuncay.jpg"),
+    socials: { linkedin: "https://www.linkedin.com/in/denizoktaytuncay/" },
+  },
+  {
+    id: "ulas-turgut",
+    name: "Ulaş Turğut",
+    role: "Lead",
+    dept: "Leadership",
+    image: img("ulas-turgut.jpg"),
+    socials: { linkedin: "https://www.linkedin.com/in/ula%C5%9F-tur%C4%9Fut-9a35a2239/" },
+  },
+  {
+    id: "salih-kaan-koc",
+    name: "Salih Kaan Koç",
+    role: "Software Team Lead",
+    dept: "Leadership",
+    image: img("salih-kaan-koc.jpg"),
+    socials: { linkedin: "https://www.linkedin.com/in/salih-kaan-ko%C3%A7/" },
+  },
+
+  // Architecture
+  {
+    id: "ezgi-akyol",
+    name: "Ezgi Akyol",
+    role: "Architect",
+    dept: "Architecture",
+    image: img("ezgi-akyol.jpg"),
+    socials: { linkedin: "https://www.linkedin.com/in/ezgi-akyol-a2026a158/" },
+  },
+  {
+    id: "buse-ozsari",
+    name: "Buse Özsarı",
+    role: "Architect",
+    dept: "Architecture",
+    image: img("buse-ozsari.jpg"),
+    socials: { linkedin: "https://www.linkedin.com/in/buse-ozsari/" },
+  },
+  {
+    id: "nur-bahar",
+    name: "Nur Bahar",
+    role: "Architect (Intern)",
+    dept: "Architecture",
+    image: img("nur-bahar.jpg"),
+  },
+
+  // Game Engine
+  {
+    id: "fatih-gurbuz",
+    name: "Fatih Gürbüz",
+    role: "Game Engine Developer",
+    dept: "Game Engine",
+    image: img("fatih-gurbuz.jpg"),
+    socials: { linkedin: "https://www.linkedin.com/in/fatih-g%C3%BCrb%C3%BCz-01b438229/" },
+  },
+  {
+    id: "furkan-uysal",
+    name: "Furkan Uysal",
+    role: "Game Engine Developer",
+    dept: "Game Engine",
+    image: img("furkan-uysal.jpg"),
+    socials: { linkedin: "https://www.linkedin.com/in/furkan-uysal-41490321a/" },
+  },
+  {
+    id: "mehmet-emin-guzel",
+    name: "Mehmet Emin Güzel",
+    role: "Interior Design & Lighting Developer",
+    dept: "Game Engine",
+    image: img("mehmet-emin-guzel.jpg"),
+    socials: { linkedin: "https://www.linkedin.com/in/mehmet-emin-g%C3%BCzel-69474b225/" },
+  },
+  {
+    id: "tanay-ozdemir",
+    name: "Tanay Özdemir",
+    role: "Environment Modeling & Optimization Specialist",
+    dept: "Game Engine",
+    image: img("tanay-ozdemir.jpg"),
+    socials: { linkedin: "https://www.linkedin.com/in/bartutanay/" },
+  },
+
+  // CRM & Web
+  {
+    id: "kubilay-kuplay",
+    name: "Kubilay Kuplay",
+    role: "Web Development & Maintenance Specialist",
+    dept: "CRM & Web",
+    image: img("kubilay-kuplay.jpg"),
+  },
+  {
+    id: "munevver-verim",
+    name: "Münevver Verim",
+    role: "CRM Coordinator",
+    dept: "CRM & Web",
+    image: img("munevver-verim.jpg"),
+    socials: { linkedin: "https://www.linkedin.com/in/m%C3%BCnevver-verim-b43aa422a/" },
+  },
+  {
+    id: "yasin-sefa-aksoy",
+    name: "Yasin Sefa Aksoy",
+    role: "CRM Coordinator",
+    dept: "CRM & Web",
+    image: img("yasin-sefa-aksoy.jpg"),
+    socials: { linkedin: "https://www.linkedin.com/in/yasin-sefa-aksoy-5b2438193/" },
+  },
+  {
+    id: "batuhan-muzafferoglu",
+    name: "Batuhan Muzafferoğlu",
+    role: "CRM Coordinator",
+    dept: "CRM & Web",
+    image: img("batuhan-muzafferoglu.jpg"),
+    socials: { linkedin: "https://www.linkedin.com/in/batuhan-muzafferoglu/" },
+  },
+  {
+    id: "ege-moroglu",
+    name: "Ege Moroğlu",
+    role: "CRM Coordinator",
+    dept: "CRM & Web",
+    badges: ["Probation"],
+    image: img("ege-moroglu.jpg"),
+    socials: { linkedin: "https://www.linkedin.com/in/ege-moroglu-37a30b190/" },
+  },
+
+  // Design
+  {
+    id: "melike-doga-kacaner",
+    name: "Melike Doğa Kaçaner",
+    role: "Graphic Design Specialist",
+    dept: "Design",
+    image: img("melike-doga-kacaner.jpg"),
+    socials: { linkedin: "https://www.linkedin.com/in/melike-do%C4%9Fa-ka%C3%A7aner-7a5a2a372/" },
+  },
+  {
+    id: "beyza-sezer",
+    name: "Beyza Sezer",
+    role: "UI-UX Designer",
+    dept: "Design",
+    image: img("beyza-sezer.jpg"),
+    socials: { linkedin: "https://www.linkedin.com/in/beyzasezeer/" },
+  },
+  {
+    id: "mert-cayli",
+    name: "Mert Çaylı",
+    role: "UI-UX Designer",
+    dept: "Design",
+    image: img("mert-cayli.jpg"),
+    socials: { linkedin: "https://www.linkedin.com/in/mithatmertcayli/" },
+  },
+
+  // Customer Relations
+  {
+    id: "mehmet-nazim-gunay",
+    name: "Mehmet Nazım Günay",
+    role: "Customer Relations & Workflow Coordinator",
+    dept: "Customer Relations",
+    image: img("mehmet-nazim-gunay.jpg"),
+    socials: { linkedin: "https://www.linkedin.com/in/naz%C4%B1m-g%C3%BCnay-3a68a319b/" },
+  },
+
+  // Rendering
+  {
+    id: "yunus-yilmaz",
+    name: "Yunus Yılmaz",
+    role: "Rendering Artist",
+    dept: "Rendering",
+    image: img("yunus-yilmaz.jpg"),
+    socials: { linkedin: "https://www.linkedin.com/in/yunusyilmazld/" },
+  },
+  {
+    id: "yagiz-atilay-tuncay",
+    name: "Yağız Atılay Tunçay",
+    role: "Scriptwriter",
+    dept: "Rendering",
+    image: img("yagiz-atilay-tuncay.jpg"),
+  },
+  {
+    id: "bora-sik",
+    name: "Bora Şık",
+    role: "Video Editor",
+    dept: "Rendering",
+    image: img("bora-sik.jpg"),
+    socials: { linkedin: "https://www.linkedin.com/in/borask/" },
+  },
 ];
 
 export default function AboutTeam() {
@@ -66,19 +288,16 @@ export default function AboutTeam() {
   }, [active]);
 
   const counts = useMemo(() => {
-    return {
-      All: TEAM.length,
-      Engineering: TEAM.filter((m) => m.dept === "Engineering").length,
-      Product: TEAM.filter((m) => m.dept === "Product").length,
-      Design: TEAM.filter((m) => m.dept === "Design").length,
-      Sales: TEAM.filter((m) => m.dept === "Sales").length,
-      Operations: TEAM.filter((m) => m.dept === "Operations").length,
-    } as Record<(typeof DEPARTMENTS)[number], number>;
+    const out = { All: TEAM.length } as Record<(typeof DEPARTMENTS)[number], number>;
+    DEPARTMENTS.forEach((d) => {
+      if (d !== "All") out[d] = TEAM.filter((m) => m.dept === d).length;
+    });
+    return out;
   }, []);
 
   return (
     <section id="team" className="relative" style={{ scrollMarginTop: HEADER_OFFSET }}>
-      {/* distinct bg */}
+      {/* bg */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(rgba(255,255,255,.16)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.16)_1px,transparent_1px)] [background-size:26px_26px]" />
         <div className="absolute -inset-x-16 top-1/3 h-48 rotate-[-2deg] bg-[linear-gradient(90deg,rgba(198,242,78,0.10),rgba(255,255,255,0.02),rgba(198,242,78,0.10))] blur-xl" />
@@ -95,13 +314,13 @@ export default function AboutTeam() {
         >
           <motion.div variants={CARD} className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] text-white/85">
             <Users className="h-3.5 w-3.5 text-[#C6F24E]" />
-            Meet the team
+            CONFIGGO Team
           </motion.div>
           <motion.h2 variants={CARD} className="typo-h2-md mt-3">
             Builders behind the <span className="text-[#C6F24E]">platform</span>
           </motion.h2>
           <motion.p variants={CARD} className="typo-small mt-2 max-w-[760px] text-white/70">
-            Product minds, engineers, designers and operators crafting CRM, Digital Twin and the workflows between.
+            Leadership, architecture, game engine, CRM & web, design, customer relations, and rendering teams shaping the product.
           </motion.p>
         </motion.div>
 
@@ -143,13 +362,13 @@ export default function AboutTeam() {
           })}
         </motion.div>
 
-        {/* grid (restaggers on filter change, and also replays on viewport enter) */}
+        {/* grid */}
         <motion.ul
-          key={active} /* restagger when filter changes */
+          key={active}
           variants={WRAP}
           initial="hidden"
-          animate="show"             /* ensure visible during filter changes */
-          whileInView="show"         /* replay on re-enter */
+          animate="show"
+          whileInView="show"
           viewport={{ once: false, amount: 0.25, margin: "-15% 0px -20% 0px" }}
           className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
         >
@@ -185,7 +404,7 @@ export default function AboutTeam() {
 /* -------- card -------- */
 
 function TeamCard({ member }: { member: Member }) {
-  const { name, role, dept, image, location, socials } = member;
+  const { name, role, dept, image, location, socials, badges } = member;
   const initials = getInitials(name);
 
   return (
@@ -200,6 +419,7 @@ function TeamCard({ member }: { member: Member }) {
               fill
               sizes="(min-width: 1280px) 320px, (min-width: 1024px) 280px, 100vw"
               className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              priority={false}
             />
             <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
           </>
@@ -212,8 +432,15 @@ function TeamCard({ member }: { member: Member }) {
         )}
 
         {/* top chips */}
-        <div className="absolute left-3 top-3 flex items-center gap-2">
-          <span className="rounded-full bg-[#C6F24E]/80 px-2 py-0.5 text-[10px] font-medium text-black">{dept}</span>
+        <div className="absolute left-3 top-3 flex flex-wrap items-center gap-2">
+          <span className="rounded-full bg-[#C6F24E]/80 px-2 py-0.5 text-[10px] font-medium text-black">
+            {dept}
+          </span>
+          {badges?.map((b) => (
+            <span key={b} className="rounded-full border border-white/20 bg-black/50 px-2 py-0.5 text-[10px] text-white/85">
+              {b}
+            </span>
+          ))}
           {location ? (
             <span className="rounded-full border border-white/20 bg-black/50 px-2 py-0.5 text-[10px] text-white/85">
               {location}
@@ -263,6 +490,8 @@ function SocialLink({ href, label, children }: { href: string; label: string; ch
     <Link
       href={href}
       aria-label={label}
+      target="_blank"
+      rel="noopener noreferrer"
       className="inline-grid h-8 w-8 place-items-center rounded-md border border-white/15 bg-white/10 text-white/85 transition hover:bg-white/15"
     >
       {children}

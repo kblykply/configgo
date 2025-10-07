@@ -8,10 +8,13 @@ import type { ReactNode } from "react";
 import {
   Flag,
   Rocket,
-  Building2,
-  MessageSquare,
-  Plug,
-  ShieldCheck,
+  Beaker,
+  MapPin,
+  Car,
+  FileBox,
+  Landmark,
+  Film,
+  Layers,
   Sparkles,
 } from "lucide-react";
 
@@ -30,11 +33,11 @@ const WRAP = {
 
 const ITEM_LEFT = {
   hidden: { opacity: 0, x: -24, scale: 0.98 },
-  show:   { opacity: 1, x: 0,   scale: 1,     transition: { duration: 0.55, ease: EASE } },
+  show:   { opacity: 1, x: 0,   scale: 1, transition: { duration: 0.55, ease: EASE } },
 };
 const ITEM_RIGHT = {
   hidden: { opacity: 0, x: 24, scale: 0.98 },
-  show:   { opacity: 1, x: 0,  scale: 1,     transition: { duration: 0.55, ease: EASE } },
+  show:   { opacity: 1, x: 0,  scale: 1, transition: { duration: 0.55, ease: EASE } },
 };
 
 type Step = {
@@ -43,87 +46,106 @@ type Step = {
   title: string;
   body: string;
   icon: ReactNode;
-  image?: string; // optional media (local path under /public)
+  image?: string;
   badge?: string;
 };
 
 const STEPS: Step[] = [
   {
-    id: "founded",
-    year: "2021",
-    title: "Founded Configgo",
+    id: "founding",
+    year: "Founding",
+    title: "Founding & First CRM Integration",
     body:
-      "Started with a simple idea: unify the messy mix of spreadsheets, CRMs and chat apps used in real estate sales.",
+      "Configgo was founded and the first apartment record was successfully created through the CRM.",
     icon: <Flag className="h-4 w-4 text-[#C6F24E]" />,
-    image: "/covers/criter.jpg",
     badge: "Origin",
   },
   {
-    id: "first-twin",
-    year: "2022",
-    title: "First Digital Twin deployments",
-    body:
-      "Launched interactive 3D experiences embedded on sales sites and kiosks—directly linked to live availability.",
+    id: "first-demo",
+    year: "Demo",
+    title: "First Demo Application",
+    body: "The first demo app was created under the name “PRR”.",
     icon: <Rocket className="h-4 w-4 text-[#C6F24E]" />,
-    image: "/projects/vega.jpg",
-    badge: "Milestone",
   },
   {
-    id: "omnichannel",
-    year: "2023",
-    title: "Omnichannel inbox + SLA",
+    id: "rnd-cist",
+    year: "R&D",
+    title: "R&D (CIST)",
     body:
-      "Brought WhatsApp, email and SMS into one thread with SLA timers and assignment rules by office and pipeline stage.",
-    icon: <MessageSquare className="h-4 w-4 text-[#C6F24E]" />,
-    image: "/projects/Shelton.jpg",
+      "A research system called “CIST” was developed. Apartment Spam System: infrastructure for automatic unit cloning. Balcony Feature: users can step out onto the balcony.",
+    icon: <Beaker className="h-4 w-4 text-[#C6F24E]" />,
   },
   {
-    id: "inventory",
-    year: "2024",
-    title: "Inventory & availability for multi-project portfolios",
+    id: "baglica",
+    year: "Bağlıca",
+    title: "Bağlıca Project Improvements",
     body:
-      "Rolled out price books, unit holds and reservations—so sales can answer pricing questions in seconds.",
-    icon: <Building2 className="h-4 w-4 text-[#C6F24E]" />,
-    image: "/covers/strada.jpg",
+      "Wide surrounding-area optimization completed. New visualization modes added: FPS, TPS, and Car Mode.",
+    icon: <Car className="h-4 w-4 text-[#C6F24E]" />,
   },
   {
-    id: "platform",
-    year: "2025",
-    title: "Integrations, API & enterprise security",
+    id: "mega-suncity",
+    year: "Projects",
+    title: "Mega 1453 & Sun City",
     body:
-      "Added REST API, webhooks and SSO/SCIM options with fine-grained RBAC and audit logs for distributed teams.",
-    icon: <Plug className="h-4 w-4 text-[#C6F24E]" />,
-    image: "/covers/oriontower.jpg",
-    badge: "Today",
+      "Development continued with Mega 1453 and Sun City. Sun City: IPL extension integrated. Mega 1454: Land Markers shown on the map for the first time.",
+    icon: <Landmark className="h-4 w-4 text-[#C6F24E]" />,
   },
   {
-    id: "trust",
-    year: "Next",
-    title: "Secure, AI-ready foundation",
+    id: "vivasi",
+    year: "Vivasi",
+    title: "Vivasi Project",
     body:
-      "Linking leads ↔ units ↔ conversations enables smarter routing, automation and predictive reporting while staying secure.",
-    icon: <ShieldCheck className="h-4 w-4 text-[#C6F24E]" />,
+      "A new document format was supported. Blender files can now be imported into projects.",
+    icon: <FileBox className="h-4 w-4 text-[#C6F24E]" />,
+  },
+  {
+    id: "partal-baglica",
+    year: "Partal Bağlıca",
+    title: "Partal Bağlıca Project",
+    body:
+      "Integrated an overlay that shows locations of public lands within the project.",
+    icon: <MapPin className="h-4 w-4 text-[#C6F24E]" />,
+  },
+  {
+    id: "shelton",
+    year: "Shelton",
+    title: "Shelton Project",
+    body:
+      "Cinematic video renders integrated into the system (e.g., intro, opening, and promo videos).",
+    icon: <Film className="h-4 w-4 text-[#C6F24E]" />,
+  },
+  {
+    id: "onyx",
+    year: "Onyx",
+    title: "Onyx Project",
+    body:
+      "Balcony system improved: when a unit has multiple balconies, all of them can be displayed.",
+    icon: <Layers className="h-4 w-4 text-[#C6F24E]" />,
+  },
+  {
+    id: "current-next",
+    year: "Today",
+    title: "Current Work & What’s Next",
+    body:
+      "The UI is being made more user-friendly and is currently demoed in Onyx. Next step: Automatic Presentation feature.",
+    icon: <Sparkles className="h-4 w-4 text-[#C6F24E]" />,
+    badge: "Now",
   },
 ];
 
 export default function AboutTimeline() {
-  // Re-trigger animations every time the section is re-entered
+  // Animate once when the section first enters the viewport (prevents staying hidden)
   const ref = useRef<HTMLElement | null>(null);
-  const inView = useInView(ref, { amount: 0.35, margin: "-15% 0px -20% 0px" });
+  const inView = useInView(ref, { amount: 0.25, margin: "-10% 0px -10% 0px", once: true });
   const controls = useAnimation();
   useEffect(() => {
     if (inView) controls.start("show");
-    else controls.set("hidden");
   }, [inView, controls]);
 
   return (
-    <section
-      id="story"
-      ref={ref}
-      className="relative"
-      style={{ scrollMarginTop: HEADER_OFFSET }}
-    >
-      {/* distinct background: center spine glow */}
+    <section id="story" ref={ref} className="relative" style={{ scrollMarginTop: HEADER_OFFSET }}>
+      {/* background spine + subtle glow */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-[linear-gradient(180deg,rgba(198,242,78,0.0),rgba(198,242,78,0.25),rgba(198,242,78,0.0))]" />
         <div className="absolute inset-0 bg-[radial-gradient(70%_120%_at_50%_0%,rgba(198,242,78,0.06),rgba(0,0,0,0)_60%)]" />
@@ -139,10 +161,10 @@ export default function AboutTimeline() {
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] text-white/85">
             <Sparkles className="h-3.5 w-3.5 text-[#C6F24E]" />
-            Our story
+            Our Story
           </div>
           <h2 className="typo-h2-md mt-3">
-            From first twin to <span className="text-[#C6F24E]">unified platform</span>
+            From the first integration to a <span className="text-[#C6F24E]">unified platform</span>
           </h2>
           <p className="typo-small mt-2 text-white/70">
             A quick look at the milestones that shaped Configgo.
@@ -166,7 +188,7 @@ export default function AboutTimeline() {
                   isLeft ? "md:pr-10" : "md:pl-10 md:col-start-2",
                 ].join(" ")}
               >
-                {/* connector to center spine */}
+                {/* connector to spine */}
                 <span
                   aria-hidden
                   className={[
@@ -175,7 +197,7 @@ export default function AboutTimeline() {
                   ].join(" ")}
                 />
 
-                {/* year & dot at the spine on md+ */}
+                {/* spine dot */}
                 <span
                   className={[
                     "pointer-events-none absolute top-[18px] hidden -translate-x-1/2 items-center gap-2 md:flex",
@@ -239,7 +261,7 @@ export default function AboutTimeline() {
 
         {/* Closing caption */}
         <div className="mt-10 text-center text-[12px] text-white/60">
-          More on our roadmap in the product updates—new releases every few weeks.
+          More on our roadmap in product updates — new releases every few weeks.
         </div>
       </div>
     </section>
