@@ -70,7 +70,7 @@ type Props = {
 };
 
 export default function ConfiggoLeadCapture({
-  imageSrc = "/crm/musteriyonetimi.jpeg",
+  imageSrc = "/crm/chat.jpg",
   imageAlt = "Lead capture and routing visual",
 }: Props) {
   const ref = useRef<HTMLElement | null>(null);

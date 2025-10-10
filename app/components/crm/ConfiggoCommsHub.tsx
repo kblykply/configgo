@@ -106,7 +106,7 @@ export default function ConfiggoCommsHub() {
               {/* image area — show the full image */}
               <div className="relative w-full bg-white/5">
                 <Image
-                  src="/images/comms-visual.png" // <- replace with your image path
+                  src="/crm/conact.jpg" // <- replace with your image path
                   alt="Omnichannel inbox visual"
                   width={1280}
                   height={720}

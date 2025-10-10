@@ -110,7 +110,7 @@ export default function ConfiggoDocuments() {
               {/* image area — show full image, no forced aspect ratio */}
               <div className="relative w-full bg-white/5">
                 <Image
-                  src="/images/docs-visual.png" // <- replace with your image path
+                  src="/crm/offers.jpg" // <- replace with your image path
                   alt="Offer builder and e-sign visual"
                   width={1280}
                   height={720}

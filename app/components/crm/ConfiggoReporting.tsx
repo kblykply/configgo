@@ -28,7 +28,7 @@ const VISUAL = {
 };
 
 export default function ConfiggoReporting({
-  imageSrc = "/images/reporting-visual.png",
+  imageSrc = "/crm/dashborad.jpg",
   imageAlt = "Reporting & dashboards visual",
 }: {
   imageSrc?: string;

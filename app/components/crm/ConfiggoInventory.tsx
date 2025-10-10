@@ -29,7 +29,7 @@ const VISUAL = {
 };
 
 export default function ConfiggoInventory({
-  imageSrc = "/crm/blokgörünümü.jpeg",
+  imageSrc = "/crm/portfolio.jpg",
   imageAlt = "Inventory visual",
 }: {
   imageSrc?: string;

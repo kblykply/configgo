@@ -121,7 +121,7 @@ export default function ConfiggoPipelines() {
               {/* image area — no forced aspect ratio to avoid bars; image fully visible */}
               <div className="relative w-full bg-white/5">
                 <Image
-                  src="/crm/sozlesmeler.jpeg" // replace with your image path
+                  src="/crm/offers.jpg" // replace with your image path
                   alt="Pipelines visual"
                   width={1280}
                   height={720}
