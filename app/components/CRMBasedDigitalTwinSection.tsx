@@ -21,10 +21,10 @@ type Feature = (typeof FEATURES)[number];
 const MEDIA: Record<Feature, string> = {
   "Filter Apartments": "/prr/2.jpg",
   "Apartment Interior Tour": "/prr/3.jpg",
-  "See the Apartment’s View": "/vega/view.png",
+  "See the Apartment’s View": "/Vega/view.png",
   "First-Person (FPS) Site Tour": "/lagoon/fps.jpg",
-  "Nearby Places & Distances": "/vega/nearby.jpg",
-  "Sun & Weather Simulation": "/vega/sunpath.jpg",
+  "Nearby Places & Distances": "/Vega/nearby.jpg",
+  "Sun & Weather Simulation": "/Vega/sunpath.jpg",
 };
 
 const DESCRIPTIONS: Record<Feature, string> = {
