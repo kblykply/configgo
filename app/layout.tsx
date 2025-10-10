@@ -20,7 +20,6 @@ const dmSans = localFont({
   display: "swap",
 });
 
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.configgo.com"),
