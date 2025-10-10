@@ -20,22 +20,38 @@ const dmSans = localFont({
   display: "swap",
 });
 
+
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://configgo.com"),
+  metadataBase: new URL("https://www.configgo.com"),
   title: { default: "Configgo", template: "%s — Configgo" },
   description: "Construction-tech CRM + Digital Twins.",
   themeColor: "#0b1220",
+  alternates: { canonical: "https://www.configgo.com" },
 
-  // Favicons & Apple icon (skip this block if you use app/icon.png & app/apple-icon.png)
   icons: {
-    icon: "/configgo-yeni-logo.png",                  // 16/32px in ICO
-    apple: "/configgo-yeni-logo.png",       // 180x180
-    shortcut: "/configgo-yeni-logo.png"
+    icon: { url: "/configgo-yeni-logo.png", type: "image/png" },
+    apple: { url: "/configgo-yeni-logo.png" },
+    shortcut: "/favicon.ico",
   },
 
-  
+  openGraph: {
+    type: "website",
+    url: "/", // -> https://www.configgo.com/
+    siteName: "Configgo",
+    title: "Configgo",
+    description: "Construction-tech CRM + Digital Twins.",
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Configgo — CRM + Digital Twins" }],
+  },
 
-  manifest: "/site.webmanifest"
+  twitter: {
+    card: "summary_large_image",
+    title: "Configgo",
+    description: "Construction-tech CRM + Digital Twins.",
+    images: ["/og.jpg"],
+  },
+
+  manifest: "/site.webmanifest",
 };
 
 
