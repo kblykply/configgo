@@ -194,7 +194,7 @@ export default function ConfiggoPricing() {
               suffix="/mo"
               subtitle="For small teams getting started"
               bullets={["50k contacts", "1 pipeline & basic reports", "Email/SMS channels"]}
-              cta={{ label: "Start free trial", href: "/signup" }}
+              cta={{ label: "Start free trial", href: "/contact" }}
             />
           </motion.div>
 
@@ -208,7 +208,7 @@ export default function ConfiggoPricing() {
               subtitle="Best for growing sales teams"
               bullets={["Unlimited contacts", "3 pipelines & advanced reports", "WhatsApp + routing rules", "Automation workflows"]}
               badge={cycle === "yearly" ? "Save 20% yearly" : "Most popular"}
-              cta={{ label: "Upgrade to Pro", href: "/checkout?plan=pro" }}
+              cta={{ label: "Upgrade to Pro", href: "/contact" }}
             />
           </motion.div>
 
@@ -294,7 +294,7 @@ export default function ConfiggoPricing() {
           className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
         >
           <Link
-            href="/signup"
+            href="/contact"
             className="inline-flex items-center gap-2 rounded-full border border-transparent bg-[#C6F24E] px-4 py-2 text-sm text-black hover:opacity-95"
           >
             Start free trial <ArrowRight className="h-3.5 w-3.5" />

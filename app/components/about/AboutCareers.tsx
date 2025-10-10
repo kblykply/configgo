@@ -62,7 +62,7 @@ const ROLES: Role[] = [
     mode: "Hybrid",
     type: "Full-time",
     posted: "2025-08-20",
-    href: "/careers/senior-frontend-engineer",
+    href: "/contact",
     tags: ["React", "Next.js", "Design Systems"],
     featured: true,
   },
@@ -74,7 +74,7 @@ const ROLES: Role[] = [
     mode: "Hybrid",
     type: "Full-time",
     posted: "2025-08-10",
-    href: "/careers/product-manager-digital-twin",
+    href: "/contact",
     tags: ["PropTech", "APIs", "B2B"],
   },
   {
@@ -85,7 +85,7 @@ const ROLES: Role[] = [
     mode: "Remote",
     type: "Full-time",
     posted: "2025-07-28",
-    href: "/careers/ux-ui-designer",
+    href: "/contact",
     tags: ["Figma", "Prototyping", "Design Systems"],
   },
   {
@@ -96,7 +96,7 @@ const ROLES: Role[] = [
     mode: "Onsite",
     type: "Full-time",
     posted: "2025-08-02",
-    href: "/careers/solutions-architect",
+    href: "/contact",
     tags: ["Pre-sales", "Integrations"],
   },
   {
@@ -107,7 +107,7 @@ const ROLES: Role[] = [
     mode: "Hybrid",
     type: "Full-time",
     posted: "2025-08-15",
-    href: "/careers/account-executive-re",
+    href: "/contact",
     tags: ["CRM", "Pipeline", "Field Sales"],
   },
   {
@@ -118,7 +118,7 @@ const ROLES: Role[] = [
     mode: "Onsite",
     type: "Full-time",
     posted: "2025-07-12",
-    href: "/careers/operations-specialist",
+    href: "/contact",
     tags: ["Vendor Mgmt", "Logistics"],
   },
 ];

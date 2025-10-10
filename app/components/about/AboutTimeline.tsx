@@ -33,11 +33,11 @@ const WRAP = {
 
 const ITEM_LEFT = {
   hidden: { opacity: 0, x: -24, scale: 0.98 },
-  show:   { opacity: 1, x: 0,   scale: 1, transition: { duration: 0.55, ease: EASE } },
+  show: { opacity: 1, x: 0, scale: 1, transition: { duration: 0.55, ease: EASE } },
 };
 const ITEM_RIGHT = {
   hidden: { opacity: 0, x: 24, scale: 0.98 },
-  show:   { opacity: 1, x: 0,  scale: 1, transition: { duration: 0.55, ease: EASE } },
+  show: { opacity: 1, x: 0, scale: 1, transition: { duration: 0.55, ease: EASE } },
 };
 
 type Step = {
@@ -55,10 +55,10 @@ const STEPS: Step[] = [
     id: "founding",
     year: "Founding",
     title: "Founding & First CRM Integration",
-    body:
-      "Configgo was founded and the first apartment record was successfully created through the CRM.",
+    body: "Configgo founded; first unit added via CRM.",
     icon: <Flag className="h-4 w-4 text-[#C6F24E]" />,
     badge: "Origin",
+    image: "/timeline/1.jpg",
   },
   {
     id: "first-demo",
@@ -66,76 +66,77 @@ const STEPS: Step[] = [
     title: "First Demo Application",
     body: "The first demo app was created under the name “PRR”.",
     icon: <Rocket className="h-4 w-4 text-[#C6F24E]" />,
+    image: "/timeline/2.jpg",
   },
   {
     id: "rnd-cist",
     year: "R&D",
     title: "R&D (CIST)",
-    body:
-      "A research system called “CIST” was developed. Apartment Spam System: infrastructure for automatic unit cloning. Balcony Feature: users can step out onto the balcony.",
+    body: "CIST built; auto unit cloning and Balcony added.",
     icon: <Beaker className="h-4 w-4 text-[#C6F24E]" />,
+    image: "/timeline/3.jpg",
   },
   {
     id: "baglica",
     year: "Bağlıca",
     title: "Bağlıca Project Improvements",
-    body:
-      "Wide surrounding-area optimization completed. New visualization modes added: FPS, TPS, and Car Mode.",
+    body: "Surroundings optimized; FPS, TPS, Car modes added.",
     icon: <Car className="h-4 w-4 text-[#C6F24E]" />,
+    image: "/timeline/4.jpg",
   },
   {
     id: "mega-suncity",
     year: "Projects",
     title: "Mega 1453 & Sun City",
-    body:
-      "Development continued with Mega 1453 and Sun City. Sun City: IPL extension integrated. Mega 1454: Land Markers shown on the map for the first time.",
+    body: "Mega 1453 & Sun City; map Land Markers added.",
     icon: <Landmark className="h-4 w-4 text-[#C6F24E]" />,
+    image: "/timeline/5.jpg",
   },
   {
     id: "vivasi",
     year: "Vivasi",
     title: "Vivasi Project",
-    body:
-      "A new document format was supported. Blender files can now be imported into projects.",
+    body: "Vivasi: new doc format; Blender imports supported.",
     icon: <FileBox className="h-4 w-4 text-[#C6F24E]" />,
+    image: "/timeline/6.jpg",
   },
   {
     id: "partal-baglica",
     year: "Partal Bağlıca",
     title: "Partal Bağlıca Project",
-    body:
-      "Integrated an overlay that shows locations of public lands within the project.",
+    body: "Overlay shows public land locations in project.",
     icon: <MapPin className="h-4 w-4 text-[#C6F24E]" />,
+    image: "/timeline/7.jpg",
   },
   {
     id: "shelton",
     year: "Shelton",
     title: "Shelton Project",
-    body:
-      "Cinematic video renders integrated into the system (e.g., intro, opening, and promo videos).",
+    body: "Shelton: cinematic intro, opening, promo videos.",
     icon: <Film className="h-4 w-4 text-[#C6F24E]" />,
+    image: "/timeline/8.jpg",
   },
   {
     id: "onyx",
     year: "Onyx",
     title: "Onyx Project",
-    body:
-      "Balcony system improved: when a unit has multiple balconies, all of them can be displayed.",
+    body: "Onyx: multiple balconies per unit now supported.",
     icon: <Layers className="h-4 w-4 text-[#C6F24E]" />,
+    image: "/timeline/9.jpg",
   },
   {
     id: "current-next",
     year: "Today",
     title: "Current Work & What’s Next",
-    body:
-      "The UI is being made more user-friendly and is currently demoed in Onyx. Next step: Automatic Presentation feature.",
+    body: "UI improved; Onyx demoed. Next: Auto Presentation.",
     icon: <Sparkles className="h-4 w-4 text-[#C6F24E]" />,
+    image: "/timeline/10.jpg",
     badge: "Now",
   },
 ];
 
+
 export default function AboutTimeline() {
-  // Animate once when the section first enters the viewport (prevents staying hidden)
   const ref = useRef<HTMLElement | null>(null);
   const inView = useInView(ref, { amount: 0.25, margin: "-10% 0px -10% 0px", once: true });
   const controls = useAnimation();
@@ -225,16 +226,16 @@ export default function AboutTimeline() {
 
                   {/* media + copy */}
                   <div className="grid grid-cols-1 gap-0 md:grid-cols-12">
-                    {/* media (optional) */}
+                    {/* media (fixed 16:9) */}
                     <div className="relative md:col-span-5">
-                      <div className="relative aspect-[16/10] md:aspect-auto md:h-full">
+                      <div className="relative aspect-[16/9]">
                         {s.image ? (
                           <>
                             <Image
                               src={s.image}
                               alt={s.title}
                               fill
-                              sizes="(min-width: 768px) 420px, 100vw"
+                              sizes="(min-width: 768px) 480px, 100vw"
                               className="object-cover"
                             />
                             <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />

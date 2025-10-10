@@ -237,7 +237,7 @@ export default function AboutContact() {
                 Direct line
               </div>
               <div className="flex flex-wrap items-center gap-3 text-[13px] text-white/80">
-                <a href="tel:+903120000000" className="underline-offset-2 hover:underline">+90 312 000 00 00</a>
+                <a href="tel:+1 (617) 319-8242" className="underline-offset-2 hover:underline">+1 (617) 319-8242</a>
                 <span>·</span>
                 <a href="https://wa.me/905550000000" className="underline-offset-2 hover:underline">WhatsApp</a>
               </div>
@@ -258,21 +258,14 @@ export default function AboutContact() {
                 <span className="text-white/60">Istanbul office: Maslak, Sarıyer / Istanbul</span>
               </div>
               <div className="mt-3">
-                <Link href="/about#offices" className="inline-flex items-center gap-1 text-[12px] text-white/75 hover:text-white">
+                <Link href="/about-us#offices" className="inline-flex items-center gap-1 text-[12px] text-white/75 hover:text-white">
                   See all offices <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               </div>
             </motion.div>
 
             {/* note */}
-            <motion.div variants={ITEM} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-[12px] text-white/70">
-              <div className="mb-1 inline-flex items-center gap-2">
-                <Info className="h-3.5 w-3.5 text-[#C6F24E]" />
-                Looking for security docs?
-              </div>
-              Visit <Link href="/about#security" className="underline">Security & Trust</Link> or our{" "}
-              <Link href="/legal" className="underline">Legal</Link> page.
-            </motion.div>
+        
           </motion.div>
         </div>
       </div>

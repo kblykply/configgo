@@ -106,7 +106,7 @@ export default function AboutFinalCTA() {
                 <div className="mb-2 text-sm text-white/85">Talk to a human</div>
                 <div className="flex flex-wrap items-center gap-3 text-[13px] text-white/80">
                   <span className="inline-flex items-center gap-2 rounded-md bg-white/10 px-2 py-1 ring-1 ring-white/15">
-                    <Phone className="h-3.5 w-3.5 text-[#C6F24E]" /> +90 312 000 00 00
+                    <Phone className="h-3.5 w-3.5 text-[#C6F24E]" /> +1 (617) 319-8242
                   </span>
                   <span className="text-white/60">Mon–Fri 9:00–18:00 (TRT)</span>
                 </div>

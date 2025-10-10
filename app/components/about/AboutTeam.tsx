@@ -96,7 +96,7 @@ const TEAM: Member[] = [
     name: "Deniz Oktay Tuncay",
     role: "Founder",
     dept: "Leadership",
-    image: img("deniz-oktay-tuncay.jpg"),
+    image: img("deniz.png"),
     socials: { linkedin: "https://www.linkedin.com/in/denizoktaytuncay/" },
   },
   {
@@ -104,7 +104,7 @@ const TEAM: Member[] = [
     name: "Ulaş Turğut",
     role: "Lead",
     dept: "Leadership",
-    image: img("ulas-turgut.jpg"),
+    image: img("ulas.png"),
     socials: { linkedin: "https://www.linkedin.com/in/ula%C5%9F-tur%C4%9Fut-9a35a2239/" },
   },
   {
@@ -112,7 +112,7 @@ const TEAM: Member[] = [
     name: "Salih Kaan Koç",
     role: "Software Team Lead",
     dept: "Leadership",
-    image: img("salih-kaan-koc.jpg"),
+    image: img("kaan.png"),
     socials: { linkedin: "https://www.linkedin.com/in/salih-kaan-ko%C3%A7/" },
   },
 
@@ -122,7 +122,7 @@ const TEAM: Member[] = [
     name: "Ezgi Akyol",
     role: "Architect",
     dept: "Architecture",
-    image: img("ezgi-akyol.jpg"),
+    image: img("ezgi.png"),
     socials: { linkedin: "https://www.linkedin.com/in/ezgi-akyol-a2026a158/" },
   },
   {
@@ -130,16 +130,10 @@ const TEAM: Member[] = [
     name: "Buse Özsarı",
     role: "Architect",
     dept: "Architecture",
-    image: img("buse-ozsari.jpg"),
+    image: img("buse.png"),
     socials: { linkedin: "https://www.linkedin.com/in/buse-ozsari/" },
   },
-  {
-    id: "nur-bahar",
-    name: "Nur Bahar",
-    role: "Architect (Intern)",
-    dept: "Architecture",
-    image: img("nur-bahar.jpg"),
-  },
+ 
 
   // Game Engine
   {
@@ -147,7 +141,7 @@ const TEAM: Member[] = [
     name: "Fatih Gürbüz",
     role: "Game Engine Developer",
     dept: "Game Engine",
-    image: img("fatih-gurbuz.jpg"),
+    image: img("fatih.png"),
     socials: { linkedin: "https://www.linkedin.com/in/fatih-g%C3%BCrb%C3%BCz-01b438229/" },
   },
   {
@@ -155,7 +149,7 @@ const TEAM: Member[] = [
     name: "Furkan Uysal",
     role: "Game Engine Developer",
     dept: "Game Engine",
-    image: img("furkan-uysal.jpg"),
+    image: img("furkan.png"),
     socials: { linkedin: "https://www.linkedin.com/in/furkan-uysal-41490321a/" },
   },
   {
@@ -163,7 +157,7 @@ const TEAM: Member[] = [
     name: "Mehmet Emin Güzel",
     role: "Interior Design & Lighting Developer",
     dept: "Game Engine",
-    image: img("mehmet-emin-guzel.jpg"),
+    image: img("mehmet.png"),
     socials: { linkedin: "https://www.linkedin.com/in/mehmet-emin-g%C3%BCzel-69474b225/" },
   },
   {
@@ -171,24 +165,18 @@ const TEAM: Member[] = [
     name: "Tanay Özdemir",
     role: "Environment Modeling & Optimization Specialist",
     dept: "Game Engine",
-    image: img("tanay-ozdemir.jpg"),
+    image: img("tanay.png"),
     socials: { linkedin: "https://www.linkedin.com/in/bartutanay/" },
   },
 
   // CRM & Web
-  {
-    id: "kubilay-kuplay",
-    name: "Kubilay Kuplay",
-    role: "Web Development & Maintenance Specialist",
-    dept: "CRM & Web",
-    image: img("kubilay-kuplay.jpg"),
-  },
+
   {
     id: "munevver-verim",
     name: "Münevver Verim",
     role: "CRM Coordinator",
     dept: "CRM & Web",
-    image: img("munevver-verim.jpg"),
+    image: img("munevver.png"),
     socials: { linkedin: "https://www.linkedin.com/in/m%C3%BCnevver-verim-b43aa422a/" },
   },
   {
@@ -196,7 +184,7 @@ const TEAM: Member[] = [
     name: "Yasin Sefa Aksoy",
     role: "CRM Coordinator",
     dept: "CRM & Web",
-    image: img("yasin-sefa-aksoy.jpg"),
+    image: img("yasin.png"),
     socials: { linkedin: "https://www.linkedin.com/in/yasin-sefa-aksoy-5b2438193/" },
   },
   {
@@ -204,7 +192,7 @@ const TEAM: Member[] = [
     name: "Batuhan Muzafferoğlu",
     role: "CRM Coordinator",
     dept: "CRM & Web",
-    image: img("batuhan-muzafferoglu.jpg"),
+    image: img("batuhan.png"),
     socials: { linkedin: "https://www.linkedin.com/in/batuhan-muzafferoglu/" },
   },
   {
@@ -213,7 +201,7 @@ const TEAM: Member[] = [
     role: "CRM Coordinator",
     dept: "CRM & Web",
     badges: ["Probation"],
-    image: img("ege-moroglu.jpg"),
+    image: img("ege.png"),
     socials: { linkedin: "https://www.linkedin.com/in/ege-moroglu-37a30b190/" },
   },
 
@@ -223,7 +211,7 @@ const TEAM: Member[] = [
     name: "Melike Doğa Kaçaner",
     role: "Graphic Design Specialist",
     dept: "Design",
-    image: img("melike-doga-kacaner.jpg"),
+    image: img("melike.png"),
     socials: { linkedin: "https://www.linkedin.com/in/melike-do%C4%9Fa-ka%C3%A7aner-7a5a2a372/" },
   },
   {
@@ -231,7 +219,7 @@ const TEAM: Member[] = [
     name: "Beyza Sezer",
     role: "UI-UX Designer",
     dept: "Design",
-    image: img("beyza-sezer.jpg"),
+    image: img("beyza.png"),
     socials: { linkedin: "https://www.linkedin.com/in/beyzasezeer/" },
   },
   {
@@ -239,7 +227,7 @@ const TEAM: Member[] = [
     name: "Mert Çaylı",
     role: "UI-UX Designer",
     dept: "Design",
-    image: img("mert-cayli.jpg"),
+    image: img("mert.png"),
     socials: { linkedin: "https://www.linkedin.com/in/mithatmertcayli/" },
   },
 
@@ -249,7 +237,7 @@ const TEAM: Member[] = [
     name: "Mehmet Nazım Günay",
     role: "Customer Relations & Workflow Coordinator",
     dept: "Customer Relations",
-    image: img("mehmet-nazim-gunay.jpg"),
+    image: img("nazim.png"),
     socials: { linkedin: "https://www.linkedin.com/in/naz%C4%B1m-g%C3%BCnay-3a68a319b/" },
   },
 
@@ -259,7 +247,7 @@ const TEAM: Member[] = [
     name: "Yunus Yılmaz",
     role: "Rendering Artist",
     dept: "Rendering",
-    image: img("yunus-yilmaz.jpg"),
+    image: img("yunus.png"),
     socials: { linkedin: "https://www.linkedin.com/in/yunusyilmazld/" },
   },
   {
@@ -267,14 +255,14 @@ const TEAM: Member[] = [
     name: "Yağız Atılay Tunçay",
     role: "Scriptwriter",
     dept: "Rendering",
-    image: img("yagiz-atilay-tuncay.jpg"),
+    image: img("yagiz.jpg"),
   },
   {
     id: "bora-sik",
     name: "Bora Şık",
     role: "Video Editor",
     dept: "Rendering",
-    image: img("bora-sik.jpg"),
+    image: img("bora.png"),
     socials: { linkedin: "https://www.linkedin.com/in/borask/" },
   },
 ];

@@ -4,6 +4,7 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { motion, useAnimation, Variants } from "framer-motion";
+import Link from "next/link";
 
 /* ---------- Motion (same style as ImmersiveSection) ---------- */
 const wrap: Variants = {
@@ -191,18 +192,18 @@ export default function WebSolutionsSection() {
                 </p>
 
                 <div className="mt-auto">
-                  <button
-                    type="button"
-                    className="inline-flex items-center gap-2 h-[38px] px-4 rounded-lg
-                               text-[14px] text-black bg-[#C6F24E] hover:brightness-95
-                               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C6F24E]/60"
-                    style={{ WebkitTapHighlightColor: "transparent" }}
-                  >
-                    See Demo
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-                      <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                    </svg>
-                  </button>
+              <Link
+  href="/digital_twins" // ← change this to your target
+  className="inline-flex items-center gap-2 h-[38px] px-4 rounded-lg
+             text-[14px] text-black bg-[#C6F24E] hover:brightness-95
+             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C6F24E]/60"
+  style={{ WebkitTapHighlightColor: "transparent" }}
+>
+  See Demo
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+    <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+  </svg>
+</Link>
                 </div>
               </div>
             </div>

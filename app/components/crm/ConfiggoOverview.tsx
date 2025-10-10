@@ -78,7 +78,7 @@ export default function ConfiggoOverview() {
   }, [inView, controls]);
 
   return (
-    <section ref={ref} className="relative">
+    <section id =  "overview" ref={ref} className="relative">
       {/* soft glow */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_130%_at_50%_0%,rgba(255,255,255,0.05),rgba(0,0,0,0)_60%)]" />
 

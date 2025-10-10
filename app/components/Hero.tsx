@@ -162,7 +162,7 @@ const pagination = useMemo(
 
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }} className="mt-7">
             <Link
-              href="#learn-more"
+              href="/digital_twins"
               className="inline-flex items-center gap-3 rounded-full border border-white/30 px-5 py-3 text-[11px] md:text-sm uppercase tracking-[.2em] hover:border-white/70 transition"
             >
               Learn more <span aria-hidden className="inline-block translate-y-[1px]">→</span>
@@ -264,7 +264,7 @@ const pagination = useMemo(
           >
             <span className="h-px w-10 bg-white/70" aria-hidden />
             <Link
-              href="#tools"
+              href="/digital_twins"
               className="inline-flex items-center gap-1.5 text-[11px] md:text-xs tracking-[.1em] uppercase text-white/80 hover:text-white"
             >
               Learn more <span aria-hidden className="inline-block translate-y-[1px]">→</span>

@@ -41,13 +41,18 @@ const ITEM = {
 };
 
 /* ----- demo data (swap with real) ----- */
+
+
+
+
+
 const LOGOS = [
-  { name: "NATA",       src: "/press/logos/hurriyet.png" },
-  { name: "Trinvest",   src: "/press/logos/forbes.png" },
-  { name: "ZirveBeton", src: "/press/logos/wired.png" },
-  { name: "DND",        src: "/press/logos/fastco.png" },
-  { name: "Kosavalı",   src: "/press/logos/bloomberg.png" },
-  { name: "Shelton",    src: "/press/logos/techcrunch.png" },
+  { name: "NATA",       src: "/NATA-logobeyaz.png" },
+  { name: "Trinvest",   src: "/trholdingbeyazlogo.png" },
+  { name: "ZirveBeton", src: "/zirvebeton-LOGO-beyaz.png" },
+  { name: "DND",        src: "/shelton-logo-beyaz.png" },
+  { name: "Kosavalı",   src: "/gallardologobeyaz.png" },
+  { name: "Shelton",    src: "/ONYX-PORTREbeyaz.png" },
 ];
 
 type Shout = {
@@ -57,12 +62,7 @@ type Shout = {
   avatar?: string;
   quote: string;
 };
-const SHOUTS: Shout[] = [
-  { id: "s1", name: "Ayşe Demir", role: "Sales Lead, Ankara", avatar: "/community/avatars/ayse.jpg", quote: "Unified inbox + SLA made our first-response time actually predictable." },
-  { id: "s2", name: "Marco R.",   role: "GM, EU Developer",    avatar: "/community/avatars/marco.jpg", quote: "Digital Twin inside the CRM reduced back-and-forth by half." },
-  { id: "s3", name: "Emin D.",    role: "Project Owner",       avatar: "/community/avatars/emin.jpg",  quote: "Unit reservations & price books sync—no more spreadsheets." },
-  { id: "s4", name: "Selin Y.",   role: "Growth, RE SaaS",     avatar: "/community/avatars/selin.jpg", quote: "Attribution finally clear; we doubled down on the top channels." },
-];
+
 
 /* ----- component ----- */
 export default function   AboutCommunity() {
@@ -176,21 +176,21 @@ export default function   AboutCommunity() {
 
               <div className="grid grid-cols-1 gap-3">
                 <Link
-                  href="https://github.com/your-org"
+                  href="https://github.com"
                   className="flex items-center justify-between rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-white/85 hover:bg-white/15"
                 >
                   <span className="inline-flex items-center gap-2"><Github className="h-4 w-4 text-[#C6F24E]" /> GitHub</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
                 <Link
-                  href="https://twitter.com/your-handle"
+                  href="https://twitter.com"
                   className="flex items-center justify-between rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-white/85 hover:bg-white/15"
                 >
                   <span className="inline-flex items-center gap-2"><Twitter className="h-4 w-4 text-[#C6F24E]" /> X / Twitter</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
                 <Link
-                  href="https://www.linkedin.com/company/your-company"
+                  href="https://tr.linkedin.com/company/configgo"
                   className="flex items-center justify-between rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-white/85 hover:bg-white/15"
                 >
                   <span className="inline-flex items-center gap-2"><Linkedin className="h-4 w-4 text-[#C6F24E]" /> LinkedIn</span>

@@ -8,6 +8,10 @@ import DTInteractiveDiscovery from "../components/digital-twin/DTInteractiveDisc
 import DTTimesOfDay from "../components/digital-twin/DTTimesOfDay";
 import DTCrmOverview from "../components/digital-twin/DTCrmOverview";
 import DTCaseStudies from "../components/digital-twin/DTCaseStudies";
+import DTInteriorTour from "../components/digital-twin/DTInteriorTour";
+import DTFilterApartments from "../components/digital-twin/DTFilterApartments";
+import DTAmenities from "../components/digital-twin/DTAmenities";
+import DTFirstPersonTour from "../components/digital-twin/DTFirstPersonTour";
 export const metadata = {
   title: "Digital Twin",
   description:
@@ -19,9 +23,17 @@ export default function Page() {
     <main className="min-h-svh bg-[var(--background)] text-white">
         <DTCrmOverview />
       <DTHero />
+            <DTInteriorTour />
+
         <DTAuthenticity />
+                <DTFilterApartments />
+
         <DTDigitalCity />
+                <DTAmenities   />
+
         <DTSurrounding />
+                <DTFirstPersonTour />
+
         <DTFutureIntegration />
         <DTInteractiveDiscovery />
         <DTTimesOfDay />    

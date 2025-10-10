@@ -111,13 +111,13 @@ export default function AboutSecurity() {
 
               <div className="mt-5 flex flex-wrap gap-2">
                 <Link
-                  href="/security"
+                  href="/crm#security"
                   className="inline-flex items-center gap-2 rounded-full border border-transparent bg-[#C6F24E] px-4 py-2 text-sm text-black hover:opacity-95"
                 >
                   Security overview
                 </Link>
                 <Link
-                  href="/status"
+                  href="/crm#reporting"
                   className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/85 hover:bg-white/15"
                 >
                   Status page

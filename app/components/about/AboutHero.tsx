@@ -91,13 +91,13 @@ export default function AboutHero() {
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/about#team"
+                href="/about-us#team"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-transparent bg-[#C6F24E] px-5 py-3 text-sm font-medium text-black hover:opacity-95"
               >
                 Meet the team
               </Link>
               <Link
-                href="/products"
+                href="/digital_twins"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm text-white/85 hover:bg-white/15"
               >
                 Explore the platform

@@ -86,7 +86,7 @@ export default function AboutMission() {
 
             <div className="mt-7 pl-4">
               <Link
-                href="/about#story"
+                href="/about-us#story"
                 className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/85 hover:bg-white/15"
               >
                 Read our story →
