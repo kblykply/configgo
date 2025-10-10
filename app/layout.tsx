@@ -20,7 +20,41 @@ const dmSans = localFont({
   display: "swap",
 });
 
-export const metadata: Metadata = { title: "My Site" };
+export const metadata: Metadata = {
+  metadataBase: new URL("https://configgo.com"),
+  title: { default: "Configgo", template: "%s — Configgo" },
+  description: "Construction-tech CRM + Digital Twins.",
+  themeColor: "#0b1220",
+
+  // Favicons & Apple icon (skip this block if you use app/icon.png & app/apple-icon.png)
+  icons: {
+    icon: "/favicon.ico",                  // 16/32px in ICO
+    apple: "/apple-touch-icon.png",       // 180x180
+    shortcut: "/favicon.ico"
+  },
+
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Configgo",
+    title: "Configgo",
+    description: "Construction-tech CRM + Digital Twins.",
+    images: [
+      { url: "/og.jpg", width: 1200, height: 630, alt: "Configgo — CRM + Digital Twins" }
+    ]
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Configgo",
+    description: "Construction-tech CRM + Digital Twins.",
+    images: ["/og.jpg"]
+  },
+
+  manifest: "/site.webmanifest"
+};
+
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
