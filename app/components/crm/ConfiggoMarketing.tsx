@@ -2,7 +2,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useMemo, useState, type ReactNode } from "react";
+import { useMemo, useState } from "react";
 import {
   Megaphone,
   Target,
@@ -30,11 +30,11 @@ const WRAP = {
 };
 const ITEM = {
   hidden: { opacity: 0, y: 14 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
 };
 const VISUAL = {
   hidden: { opacity: 0, y: 16, scale: 0.985 },
-  show:   { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: EASE, delay: 0.05 } },
+  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: EASE, delay: 0.05 } },
 };
 const VIEWPORT = { once: false, amount: 0.3, margin: "-15% 0% -25% 0%" } as const;
 
@@ -90,7 +90,7 @@ export default function ConfiggoMarketing() {
             <motion.ul variants={WRAP} className="mt-6 space-y-3">
               {[
                 { Icon: Filter, txt: "Segments by typology, budget, language, last activity" },
-                { Icon: Bot,    txt: "Journeys with delays, branches and auto-stop on reply" },
+                { Icon: Bot, txt: "Journeys with delays, branches and auto-stop on reply" },
                 { Icon: SplitSquareHorizontal, txt: "A/B subject, send time and template variants" },
                 { Icon: Target, txt: "UTM & source tracking mapped to pipelines & revenue" },
               ].map(({ Icon, txt }) => (
@@ -110,7 +110,10 @@ export default function ConfiggoMarketing() {
               </div>
               <div className="flex flex-wrap gap-2">
                 {SEGMENTS.map((s) => (
-                  <span key={s.label} className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs text-white/85">
+                  <span
+                    key={s.label}
+                    className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs text-white/85"
+                  >
                     {s.label}
                   </span>
                 ))}
@@ -122,13 +125,25 @@ export default function ConfiggoMarketing() {
               variants={ITEM}
               className="mt-8 grid grid-cols-3 gap-3 rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-center shadow-[0_16px_40px_rgba(0,0,0,0.35)]"
             >
-              <div><div className="text-xl font-[600] text-[#C6F24E]">48%</div><div className="text-xs text-white/70">Open rate</div></div>
-              <div><div className="text-xl font-[600] text-[#C6F24E]">19%</div><div className="text-xs text-white/70">Reply rate</div></div>
-              <div><div className="text-xl font-[600] text-[#C6F24E]">4.2×</div><div className="text-xs text-white/70">ROI</div></div>
+              <div>
+                <div className="text-xl font-[600] text-[#C6F24E]">48%</div>
+                <div className="text-xs text-white/70">Open rate</div>
+              </div>
+              <div>
+                <div className="text-xl font-[600] text-[#C6F24E]">19%</div>
+                <div className="text-xs text-white/70">Reply rate</div>
+              </div>
+              <div>
+                <div className="text-xl font-[600] text-[#C6F24E]">4.2×</div>
+                <div className="text-xs text-white/70">ROI</div>
+              </div>
             </motion.div>
 
             {/* tabs */}
-            <motion.div variants={ITEM} className="mt-6 inline-flex w-full max-w-[420px] rounded-full border border-white/15 bg-white/10 p-1 backdrop-blur-sm">
+            <motion.div
+              variants={ITEM}
+              className="mt-6 inline-flex w-full max-w-[420px] rounded-full border border-white/15 bg-white/10 p-1 backdrop-blur-sm"
+            >
               <button
                 onClick={() => setTab("journey")}
                 aria-pressed={tab === "journey"}
@@ -198,13 +213,12 @@ export default function ConfiggoMarketing() {
 
 /* -------------------- MOBILE VIEWS -------------------- */
 function JourneyMobile({ play }: { play: boolean }) {
-  // A clean vertical stepper for small screens
   const steps = [
-    { Icon: Target,          title: "Trigger",   sub: "Source: Meta Ads" },
-    { Icon: Filter,          title: "Condition", sub: "Budget ≥ 200k" },
-    { Icon: MessageCircle,   title: "WhatsApp",  sub: "Template: Intro + CTA", green: true },
-    { Icon: CalendarClock,   title: "Delay",     sub: "Wait 1 day" },
-    { Icon: Mail,            title: "Email",     sub: "Floor plan + booking", green: true },
+    { Icon: Target, title: "Trigger", sub: "Source: Meta Ads" },
+    { Icon: Filter, title: "Condition", sub: "Budget ≥ 200k" },
+    { Icon: MessageCircle, title: "WhatsApp", sub: "Template: Intro + CTA", green: true },
+    { Icon: CalendarClock, title: "Delay", sub: "Wait 1 day" },
+    { Icon: Mail, title: "Email", sub: "Floor plan + booking", green: true },
   ];
 
   return (
@@ -215,10 +229,14 @@ function JourneyMobile({ play }: { play: boolean }) {
         <motion.li
           key={s.title}
           initial={{ opacity: 0, y: 8 }}
-          animate={play ? { opacity: 1, y: 0, transition: { duration: 0.35, ease: EASE, delay: i * 0.06 } } : {}}
+          animate={
+            play ? { opacity: 1, y: 0, transition: { duration: 0.35, ease: EASE, delay: i * 0.06 } } : {}
+          }
           className={[
             "relative mb-3 rounded-xl border p-3",
-            s.green ? "border-[#C6F24E]/30 bg-[#C6F24E]/10 ring-1 ring-[#C6F24E]/20" : "border-white/10 bg-white/[0.04] ring-1 ring-white/10",
+            s.green
+              ? "border-[#C6F24E]/30 bg-[#C6F24E]/10 ring-1 ring-[#C6F24E]/20"
+              : "border-white/10 bg-white/[0.04] ring-1 ring-white/10",
           ].join(" ")}
         >
           {/* dot on the rail */}
@@ -277,7 +295,8 @@ function PerformanceMobile({ play }: { play: boolean }) {
             A — “Welcome to Vega Center” · Open 46% · Reply 17%
           </div>
           <div className="rounded-lg border border-[#C6F24E]/30 bg-[#C6F24E]/10 p-2 text-xs text-white/90">
-            B — “2+1 units open this week” · Open 53% · Reply 19% <span className="ml-2 rounded-full bg-white/10 px-2 py-0.5 text-[10px]">Winner</span>
+            B — “2+1 units open this week” · Open 53% · Reply 19%{" "}
+            <span className="ml-2 rounded-full bg-white/10 px-2 py-0.5 text-[10px]">Winner</span>
           </div>
         </div>
         <div className="mt-2 text-[11px] text-white/60">Winner auto-applied after 1k sends.</div>
@@ -286,7 +305,7 @@ function PerformanceMobile({ play }: { play: boolean }) {
   );
 }
 
-/* -------------------- DESKTOP VIEWS (unchanged idea, responsive %) -------------------- */
+/* -------------------- DESKTOP VIEWS -------------------- */
 function JourneyDesktop({ play }: { play: boolean }) {
   // percent widths so it scales; three across
   const W = 28;
@@ -299,18 +318,19 @@ function JourneyDesktop({ play }: { play: boolean }) {
   };
 
   return (
-    <div className="relative h-full w-full overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] p-5">
-      <Node x={4}  y={10} w={W} Icon={Target}         label="Trigger"   sub="Source: Meta Ads" />
-      <Node x={36} y={12} w={W} Icon={Filter}         label="Condition" sub="Budget ≥ 200k" />
-      <Node x={68} y={10} w={W} Icon={MessageCircle}  label="WhatsApp"  sub="Template: Intro + CTA" green />
-      <Node x={36} y={55} w={W} Icon={CalendarClock}  label="Delay"     sub="Wait 1 day" />
-      <Node x={68} y={55} w={W} Icon={Mail}           label="Email"     sub="Floor plan + booking" green />
-
-      {/* connectors */}
-      <Connector from={{ x: centers.t,  y: 18 }} to={{ x: centers.c,  y: 18 }} play={play} />
-      <Connector from={{ x: centers.c,  y: 18 }} to={{ x: centers.r,  y: 18 }} play={play} />
-      <Connector from={{ x: centers.c,  y: 18 }} to={{ x: centers.bC, y: 63 }} play={play} />
+    <div className="relative w-full min-h-[360px] overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] p-5">
+      {/* connectors FIRST & BEHIND */}
+      <Connector from={{ x: centers.t, y: 18 }} to={{ x: centers.c, y: 18 }} play={play} />
+      <Connector from={{ x: centers.c, y: 18 }} to={{ x: centers.r, y: 18 }} play={play} />
+      <Connector from={{ x: centers.c, y: 18 }} to={{ x: centers.bC, y: 63 }} play={play} />
       <Connector from={{ x: centers.bC, y: 63 }} to={{ x: centers.bR, y: 63 }} play={play} />
+
+      {/* nodes */}
+      <Node x={4} y={10} w={W} Icon={Target} label="Trigger" sub="Source: Meta Ads" />
+      <Node x={36} y={12} w={W} Icon={Filter} label="Condition" sub="Budget ≥ 200k" />
+      <Node x={68} y={10} w={W} Icon={MessageCircle} label="WhatsApp" sub="Template: Intro + CTA" green />
+      <Node x={36} y={55} w={W} Icon={CalendarClock} label="Delay" sub="Wait 1 day" />
+      <Node x={68} y={55} w={W} Icon={Mail} label="Email" sub="Floor plan + booking" green />
 
       <div className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-[11px] text-white/80 ring-1 ring-white/15">
         <CheckCircle2 className="h-3.5 w-3.5 text-[#C6F24E]" /> Auto-stop on reply
@@ -322,11 +342,11 @@ function JourneyDesktop({ play }: { play: boolean }) {
 function PerformanceDesktop({ play }: { play: boolean }) {
   const stats = useMemo(
     () => [
-      { label: "Sent",      value: 10000, fmt: (n: number) => n.toLocaleString() },
-      { label: "Opens",     value: 4800,  fmt: (n: number) => (n / 100).toFixed(0) + "%" },
-      { label: "Replies",   value: 1900,  fmt: (n: number) => (n / 100).toFixed(0) + "%" },
-      { label: "Bookings",  value: 600,   fmt: (n: number) => (n / 100).toFixed(0) + "%" },
-      { label: "ROI",       value: 420,   fmt: (n: number) => (n / 100).toFixed(1) + "×" },
+      { label: "Sent", value: 10000, fmt: (n: number) => n.toLocaleString() },
+      { label: "Opens", value: 4800, fmt: (n: number) => (n / 100).toFixed(0) + "%" },
+      { label: "Replies", value: 1900, fmt: (n: number) => (n / 100).toFixed(0) + "%" },
+      { label: "Bookings", value: 600, fmt: (n: number) => (n / 100).toFixed(0) + "%" },
+      { label: "ROI", value: 420, fmt: (n: number) => (n / 100).toFixed(1) + "×" },
     ],
     []
   );
@@ -349,7 +369,11 @@ function PerformanceDesktop({ play }: { play: boolean }) {
                 <div className="h-3 w-full rounded-full bg-white/10">
                   <motion.div
                     initial={{ width: 0 }}
-                    animate={play ? { width: `${pct}%`, transition: { duration: 0.7, delay: 0.06 * i, ease: EASE } } : {}}
+                    animate={
+                      play
+                        ? { width: `${pct}%`, transition: { duration: 0.7, delay: 0.06 * i, ease: EASE } }
+                        : {}
+                    }
                     className="h-3 rounded-full bg-[#C6F24E]"
                   />
                 </div>
@@ -357,9 +381,7 @@ function PerformanceDesktop({ play }: { play: boolean }) {
             );
           })}
         </ul>
-        <div className="mt-3 text-[11px] text-white/60">
-          Tracked via UTM/source → mapped to pipelines & revenue.
-        </div>
+        <div className="mt-3 text-[11px] text-white/60">Tracked via UTM/source → mapped to pipelines & revenue.</div>
       </div>
 
       {/* A/B card */}
@@ -380,15 +402,26 @@ function PerformanceDesktop({ play }: { play: boolean }) {
 
 /* -------- Shared bits -------- */
 function Node({
-  x, y, w = 28, Icon, label, sub, green,
+  x,
+  y,
+  w = 28,
+  Icon,
+  label,
+  sub,
+  green,
 }: {
-  x: number; y: number; w?: number;
-  Icon: any; label: string; sub?: string; green?: boolean;
+  x: number;
+  y: number;
+  w?: number;
+  Icon: any;
+  label: string;
+  sub?: string;
+  green?: boolean;
 }) {
   return (
     <div
       className={[
-        "absolute rounded-xl border p-3 shadow-[0_12px_28px_rgba(0,0,0,0.35)]",
+        "absolute z-10 rounded-xl border p-3 shadow-[0_12px_28px_rgba(0,0,0,0.35)]",
         "bg-white/[0.06] ring-1 ring-white/10",
         green ? "border-[#C6F24E]/30 bg-[#C6F24E]/12 ring-[#C6F24E]/25" : "border-white/10",
       ].join(" ")}
@@ -408,20 +441,28 @@ function Node({
 }
 
 function Connector({
-  from, to, play,
+  from,
+  to,
+  play,
 }: {
   from: { x: number; y: number };
-  to:   { x: number; y: number };
+  to: { x: number; y: number };
   play: boolean;
 }) {
   return (
-    <svg className="pointer-events-none absolute left-0 top-0 h-full w-full">
+    <svg
+      className="pointer-events-none absolute left-0 top-0 h-full w-full -z-10"
+      preserveAspectRatio="none"
+    >
       <motion.line
-        x1={`${from.x}%`} y1={`${from.y}%`}
-        x2={`${to.x}%`}   y2={`${to.y}%`}
+        x1={`${from.x}%`}
+        y1={`${from.y}%`}
+        x2={`${to.x}%`}
+        y2={`${to.y}%`}
         stroke="rgba(198,242,78,0.9)"
         strokeWidth="2"
         strokeLinecap="round"
+        vectorEffect="non-scaling-stroke"
         initial={{ pathLength: 0 }}
         animate={play ? { pathLength: 1, transition: { duration: 0.8, ease: "easeOut" } } : {}}
       />
@@ -430,8 +471,18 @@ function Connector({
 }
 
 function VariantCard({
-  title, open, reply, winner, play,
-}: { title: string; open: number; reply: number; winner?: boolean; play: boolean }) {
+  title,
+  open,
+  reply,
+  winner,
+  play,
+}: {
+  title: string;
+  open: number;
+  reply: number;
+  winner?: boolean;
+  play: boolean;
+}) {
   return (
     <div
       className={[
