@@ -20,7 +20,7 @@ const dmSans = localFont({
   display: "swap",
 });
 
-
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.configgo.com"),
@@ -30,9 +30,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://www.configgo.com" },
 
   icons: {
-    icon: { url: "/configgo-yeni-logo.png", type: "image/png" },
-    apple: { url: "/configgo-yeni-logo.png" },
-    shortcut: "/favicon.ico",
+    icon: [{ url: "/favicon.ico?v=2", sizes: "any" }], // your ICO with 16 & 32
+    shortcut: ["/favicon.ico?v=2"],
   },
 
   openGraph: {
@@ -53,8 +52,6 @@ export const metadata: Metadata = {
 
   manifest: "/site.webmanifest",
 };
-
-
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
