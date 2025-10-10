@@ -5,15 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, useState } from "react";
-import {
-  Search,
-  Filter,
-  MapPin,
-  Building2,
-  ArrowUpRight,
-  ChevronDown,
-  X,
-} from "lucide-react";
+import { Search, Filter, MapPin, Building2, ArrowUpRight, ChevronDown, X } from "lucide-react";
 
 export type Project = {
   id: string;
@@ -26,43 +18,23 @@ export type Project = {
 
 type Props = { projects?: Project[] };
 
-
-
-
-
 /* ---------- Data (yours) ---------- */
 const DEFAULT_PROJECTS: Project[] = [
-  { id: "p1", title: "Vega Center", developer: "NATA Holding", city: "Ankara", image: "/projects/vega.jpg", href: "#" },
-  { id: "p2", title: "SheltonVisalia", developer: "Shelton", city: "Ankara", image: "/projects/Shelton.jpg", href: "#" },
-  { id: "p3", title: "Paryal Bağlıca", developer: "ZirveBeton", city: "Ankara", image: "/projects/zirve.jpg", href: "#" },
-  { id: "p4", title: "VisVadi", developer: "VisVadi", city: "Ankara", image: "/covers/visvadi.jpg", href: "#" },
-  { id: "p5", title: "Suare", developer: "Suare", city: "Ankara", image: "/covers/visvadi.jpg", href: "#" },
-  { id: "p6", title: "Ruby Strada", developer: "Vizör", city: "Ankara", image: "/covers/strada.jpg", href: "#" },
-  { id: "p7", title: "ONYX Potre", developer: "ONYX", city: "Ankara", image: "/covers/onyx.jpg", href: "#" },
-  { id: "p9", title: "Criter Bağlıca", developer: "Criter", city: "Ankara", image: "/covers/criter.jpg", href: "#" },
-  { id: "p10", title: "Lagoon", developer: "DND", city: "Cyprus", image: "/covers/laggon.jpg", href: "#" },
-  { id: "p11", title: "Mega1453", developer: "Trinvest", city: "Ankara", image: "/covers/mega1453.jpg", href: "#" },
-  { id: "p12", title: "Orion Tower", developer: "Kosavalı", city: "Ankara", image: "/covers/oriontower.jpg", href: "#" },
-  { id: "p13", title: "Suncity 2", developer: "Trinvest", city: "Antalya", image: "/covers/suncity.jpg", href: "#" },
-  { id: "p16", title: "Park Rest", developer: "Elite", city: "Cyprus", image: "/covers/prr.jpg", href: "#" },
+  { id: "p1",  title: "Vega Center",     developer: "NATA Holding", city: "Ankara",  image: "/projects/vega.jpg",        href: "#" },
+  { id: "p2",  title: "SheltonVisalia",   developer: "Shelton",      city: "Ankara",  image: "/projects/Shelton.jpg",     href: "#" },
+  { id: "p3",  title: "Paryal Bağlıca",   developer: "ZirveBeton",   city: "Ankara",  image: "/projects/zirve.jpg",       href: "#" },
+  { id: "p6",  title: "Ruby Strada",      developer: "Vizör",        city: "Ankara",  image: "/covers/strada.jpg",        href: "#" },
+  { id: "p7",  title: "ONYX Potre",       developer: "ONYX",         city: "Ankara",  image: "/covers/onyx.jpg",          href: "#" },
+  { id: "p9",  title: "Criter Bağlıca",   developer: "Criter",       city: "Ankara",  image: "/covers/criter.jpg",        href: "#" },
+  { id: "p10", title: "Lagoon",           developer: "DND",          city: "Cyprus",  image: "/covers/laggon.jpg",        href: "#" },
+  { id: "p11", title: "Mega1453",         developer: "Trinvest",     city: "Ankara",  image: "/covers/mega1453.jpg",      href: "#" },
+  { id: "p12", title: "Orion Tower",      developer: "Kosavalı",     city: "Ankara",  image: "/covers/oriontower.jpg",    href: "#" },
+  { id: "p13", title: "Suncity 2",        developer: "Trinvest",     city: "Antalya", image: "/covers/suncity.jpg",       href: "#" },
+  { id: "p16", title: "Park Rest",        developer: "Elite",        city: "Cyprus",  image: "/covers/prr.jpg",           href: "#" },
 ];
 
-/* ---------- Variants ---------- */
-type Bezier = [number, number, number, number];
-const EASE: Bezier = [0.22, 0.61, 0.36, 1];
-const WRAP = {
-  hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
-  show: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.6, ease: EASE, staggerChildren: 0.06 },
-  },
-};
-const CARD = {
-  hidden: { opacity: 0, y: 18, scale: 0.98 },
-  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: EASE } },
-};
+/* ---------- Easing ---------- */
+const EASE: [number, number, number, number] = [0.22, 0.61, 0.36, 1];
 
 /* ---------- Component ---------- */
 export default function DTCaseStudies({ projects = DEFAULT_PROJECTS }: Props) {
@@ -102,15 +74,18 @@ export default function DTCaseStudies({ projects = DEFAULT_PROJECTS }: Props) {
       <div className="relative z-[1] mx-auto max-w-[1450px] px-6 py-18 md:py-24">
         {/* Header + sticky controls */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-12">
-          <div className="md:col-span-4 md:pr-4 md:sticky md:top-[calc(var(--header-h,72px)+24px)] self-start">
+          <div className="min-w-0 md:col-span-4 md:pr-4 md:sticky md:top-[calc(var(--header-h,72px)+24px)] self-start">
             <motion.div
-              variants={WRAP}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: false, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.3 }}
               className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.35)]"
             >
-              <motion.div variants={CARD} className="mb-4">
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } }}
+                className="mb-4"
+              >
                 <p className="typo-small-heading text-white/70">Case Studies</p>
                 <h2 className="typo-h2-md mt-2">
                   <span className="text-[#C6F24E]">Projects</span> We’ve Brought To Life
@@ -121,7 +96,11 @@ export default function DTCaseStudies({ projects = DEFAULT_PROJECTS }: Props) {
               </motion.div>
 
               {/* Search */}
-              <motion.div variants={CARD} className="relative mt-4">
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE, delay: 0.04 } }}
+                className="relative mt-4"
+              >
                 <Search className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/50" />
                 <input
                   value={q}
@@ -132,7 +111,11 @@ export default function DTCaseStudies({ projects = DEFAULT_PROJECTS }: Props) {
               </motion.div>
 
               {/* City chips */}
-              <motion.div variants={CARD} className="mt-5">
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE, delay: 0.08 } }}
+                className="mt-5"
+              >
                 <div className="mb-2 flex items-center gap-2 text-white/60 text-xs">
                   <Filter className="h-3.5 w-3.5" /> Filters
                 </div>
@@ -169,7 +152,11 @@ export default function DTCaseStudies({ projects = DEFAULT_PROJECTS }: Props) {
               </motion.div>
 
               {/* Sort */}
-              <motion.div variants={CARD} className="mt-5">
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE, delay: 0.12 } }}
+                className="mt-5"
+              >
                 <label className="mb-1 block text-xs text-white/60">Sort by</label>
                 <div className="relative">
                   <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/50" />
@@ -186,7 +173,11 @@ export default function DTCaseStudies({ projects = DEFAULT_PROJECTS }: Props) {
               </motion.div>
 
               {/* Stats */}
-              <motion.div variants={CARD} className="mt-6 rounded-xl border border-white/10 bg-white/[0.04] p-4">
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE, delay: 0.16 } }}
+                className="mt-6 rounded-xl border border-white/10 bg-white/[0.04] p-4"
+              >
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-white/70">Showing</span>
                   <span className="text-white">{Math.min(filtered.length, Math.max(0, show))}</span>
@@ -200,17 +191,16 @@ export default function DTCaseStudies({ projects = DEFAULT_PROJECTS }: Props) {
           </div>
 
           {/* Right side: Featured + Grid */}
-          <div className="md:col-span-8">
+          <div className="min-w-0 md:col-span-8">
             {/* Featured banner */}
             {featured && (
               <motion.div
-                variants={WRAP}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: false, amount: 0.2 }}
+                initial={{ opacity: 0, y: 22 }}
+                whileInView={{ opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } }}
+                viewport={{ once: true, amount: 0.25 }}
                 className="mb-8"
               >
-                <motion.div variants={CARD} className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
+                <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
                   <div className="relative aspect-[21/9]">
                     <Image
                       src={featured.image}
@@ -250,24 +240,23 @@ export default function DTCaseStudies({ projects = DEFAULT_PROJECTS }: Props) {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               </motion.div>
             )}
 
             {/* Grid */}
-            <motion.ul
-              variants={WRAP}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: false, amount: 0.2 }}
-              className="grid grid-cols-1 gap-6 sm:grid-cols-2"
-            >
-              {rest.map((p) => (
-                <motion.li key={p.id} variants={CARD}>
+            <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              {rest.map((p, idx) => (
+                <motion.li
+                  key={p.id}
+                  // Animate on mount (works for initial render AND "Load more")
+                  initial={{ opacity: 0, y: 14, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, ease: EASE, delay: Math.min(idx, 12) * 0.03 } }}
+                >
                   <ProjectCard p={p} onQuick={() => setFocus(p)} />
                 </motion.li>
               ))}
-            </motion.ul>
+            </ul>
 
             {/* Load more */}
             {show < filtered.length && (
@@ -302,7 +291,7 @@ export default function DTCaseStudies({ projects = DEFAULT_PROJECTS }: Props) {
               className="absolute left-1/2 top-1/2 w-[min(920px,92vw)] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 shadow-[0_30px_100px_rgba(0,0,0,0.7)]"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative aspect-[16/9]">
+              <div className="relative aspect:[16/9]">
                 <Image src={focus.image} alt={focus.title} fill className="object-cover" />
                 <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
               </div>
@@ -342,23 +331,37 @@ export default function DTCaseStudies({ projects = DEFAULT_PROJECTS }: Props) {
 function ProjectCard({ p, onQuick }: { p: Project; onQuick: () => void }) {
   return (
     <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] shadow-[0_24px_60px_rgba(0,0,0,0.45)] transition">
-      <div className="relative aspect-[16/11]">
-        <Image
-          src={p.image}
-          alt={p.title}
-          fill
-          sizes="(min-width: 1024px) 600px, 100vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-        />
+      <div className="relative aspect-[16/11] overflow-hidden">
+        {/* SCALE THIS WRAPPER – image + gradient move together */}
+        <div className="absolute inset-0 will-change-transform transform-gpu transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.04]">
+          <Image
+            src={p.image}
+            alt={p.title}
+            fill
+            sizes="(min-width: 1024px) 600px, 100vw"
+            className="object-cover"
+          />
+          {/* gradient now scales with the image */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+        </div>
+
+        {/* chips & title stay crisp (not scaled) */}
+        <div className="absolute left-0 top-0 z-10 m-3 flex gap-2">
+          <span className="rounded-full bg-[#C6F24E] px-2.5 py-0.5 text-[10px] font-medium text-black/90">
+            {p.city}
+          </span>
+          <span className="rounded-full bg-white/15 px-2.5 py-0.5 text-[10px] text-white/85">
+            {p.developer}
+          </span>
+        </div>
+        <div className="absolute inset-x-0 bottom-0 z-10 p-4">
+          <h3 className="font-[500] text-white"> {p.title} </h3>
+        </div>
+
+        {/* keep the ring fixed (not scaled) */}
         <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
-        <div className="absolute left-0 top-0 m-3 flex gap-2">
-          <span className="rounded-full bg-[#C6F24E] px-2.5 py-0.5 text-[10px] font-medium text-black/90">{p.city}</span>
-          <span className="rounded-full bg-white/15 px-2.5 py-0.5 text-[10px] text-white/85">{p.developer}</span>
-        </div>
-        <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/70 via-black/20 to-transparent">
-          <h3 className="font-[500] text-white">{p.title}</h3>
-        </div>
       </div>
+
       <div className="flex items-center justify-between p-4">
         <Link
           href={p.href || "#"}
@@ -366,13 +369,11 @@ function ProjectCard({ p, onQuick }: { p: Project; onQuick: () => void }) {
         >
           Open <ArrowUpRight className="h-4 w-4" />
         </Link>
-        <button
-          onClick={onQuick}
-          className="text-xs text-white/80 hover:text-white/95 underline underline-offset-4"
-        >
+        <button onClick={onQuick} className="text-xs text-white/80 hover:text-white/95 underline underline-offset-4">
           Quick View
         </button>
       </div>
     </div>
   );
 }
+

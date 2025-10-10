@@ -1,8 +1,8 @@
 // app/components/configgo/ConfiggoTeams.tsx
 "use client";
 
-import { motion, useAnimation, useInView } from "framer-motion";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { useState, type ReactNode } from "react";
 import {
   Building2,
   Users2,
@@ -32,7 +32,7 @@ type PermKey =
 /* -------------------- Data -------------------- */
 const ROLES: Role[] = ["Admin", "Sales Manager", "Agent", "Marketing", "Broker"];
 
-const PERMS: { key: PermKey; label: string; icon: React.ReactNode }[] = [
+const PERMS: { key: PermKey; label: string; icon: ReactNode }[] = [
   { key: "view_leads",       label: "View leads & contacts",    icon: <Users2 className="h-3.5 w-3.5" /> },
   { key: "edit_deals",       label: "Create & edit deals",      icon: <Settings2 className="h-3.5 w-3.5" /> },
   { key: "bulk_export",      label: "Export data",              icon: <Upload className="h-3.5 w-3.5" /> },
@@ -66,14 +66,10 @@ const ITEM = {
   hidden: { opacity: 0, y: 12 },
   show:   { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
 };
+const VIEWPORT = { once: false, amount: 0.3, margin: "-15% 0% -25% 0%" } as const;
 
 /* -------------------- Component -------------------- */
 export default function ConfiggoTeams() {
-  const ref = useRef<HTMLElement | null>(null);
-  const inView = useInView(ref, { amount: 0.35, margin: "-15% 0px -25% 0px" });
-  const controls = useAnimation();
-  useEffect(() => { inView ? controls.start("show") : controls.set("hidden"); }, [inView, controls]);
-
   const [highlight, setHighlight] = useState<Role | null>("Sales Manager");
 
   function hasPerm(r: Role, p: PermKey): boolean {
@@ -81,7 +77,7 @@ export default function ConfiggoTeams() {
   }
 
   return (
-    <section ref={ref} className="relative" id="teams">
+    <section className="relative" id="teams">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_120%_at_50%_0%,rgba(255,255,255,0.05),rgba(0,0,0,0)_65%)]" />
 
       <div className="relative z-[1] mx-auto max-w-[1450px] px-6 py-16 md:py-24">
@@ -102,9 +98,15 @@ export default function ConfiggoTeams() {
         </div>
 
         {/* Body */}
-        <motion.div variants={WRAP} initial="hidden" animate={controls} className="grid grid-cols-1 gap-6 md:grid-cols-12">
+        <motion.div
+          variants={WRAP}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT}
+          className="grid grid-cols-1 gap-6 md:grid-cols-12"
+        >
           {/* LEFT rail */}
-          <motion.aside variants={ITEM} className="md:col-span-4 space-y-6">
+          <motion.aside variants={ITEM} className="min-w-0 md:col-span-4 space-y-6">
             <div className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
               <div className="mb-2 text-sm text-white/80">Why role-based access?</div>
               <p className="typo-small text-white/70">
@@ -142,7 +144,7 @@ export default function ConfiggoTeams() {
           </motion.aside>
 
           {/* RIGHT — permission matrix (full width; no audit rail) */}
-          <motion.div variants={ITEM} className="md:col-span-8">
+          <motion.div variants={ITEM} className="min-w-0 md:col-span-8">
             <div className="rounded-xl border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02))] p-4">
               <div className="mb-3 flex items-center justify-between">
                 <div className="flex items-center gap-2 text-sm text-white/80">
@@ -209,6 +211,7 @@ export default function ConfiggoTeams() {
                           {/* role cells */}
                           {ROLES.map((role, ci) => {
                             const allowed = hasPerm(role, perm.key);
+                            const delay = 0.015 * (ri + ci);
                             const activeCol = highlight === role;
                             return (
                               <td
@@ -220,11 +223,9 @@ export default function ConfiggoTeams() {
                               >
                                 <motion.span
                                   initial={{ opacity: 0, y: 6 }}
-                                  animate={{
-                                    opacity: 1,
-                                    y: 0,
-                                    transition: { duration: 0.35, ease: EASE, delay: 0.015 * (ri + ci) },
-                                  }}
+                                  whileInView={{ opacity: 1, y: 0 }}
+                                  viewport={VIEWPORT}
+                                  transition={{ duration: 0.35, ease: EASE, delay }}
                                   className={[
                                     "inline-grid h-7 w-7 place-items-center rounded-md ring-1",
                                     allowed

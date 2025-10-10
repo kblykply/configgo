@@ -26,16 +26,20 @@ export default function Page() {
         <AboutHero />
         <AboutMission />
         <AboutPillars />    
-        <AboutTimeline />
+
+             <AboutTimeline />
         <AboutTeam />   
         <AboutValues />
         <AboutOffices />
         <AboutSecurity />
+
+
+
         <AboutCareers />
-        <AboutCommunity />
+            <AboutCommunity />
         <AboutContact />
         <AboutFinalCTA />
-     
+
     </main>
   );
 }

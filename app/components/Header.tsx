@@ -668,9 +668,9 @@ export default function Header({
     <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 px-5 py-4 text-[12px] text-white/70 md:flex-row shrink-0">
       <div>© {new Date().getFullYear()} Configgo</div>
       <div className="flex items-center gap-3">
-        <Link href="/legal/privacy" onClick={() => setMenuOpen(false)} className="hover:text-white">Privacy</Link>
+        <Link href="/privacy" onClick={() => setMenuOpen(false)} className="hover:text-white">Privacy</Link>
         <span>·</span>
-        <Link href="/legal/terms" onClick={() => setMenuOpen(false)} className="hover:text-white">Terms</Link>
+        <Link href="/terms" onClick={() => setMenuOpen(false)} className="hover:text-white">Terms</Link>
       </div>
     </div>
   </div>

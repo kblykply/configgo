@@ -12,42 +12,47 @@ const HEADER_OFFSET = "20vh";
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 const WRAP = {
   hidden: { opacity: 0, y: 18, filter: "blur(6px)" },
-  show:   { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.55, ease: EASE, staggerChildren: 0.06 } },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.55, ease: EASE, staggerChildren: 0.06 },
+  },
 };
 const ITEM = {
   hidden: { opacity: 0, y: 10 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.45, ease: EASE } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: EASE } },
 };
 
 export default function ConfiggoFinalCTA() {
   return (
     <section
       id="get-started"
-      className="relative"
+      className="relative overflow-x-hidden"
       style={{ paddingTop: HEADER_OFFSET, scrollMarginTop: HEADER_OFFSET }}
     >
       {/* Ambient glow + diagonal accent */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(80%_140%_at_50%_0%,rgba(198,242,78,0.10),rgba(0,0,0,0)_60%)]" />
-        <div className="absolute -inset-x-10 top-1/3 h-48 rotate-[-3deg] bg-[linear-gradient(90deg,rgba(198,242,78,0.12),rgba(255,255,255,0.02),rgba(198,242,78,0.12))] blur-xl" />
+        <div className="absolute left-1/2 top-1/3 h-48 w-[120vw] -translate-x-1/2 rotate-[-3deg] bg-[linear-gradient(90deg,rgba(198,242,78,0.12),rgba(255,255,255,0.02),rgba(198,242,78,0.12))] blur-xl" />
       </div>
 
-      <div className="relative z-[1] mx-auto max-w-[1450px] px-6 pb-20 md:pb-28">
+      <div className="relative z-[1] mx-auto w-full max-w-[1450px] px-4 sm:px-6 pb-20 md:pb-28">
         <motion.div
           variants={WRAP}
-          initial={false}
+          initial="hidden"
           whileInView="show"
           viewport={{ once: false, amount: 0.2, margin: "-12% 0px -12% 0px" }}
           className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-12"
         >
           {/* Left: copy + CTAs */}
-          <motion.div variants={ITEM} className="md:col-span-6 lg:col-span-5">
+          <motion.div variants={ITEM} className="min-w-0 md:col-span-6 lg:col-span-5">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] text-white/85">
               <Rocket className="h-3.5 w-3.5 text-[#C6F24E]" />
               Launch Configgo in weeks
             </div>
 
-            <h2 className="typo-hero-light mt-4 text-white md:text-[64px]">
+            <h2 className="typo-hero-light mt-4 break-words text-white md:text-[64px]">
               Ready to <span className="typo-hero-semi text-[#C6F24E]">sell smarter</span>?
             </h2>
 
@@ -64,7 +69,7 @@ export default function ConfiggoFinalCTA() {
               ].map((t) => (
                 <li key={t} className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-[#C6F24E]" />
-                  <span>{t}</span>
+                  <span className="min-w-0 break-words">{t}</span>
                 </li>
               ))}
             </ul>
@@ -91,7 +96,7 @@ export default function ConfiggoFinalCTA() {
           </motion.div>
 
           {/* Right: product “window” teaser */}
-          <motion.div variants={ITEM} className="md:col-span-6 lg:col-span-7">
+          <motion.div variants={ITEM} className="min-w-0 md:col-span-6 lg:col-span-7">
             <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-[0_40px_100px_rgba(0,0,0,0.6)]">
               {/* window top bar */}
               <div className="flex h-9 items-center justify-between border-b border-white/10 bg-white/5 px-4">
@@ -105,7 +110,7 @@ export default function ConfiggoFinalCTA() {
               </div>
 
               {/* ghost UI grid (no external images required) */}
-              <div className="grid gap-4 p-5 md:grid-cols-2">
+              <div className="grid min-w-0 gap-4 p-4 sm:p-5 md:grid-cols-2">
                 {/* pipeline chip row */}
                 <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
                   <div className="mb-2 text-xs text-white/70">Hot pipeline</div>
@@ -150,10 +155,10 @@ export default function ConfiggoFinalCTA() {
                     ].map(([ch, text]) => (
                       <li
                         key={text}
-                        className="flex items-center justify-between gap-3 rounded-lg border border-white/10 bg-black/40 px-3 py-2"
+                        className="flex min-w-0 items-center justify-between gap-3 rounded-lg border border-white/10 bg-black/40 px-3 py-2"
                       >
-                        <span className="text-white/85">{text}</span>
-                        <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] text-white/70">
+                        <span className="min-w-0 break-words text-white/85">{text}</span>
+                        <span className="shrink-0 rounded-full bg-white/10 px-2 py-0.5 text-[10px] text-white/70">
                           {ch}
                         </span>
                       </li>
@@ -184,7 +189,10 @@ export default function ConfiggoFinalCTA() {
             </div>
 
             <p className="typo-small mt-3 text-white/60">
-              Need help choosing a plan? <Link href="/contact" className="underline underline-offset-4 text-white/80 hover:text-white">Talk to sales</Link>.
+              Need help choosing a plan?{" "}
+              <Link href="/contact" className="text-white/80 underline underline-offset-4 hover:text-white">
+                Talk to sales
+              </Link>.
             </p>
           </motion.div>
         </motion.div>

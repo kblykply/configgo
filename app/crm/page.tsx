@@ -28,7 +28,11 @@ export const metadata = {
 export default function Page() {
   return (
     <main className="min-h-svh bg-[var(--background)] text-white">
-      <ConfiggoHero />
+       
+
+        
+          
+ <ConfiggoHero />
         <ConfiggoSocialProof />
         <ConfiggoPersonas />
         <ConfiggoOverview />
@@ -36,24 +40,22 @@ export default function Page() {
         <ConfiggoPipelines />
         <ConfiggoInventory />
         <ConfiggoCommsHub />
+
+
         <ConfiggoMarketing />
         <ConfiggoDocuments />
         <ConfiggoReporting />
         <ConfiggoTeams />
-       
         <ConfiggoIntegrations />
-        <ConfiggoTwinAddon /> 
 
-        
-          
+        <ConfiggoTwinAddon /> 
         <ConfiggoImplementation />
         <ConfiggoSecurity />
-        <ConfiggoPricing />
+
+             <ConfiggoPricing />
     <ConfiggoFAQ />
      <ConfiggoFinalCTA />
 
-
-     
     </main>
   );
 }

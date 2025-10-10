@@ -2,8 +2,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useAnimation, useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 
 type Props = {
   /** image or video poster under /public */
@@ -35,33 +34,28 @@ const ITEM = {
 };
 const VISUAL = {
   hidden: { opacity: 0, y: 18, scale: 0.985 },
-  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: EASE, delay: 0.06 } },
+  show:   { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: EASE, delay: 0.06 } },
 };
+const VIEWPORT = { once: false, amount: 0.28, margin: "-12% 0% -20% 0%" } as const;
 
 export default function DTAuthenticity({
-  mediaSrc = "/auth.jpg", // put your image here
-  videoSrc, // e.g. "/digital-twin/auth.mp4"
+  mediaSrc = "/auth.jpg",
+  videoSrc,
 }: Props) {
-  const ref = useRef<HTMLElement | null>(null);
-  const inView = useInView(ref, { amount: 0.4, margin: "-15% 0px -25% 0px" });
-  const controls = useAnimation();
-
-  useEffect(() => {
-    if (inView) controls.start("show");
-    else controls.set("hidden");
-  }, [inView, controls]);
-
   return (
-    <section
-      ref={ref}
-      className="relative"
-    >
-      {/* subtle swirl / vignette */}
+    <section className="relative">
+      {/* background */}
       <div className="pointer-events-none absolute inset-0 bg-[#030303]" />
 
       <div className="relative z-[1] mx-auto max-w-[1450px] px-6 py-20 md:py-28">
         {/* Heading */}
-        <motion.div variants={WRAP} initial="hidden" animate={controls} className="text-center mb-10 md:mb-14">
+        <motion.div
+          variants={WRAP}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT}
+          className="mb-10 text-center md:mb-14"
+        >
           <motion.p variants={ITEM} className="typo-small-heading text-white/70">
             Architectural
           </motion.p>
@@ -73,17 +67,17 @@ export default function DTAuthenticity({
         {/* Grid */}
         <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-12 md:gap-12">
           {/* Left — feature cards */}
-        <motion.ul
-  variants={WRAP}
-  initial="hidden"
-  animate={controls}
- className="md:col-span-5 md:self-center space-y-6"
->
+          <motion.ul
+            variants={WRAP}
+            initial="hidden"
+            whileInView="show"
+            viewport={VIEWPORT}
+            className="min-w-0 md:col-span-5 md:self-center space-y-6"
+          >
             {FEATURES.map((t, i) => (
               <motion.li key={i} variants={ITEM}>
                 <div className="relative flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-6 shadow-[0_18px_40px_rgba(0,0,0,0.35)] backdrop-blur-sm">
                   <div className="grid h-10 w-10 place-items-center rounded-md bg-white">
-                    {/* square icon placeholder */}
                     <div className="h-4 w-4 rounded-[3px] bg-neutral-900" />
                   </div>
                   <div className="h-10 w-px bg-white/15" />
@@ -92,39 +86,41 @@ export default function DTAuthenticity({
               </motion.li>
             ))}
           </motion.ul>
-{/* Right — media window */}
-<motion.div
-  variants={VISUAL}
-  initial="hidden"
-  animate={controls}
-  className="md:col-span-7"
->
-  <div className="relative w-full min-h-[550px] md:min-h-[650px] rounded-2xl overflow-hidden shadow-lg ">
-    {videoSrc ? (
-      <video
-        src={videoSrc}
-        poster={mediaSrc}
-        className="absolute inset-0 h-full w-full object-contain"
-        autoPlay
-        muted
-        loop
-        playsInline
-      />
-    ) : (
-      <Image
-        src={mediaSrc}
-        alt="Authenticity showcase"
-        fill
-        sizes="(min-width: 1024px) 1200px, 100vw"
-        className="object-contain"
-        priority
-      />
-    )}
-    <div className="pointer-events-none absolute inset-0 " />
-  </div>
-</motion.div>
 
-
+          {/* Right — media window */}
+          <motion.div
+            variants={VISUAL}
+            initial="hidden"
+            whileInView="show"
+            viewport={VIEWPORT}
+            className="min-w-0 md:col-span-7"
+          >
+            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-[0_40px_100px_rgba(0,0,0,0.6)]">
+              {/* Keep a friendly aspect on mobile; grow taller on desktop */}
+              <div className="relative aspect-[16/9] md:aspect-auto md:min-h-[650px]">
+                {videoSrc ? (
+                  <video
+                    src={videoSrc}
+                    poster={mediaSrc}
+                    className="absolute inset-0 h-full w-full object-contain"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  />
+                ) : (
+                  <Image
+                    src={mediaSrc}
+                    alt="Authenticity showcase"
+                    fill
+                    sizes="(min-width:1024px) 1200px, (min-width:640px) 90vw, 100vw"
+                    className="object-contain"
+                    priority
+                  />
+                )}
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

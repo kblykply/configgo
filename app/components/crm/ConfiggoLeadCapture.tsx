@@ -2,8 +2,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import {
   Megaphone,
   Globe,
@@ -31,6 +30,7 @@ const ITEM = {
   hidden: { opacity: 0, y: 14 },
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
 };
+const VIEWPORT = { once: false, amount: 0.25, margin: "-15% 0% -25% 0%" } as const;
 
 const SOURCES = [
   { label: "Web Forms", Icon: Globe },
@@ -40,32 +40,14 @@ const SOURCES = [
 ] as const;
 
 const RULES = [
-  {
-    title: "Round-robin by team",
-    desc: "Evenly distribute new leads to Istanbul Sales",
-    Icon: UsersRound,
-  },
-  {
-    title: "SLA 15 min",
-    desc: "Escalate if no reply within 15 minutes",
-    Icon: Timer,
-  },
-  {
-    title: "De-dupe email/phone",
-    desc: "Merge duplicate contacts and keep history",
-    Icon: CopyCheck,
-  },
-  {
-    title: "Smart filters",
-    desc: "Route by budget, language, project interest",
-    Icon: Filter,
-  },
+  { title: "Round-robin by team", desc: "Evenly distribute new leads to Istanbul Sales", Icon: UsersRound },
+  { title: "SLA 15 min", desc: "Escalate if no reply within 15 minutes", Icon: Timer },
+  { title: "De-dupe email/phone", desc: "Merge duplicate contacts and keep history", Icon: CopyCheck },
+  { title: "Smart filters", desc: "Route by budget, language, project interest", Icon: Filter },
 ];
 
 type Props = {
-  /** Replace with your image path. Example: "/images/lead-capture-demo.jpg" */
   imageSrc?: string;
-  /** Accessible description for the image. */
   imageAlt?: string;
 };
 
@@ -73,11 +55,8 @@ export default function ConfiggoLeadCapture({
   imageSrc = "/crm/chat.jpg",
   imageAlt = "Lead capture and routing visual",
 }: Props) {
-  const ref = useRef<HTMLElement | null>(null);
-  const inView = useInView(ref, { amount: 0.35, margin: "-15% 0px -25% 0px" });
-
   return (
-    <section ref={ref} className="relative" id="lead-capture">
+    <section className="relative" id="lead-capture">
       {/* subtle glow */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_130%_at_50%_0%,rgba(255,255,255,0.05),rgba(0,0,0,0)_60%)]" />
 
@@ -86,7 +65,8 @@ export default function ConfiggoLeadCapture({
         <motion.div
           variants={WRAP}
           initial="hidden"
-          animate={inView ? "show" : "hidden"}
+          whileInView="show"
+          viewport={VIEWPORT}
           className="mb-10 text-center"
         >
           <motion.p variants={ITEM} className="typo-small-heading text-white/70">
@@ -103,8 +83,9 @@ export default function ConfiggoLeadCapture({
           <motion.div
             variants={WRAP}
             initial="hidden"
-            animate={inView ? "show" : "hidden"}
-            className="md:col-span-5"
+            whileInView="show"
+            viewport={VIEWPORT}
+            className="min-w-0 md:col-span-5"
           >
             <motion.p variants={ITEM} className="typo-small text-white/70">
               Capture leads from web forms, portals and ads, QR check-ins at the sales center, and WhatsApp — then
@@ -156,42 +137,43 @@ export default function ConfiggoLeadCapture({
             </motion.div>
           </motion.div>
 
-        {/* RIGHT — window with a single image */}
-<motion.div
-  variants={ITEM}
-  initial="hidden"
-  animate={inView ? "show" : "hidden"}
-  className="md:col-span-7"
->
-  <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-[0_40px_100px_rgba(0,0,0,0.6)]">
-    {/* window chrome */}
-    <div className="flex h-9 items-center gap-2 border-b border-white/10 bg-white/5 px-4">
-      <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
-      <span className="h-3 w-3 rounded-full bg-[#FFBD2E]" />
-      <span className="h-3 w-3 rounded-full bg-[#28C840]" />
-    </div>
+          {/* RIGHT — window with a single image */}
+          <motion.div
+            variants={ITEM}
+            initial="hidden"
+            whileInView="show"
+            viewport={VIEWPORT}
+            className="min-w-0 md:col-span-7"
+          >
+            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-[0_40px_100px_rgba(0,0,0,0.6)]">
+              {/* window chrome */}
+              <div className="flex h-9 items-center gap-2 border-b border-white/10 bg-white/5 px-4">
+                <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
+                <span className="h-3 w-3 rounded-full bg-[#FFBD2E]" />
+                <span className="h-3 w-3 rounded-full bg-[#28C840]" />
+              </div>
 
-    {/* image area */}
-    <div className="relative w-full bg-white/5">
-      <Image
-        src={imageSrc}
-        alt={imageAlt}
-        width={1280}
-        height={720}
-        className="w-full h-auto object-contain"
-        priority={false}
-      />
-      {/* subtle inner ring */}
-      <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
-    </div>
-  </div>
+              {/* image area */}
+              <div className="relative w-full bg-white/5">
+                <Image
+                  src={imageSrc}
+                  alt={imageAlt}
+                  width={1280}
+                  height={720}
+                  sizes="(min-width:1024px) 720px, (min-width:640px) 90vw, 100vw"
+                  className="h-auto w-full object-contain"
+                  priority={false}
+                />
+                {/* subtle inner ring */}
+                <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
+              </div>
+            </div>
 
-  {/* footnote */}
-  <p className="typo-small mt-4 text-white/60">
-    Connect sources via forms, APIs and integrations. Set routing once; Configgo handles the rest.
-  </p>
-</motion.div>
-
+            {/* footnote */}
+            <p className="typo-small mt-4 text-white/60">
+              Connect sources via forms, APIs and integrations. Set routing once; Configgo handles the rest.
+            </p>
+          </motion.div>
         </div>
       </div>
     </section>

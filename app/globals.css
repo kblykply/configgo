@@ -59,6 +59,7 @@
 }
 
 
+/* Keep vertical scrollbar space reserved so layout doesn't shift on filter animations */
 
 @theme inline {
   --color-background: var(--background);
@@ -86,6 +87,7 @@ html, body {
    -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  
 }
 
 /* Headings = Clash Display by default */
@@ -113,6 +115,10 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 70px;
   line-height: 1;
 }
+@layer base {
+  html { scrollbar-gutter: stable both-edges; }
+}
+
 
 /* Clash Display – 40px Medium (500) */
 .typo-h2-md {

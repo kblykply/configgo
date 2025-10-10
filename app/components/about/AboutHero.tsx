@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import {
   Rocket,
   Building2,
-  Box,            // ✅ use Box instead of Cube
+  Box,
   Layers,
   MessageSquare,
   ShieldCheck,
@@ -14,7 +14,8 @@ import {
 } from "lucide-react";
 import type { ReactNode } from "react";
 
-const HEADER_OFFSET = "20vh";
+/** Smaller on phones, larger on desktop */
+const HEADER_OFFSET = "clamp(64px, 21vh, 20vh)";
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 
 const WRAP = {
@@ -39,7 +40,6 @@ export default function AboutHero() {
       style={{
         paddingTop: HEADER_OFFSET,
         scrollMarginTop: HEADER_OFFSET,
-        // Make the section exactly viewport height minus the header offset
         minHeight: `calc(100svh - ${HEADER_OFFSET})`,
       }}
     >
@@ -50,30 +50,39 @@ export default function AboutHero() {
       </div>
 
       <div
-        className="relative z-[1] mx-auto max-w-[1450px] px-6 pb-16 md:pb-24 flex items-center"
-        style={{ minHeight: "inherit" }} // ensure inner wraps to the section's 100vh height
+        className="relative z-[1] mx-auto max-w-[1450px] px-4 sm:px-6 pb-12 md:pb-24 flex items-center"
+        style={{ minHeight: "inherit" }}
       >
+        {/* Start visible; animate when in view (no hooks, no stuck hidden state) */}
         <motion.div
           variants={WRAP}
           initial={false}
           whileInView="show"
-          viewport={{ once: false, amount: 0.2, margin: "-12% 0px -12% 0px" }}
-          className="grid w-full grid-cols-1 items-center gap-10 md:grid-cols-12 md:gap-12"
+          viewport={{ once: true, amount: 0.2, margin: "-10% 0px -10% 0px" }}
+          className="grid w-full grid-cols-1 items-center gap-8 sm:gap-10 md:grid-cols-12 md:gap-12"
         >
           {/* Copy */}
-          <motion.div variants={ITEM} className="md:col-span-7">
+          <motion.div variants={ITEM} className="min-w-0 md:col-span-7">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] text-white/85">
               <Rocket className="h-3.5 w-3.5 text-[#C6F24E]" />
               About Configgo
             </div>
 
-            <h1 className="typo-hero-light mt-4 text-white md:text-[84px]">
+            {/* Tight, wrapped, balanced heading for mobile */}
+            <h1
+              className={[
+                "mt-4 text-white font-semibold tracking-[-0.01em] leading-[1.08]",
+                "break-words [hyphens:auto] [text-wrap:balance]",
+                "max-w-[28ch] sm:max-w-[34ch]",
+              ].join(" ")}
+              style={{ fontSize: "clamp(26px, 6.2vw, 48px)" }}
+            >
               We’re building the
-              <span className="typo-hero-semi text-[#C6F24E]"> construction-tech platform</span>
+              <span className="font-semibold text-[#C6F24E]"> construction-tech platform</span>{" "}
               teams actually love.
             </h1>
 
-            <p className="typo-small mt-4 max-w-[760px] text-white/75">
+            <p className="typo-small mt-4 max-w-[70ch] text-white/75">
               Not just a CRM. Configgo unifies <b className="text-white">Real-Estate CRM</b>, a
               <b className="text-white"> Digital Twin</b> layer, and the operational tools modern
               developers, contractors, and sales teams need—inventory & availability, omnichannel
@@ -83,7 +92,7 @@ export default function AboutHero() {
             {/* capability chips */}
             <div className="mt-5 flex flex-wrap gap-2">
               <CapChip icon={<Building2 className="h-3.5 w-3.5" />} text="Real-Estate CRM" />
-              <CapChip icon={<Box className="h-3.5 w-3.5" />} text="Digital Twin" /> {/* ✅ replaced */}
+              <CapChip icon={<Box className="h-3.5 w-3.5" />} text="Digital Twin" />
               <CapChip icon={<Layers className="h-3.5 w-3.5" />} text="BIM & Docs (light)" />
               <CapChip icon={<MessageSquare className="h-3.5 w-3.5" />} text="Omnichannel Inbox" />
               <CapChip icon={<Building2 className="h-3.5 w-3.5" />} text="Inventory & Availability" />
@@ -106,7 +115,7 @@ export default function AboutHero() {
           </motion.div>
 
           {/* Stats panel */}
-          <motion.div variants={ITEM} className="md:col-span-5">
+          <motion.div variants={ITEM} className="min-w-0 md:col-span-5">
             <div className="grid gap-4 sm:grid-cols-2">
               <StatCard icon={<Box className="h-4 w-4 text-[#C6F24E]" />} kpi="40+" label="Digital twins deployed" />
               <StatCard icon={<Building2 className="h-4 w-4 text-[#C6F24E]" />} kpi="18k+" label="Units managed" />
@@ -121,7 +130,6 @@ export default function AboutHero() {
 }
 
 /* helpers */
-
 function CapChip({ icon, text }: { icon: ReactNode; text: string }) {
   return (
     <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] text-white/85">
@@ -130,7 +138,6 @@ function CapChip({ icon, text }: { icon: ReactNode; text: string }) {
     </span>
   );
 }
-
 function StatCard({ icon, kpi, label }: { icon: ReactNode; kpi: string; label: string }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">

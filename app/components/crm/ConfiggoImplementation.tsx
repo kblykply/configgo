@@ -1,7 +1,7 @@
+// app/components/configgo/ConfiggoImplementation.tsx
 "use client";
 
-import { motion, useAnimation, useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import {
   Rocket, Upload, FileSpreadsheet, Database, Settings2, CalendarDays,
   UserCheck, ShieldCheck, LifeBuoy, CheckCircle2, ServerCog, ClipboardList, ArrowRight
@@ -19,26 +19,30 @@ const ITEM = {
 };
 
 const HEADER_OFFSET = "clamp(72px, 16vh, 128px)"; // reserve space for your fixed header
+const VIEWPORT = { once: false, amount: 0.3, margin: "-15% 0% -25% 0%" } as const;
 
 export default function ConfiggoImplementation() {
-  const ref = useRef<HTMLElement | null>(null);
-  const inView = useInView(ref, { amount: 0.35, margin: "-15% 0px -25% 0px" });
-  const controls = useAnimation();
-  useEffect(() => { inView ? controls.start("show") : controls.set("hidden"); }, [inView, controls]);
-
   return (
     <section
-      ref={ref}
       id="implementation"
       className="relative"
       style={{ paddingTop: HEADER_OFFSET, scrollMarginTop: HEADER_OFFSET }}
     >
-      {/* visible glow so you can tell it rendered */}
+      {/* subtle glow so you can tell it rendered even before anim triggers */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(90%_120%_at_50%_0%,rgba(198,242,78,0.08),rgba(0,0,0,0)_60%)]" />
 
-      <div className="relative z-[1] mx-auto max-w-[1450px] px-6 pb-16 md:pb-24">
-        <motion.div variants={WRAP} initial="hidden" animate={controls} className="mb-8 text-center">
-          <motion.p variants={ITEM} className="typo-small-heading text-white/70">Implementation & Migration</motion.p>
+      <div className="relative z-[1] mx-auto max-w-[1450px] px-4 sm:px-6 pb-16 md:pb-24">
+        {/* Header */}
+        <motion.div
+          variants={WRAP}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT}
+          className="mb-8 text-center"
+        >
+          <motion.p variants={ITEM} className="typo-small-heading text-white/70">
+            Implementation & Migration
+          </motion.p>
           <motion.h2 variants={ITEM} className="typo-h2-md mt-2">
             Go live in <span className="text-[#C6F24E]">weeks</span>, not months
           </motion.h2>
@@ -47,7 +51,14 @@ export default function ConfiggoImplementation() {
           </motion.p>
         </motion.div>
 
-        <motion.div variants={WRAP} initial="hidden" animate={controls} className="grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-10">
+        {/* Grid */}
+        <motion.div
+          variants={WRAP}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT}
+          className="grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-10"
+        >
           {/* Left: migration paths */}
           <motion.div variants={ITEM} className="md:col-span-5 space-y-4">
             <Card icon={<FileSpreadsheet className="h-4 w-4 text-[#C6F24E]" />} title="From spreadsheets">
@@ -61,7 +72,7 @@ export default function ConfiggoImplementation() {
             </Card>
           </motion.div>
 
-          {/* Right: import wizard teaser (simple) */}
+          {/* Right: import wizard teaser */}
           <motion.div variants={ITEM} className="md:col-span-7">
             <div className="rounded-2xl border border-white/10 bg-black/40 shadow-[0_40px_100px_rgba(0,0,0,0.6)] overflow-hidden">
               <div className="flex items-center justify-between border-b border-white/10 bg-white/5 px-4 py-2">
@@ -119,9 +130,18 @@ Jane Doe,jane@example.com,+90 555 987 6543,Orion Tower,1+1,Web Form`}
         </motion.div>
 
         {/* Timeline & support (compact) */}
-        <motion.div variants={WRAP} initial="hidden" animate={controls} className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-12">
+        <motion.div
+          variants={WRAP}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT}
+          className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-12"
+        >
           <motion.div variants={ITEM} className="md:col-span-8 rounded-xl border border-white/10 bg-white/[0.04] p-5">
-            <div className="mb-3 flex items-center gap-2"><CalendarDays className="h-4 w-4 text-[#C6F24E]" /><h3 className="text-lg">Your first 30 days</h3></div>
+            <div className="mb-3 flex items-center gap-2">
+              <CalendarDays className="h-4 w-4 text-[#C6F24E]" />
+              <h3 className="text-lg">Your first 30 days</h3>
+            </div>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               <Timeline badge="Week 0–1" title="Plan & prepare" items={["Kickoff & success plan","Field/pipeline design","Data audit & mapping"]} icon={<ClipboardList className="h-4 w-4 text-[#C6F24E]" />} />
               <Timeline badge="Week 2"   title="Migrate & connect" items={["Imports to sandbox → prod","Connect forms & channels","QA with managers"]} icon={<ServerCog className="h-4 w-4 text-[#C6F24E]" />} />

@@ -27,20 +27,21 @@ export default function AboutFinalCTA() {
   return (
     <section
       id="final-cta"
-      className="relative"
+      className="relative overflow-x-hidden" // <- prevent horizontal scroll on mobile
       style={{ scrollMarginTop: HEADER_OFFSET }}
     >
-      {/* Distinct background: diagonal lime band + halo + subtle grid */}
-      <div className="pointer-events-none absolute inset-0">
+      {/* BG: diagonal band + halo + subtle grid */}
+      <div className="pointer-events-none absolute inset-0 [contain:paint]">
         <div className="absolute inset-0 opacity-[0.05] [background-image:linear-gradient(rgba(255,255,255,.14)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.14)_1px,transparent_1px)] [background-size:26px_26px]" />
-        <div className="absolute -inset-x-16 top-10 h-48 rotate-[2deg] bg-[linear-gradient(90deg,rgba(198,242,78,0.12),rgba(255,255,255,0.02),rgba(198,242,78,0.12))] blur-xl" />
+        {/* keep band inside small screens to avoid overflow */}
+        <div className="absolute top-10 h-48 rotate-[2deg] bg-[linear-gradient(90deg,rgba(198,242,78,0.12),rgba(255,255,255,0.02),rgba(198,242,78,0.12))] blur-xl -inset-x-8 md:-inset-x-16" />
         <div className="absolute inset-0 bg-[radial-gradient(70%_120%_at_50%_0%,rgba(198,242,78,0.06),rgba(0,0,0,0)_60%)]" />
       </div>
 
-      <div className="relative z-[1] mx-auto max-w-[1450px] px-6 pb-16 pt-12 md:pb-24 md:pt-16">
+      <div className="relative z-[1] mx-auto w-full max-w-[1450px] px-4 sm:px-6 pb-16 pt-12 md:pb-24 md:pt-16">
         <motion.div
           variants={WRAP}
-          initial="hidden"
+          initial={false} // visible immediately; still animates on enter
           whileInView="show"
           viewport={{ once: false, amount: 0.25, margin: "-15% 0px -20% 0px" }}
           className="overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-6 md:p-10 shadow-[0_28px_80px_rgba(0,0,0,0.55)]"
@@ -56,8 +57,8 @@ export default function AboutFinalCTA() {
 
           {/* headline + actions */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-12">
-            <motion.div variants={ITEM} className="md:col-span-7">
-              <h2 className="typo-h2-md">
+            <motion.div variants={ITEM} className="md:col-span-7 min-w-0">
+              <h2 className="typo-h2-md break-words">
                 Launch <span className="text-[#C6F24E]">Configgo</span> — CRM + Digital Twin for construction
               </h2>
               <p className="typo-small mt-3 max-w-[720px] text-white/75">
@@ -100,8 +101,8 @@ export default function AboutFinalCTA() {
               </div>
             </motion.div>
 
-            {/* right: quick-contact / reassurance */}
-            <motion.div variants={ITEM} className="md:col-span-5">
+            {/* right: quick contact */}
+            <motion.div variants={ITEM} className="md:col-span-5 min-w-0">
               <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-5">
                 <div className="mb-2 text-sm text-white/85">Talk to a human</div>
                 <div className="flex flex-wrap items-center gap-3 text-[13px] text-white/80">

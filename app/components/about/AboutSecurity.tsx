@@ -40,21 +40,21 @@ export default function AboutSecurity() {
   return (
     <section
       id="security"
-      className="relative"
+      className="relative overflow-x-hidden" /* clip wide glows on mobile */
       style={{ scrollMarginTop: HEADER_OFFSET }}
     >
       {/* distinct bg: angled lime band + soft halo + micro grid */}
-      <div className="pointer-events-none absolute inset-0">
+      <div className="pointer-events-none absolute inset-0 [contain:paint]">
         <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(rgba(255,255,255,.16)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.16)_1px,transparent_1px)] [background-size:26px_26px]" />
         <div className="absolute -inset-x-10 top-16 h-44 rotate-[2deg] bg-[linear-gradient(90deg,rgba(198,242,78,0.12),rgba(255,255,255,0.02),rgba(198,242,78,0.12))] blur-xl" />
         <div className="absolute inset-0 bg-[radial-gradient(70%_120%_at_50%_0%,rgba(198,242,78,0.06),rgba(0,0,0,0)_60%)]" />
       </div>
 
-      <div className="relative z-[1] mx-auto max-w-[1450px] px-6 py-16 md:py-24">
+      <div className="relative z-[1] mx-auto w-full max-w-[1450px] px-4 sm:px-6 py-16 md:py-24">
         {/* Header */}
         <motion.div
           variants={WRAP}
-          initial="hidden"
+          initial={false} /* visible immediately; still animates in-view */
           whileInView="show"
           viewport={{ once: false, amount: 0.25, margin: "-15% 0px -20% 0px" }}
           className="mb-8 md:mb-12"
@@ -63,7 +63,7 @@ export default function AboutSecurity() {
             <ShieldCheck className="h-3.5 w-3.5 text-[#C6F24E]" />
             Security & trust
           </motion.p>
-          <motion.h2 variants={ITEM} className="typo-h2-md mt-2">
+          <motion.h2 variants={ITEM} className="typo-h2-md mt-2 break-words">
             Snapshot of how we <span className="text-[#C6F24E]">protect</span> your data
           </motion.h2>
           <motion.p variants={ITEM} className="typo-small mt-2 max-w-[760px] text-white/70">
@@ -76,10 +76,10 @@ export default function AboutSecurity() {
           {/* Summary panel */}
           <motion.div
             variants={WRAP}
-            initial="hidden"
+            initial={false}
             whileInView="show"
             viewport={{ once: false, amount: 0.25, margin: "-15% 0px -20% 0px" }}
-            className="md:col-span-5"
+            className="md:col-span-5 min-w-0"
           >
             <motion.div variants={ITEM} className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-5 shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
               {/* subtle ring */}
@@ -88,18 +88,18 @@ export default function AboutSecurity() {
                 <span className="inline-grid h-12 w-12 place-items-center rounded-xl bg-[#C6F24E]/15 text-[#C6F24E] ring-1 ring-[#C6F24E]/30">
                   <ShieldCheck className="h-6 w-6" />
                 </span>
-                <div>
+                <div className="min-w-0">
                   <div className="text-white text-lg font-[500]">Defense in depth</div>
                   <div className="text-[12px] text-white/65">Security is a product requirement—not an add-on.</div>
                 </div>
               </div>
 
               <ul className="space-y-2 text-sm text-white/85">
-                <Li icon={<Lock className="h-4 w-4" />}>Encryption in transit (TLS 1.2+) & at rest (AES-256)</Li>
-                <Li icon={<KeyRound className="h-4 w-4" />}>SSO (SAML/OIDC) & granular RBAC, SCIM on Enterprise</Li>
-                <Li icon={<FileCheck className="h-4 w-4" />}>Audit logs & immutable event trails</Li>
+                <Li icon={<Lock className="h-4 w-4" />}>Encryption in transit (TLS 1.2+) &amp; at rest (AES-256)</Li>
+                <Li icon={<KeyRound className="h-4 w-4" />}>SSO (SAML/OIDC) &amp; granular RBAC, SCIM on Enterprise</Li>
+                <Li icon={<FileCheck className="h-4 w-4" />}>Audit logs &amp; immutable event trails</Li>
                 <Li icon={<Database className="h-4 w-4" />}>Automated backups with rolling retention</Li>
-                <Li icon={<Eye className="h-4 w-4" />}>Privacy by design & least-privilege access</Li>
+                <Li icon={<Eye className="h-4 w-4" />}>Privacy by design &amp; least-privilege access</Li>
               </ul>
 
               {/* quick stats */}
@@ -127,11 +127,11 @@ export default function AboutSecurity() {
           </motion.div>
 
           {/* Right tiles */}
-          <div className="md:col-span-7 grid grid-cols-1 gap-6">
+          <div className="md:col-span-7 grid grid-cols-1 gap-6 min-w-0">
             {/* Compliance badges */}
             <motion.div
               variants={WRAP}
-              initial="hidden"
+              initial={false}
               whileInView="show"
               viewport={{ once: false, amount: 0.25, margin: "-15% 0px -20% 0px" }}
               className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-5"
@@ -141,7 +141,9 @@ export default function AboutSecurity() {
                   <BadgeCheck className="h-4 w-4 text-[#C6F24E]" />
                   Compliance (snapshot)
                 </div>
-                <Link href="/legal" className="text-[12px] text-white/70 hover:text-white">Legal & policies →</Link>
+                <Link href="/legal" className="text-[12px] text-white/70 hover:text-white whitespace-nowrap">
+                  Legal &amp; policies →
+                </Link>
               </motion.div>
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                 <Badge label="GDPR" status="Compliant" />
@@ -156,7 +158,7 @@ export default function AboutSecurity() {
             {/* Data residency */}
             <motion.div
               variants={WRAP}
-              initial="hidden"
+              initial={false}
               whileInView="show"
               viewport={{ once: false, amount: 0.25, margin: "-15% 0px -20% 0px" }}
               className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-5"
@@ -179,7 +181,7 @@ export default function AboutSecurity() {
             {/* Controls grid */}
             <motion.div
               variants={WRAP}
-              initial="hidden"
+              initial={false}
               whileInView="show"
               viewport={{ once: false, amount: 0.25, margin: "-15% 0px -20% 0px" }}
               className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-5"
@@ -202,7 +204,7 @@ export default function AboutSecurity() {
                   Event trails, exportable logs
                 </Control>
                 <Control icon={<FileKey className="h-4 w-4" />} title="Data lifecycle">
-                  Backups, retention & deletion workflows
+                  Backups, retention &amp; deletion workflows
                 </Control>
                 <Control icon={<Eye className="h-4 w-4" />} title="Privacy">
                   DPA, subprocessors list, DSAR support
@@ -213,7 +215,7 @@ export default function AboutSecurity() {
             {/* Docs & downloads */}
             <motion.div
               variants={WRAP}
-              initial="hidden"
+              initial={false}
               whileInView="show"
               viewport={{ once: false, amount: 0.25, margin: "-15% 0px -20% 0px" }}
               className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-5"
@@ -240,11 +242,11 @@ export default function AboutSecurity() {
 
 function Li({ icon, children }: { icon: ReactNode; children: ReactNode }) {
   return (
-    <li className="flex items-start gap-2">
+    <li className="flex items-start gap-2 break-words">
       <span className="mt-0.5 inline-grid h-6 w-6 shrink-0 place-items-center rounded-md bg-[#C6F24E]/15 text-[#C6F24E] ring-1 ring-[#C6F24E]/30">
         {icon}
       </span>
-      <span>{children}</span>
+      <span className="min-w-0">{children}</span>
     </li>
   );
 }
@@ -261,10 +263,10 @@ function QuickStat({ k, label }: { k: string; label: string }) {
 function Badge({ label, status, muted = false }: { label: string; status: string; muted?: boolean }) {
   return (
     <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.05] px-3 py-2">
-      <span className="text-sm text-white">{label}</span>
+      <span className="text-sm text-white break-words">{label}</span>
       <span
         className={[
-          "rounded-full px-2 py-0.5 text-[10px]",
+          "ml-2 rounded-full px-2 py-0.5 text-[10px] whitespace-nowrap",
           muted ? "border border-white/15 bg-black/40 text-white/70" : "border border-[#C6F24E]/40 bg-[#C6F24E]/20 text-white",
         ].join(" ")}
       >
@@ -288,9 +290,9 @@ function Control({ icon, title, children }: { icon: ReactNode; title: string; ch
       <span className="inline-grid h-8 w-8 shrink-0 place-items-center rounded-md bg-[#C6F24E]/15 text-[#C6F24E] ring-1 ring-[#C6F24E]/30">
         {icon}
       </span>
-      <div>
-        <div className="text-sm text-white">{title}</div>
-        <div className="text-[12px] text-white/70">{children}</div>
+      <div className="min-w-0">
+        <div className="text-sm text-white break-words">{title}</div>
+        <div className="text-[12px] text-white/70 break-words">{children}</div>
       </div>
     </div>
   );

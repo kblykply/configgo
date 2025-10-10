@@ -7,6 +7,8 @@ import WeatherCreationSection from "./components/WeatherCreationSection";
 import WebSolutionsSection from "./components/WebSolutionsSection";
 import NewsSection from "./components/NewsSection";
 import FaqSection from "./components/FaqSection";
+import CRMBasedDigitalTwinSection from "./components/CRMBasedDigitalTwinSection";
+import ConfiggoCRMPlusSection from "./components/ConfiggoCRMPlusSection";
 export default function Page() {
   return (
     <main>
@@ -15,10 +17,11 @@ export default function Page() {
       <Partners 
       />
       <PropertyShowcase />
-      <AboutUsSection />
-      <ImmersiveSection 
-       
-      />
+            <CRMBasedDigitalTwinSection />
+                        <ConfiggoCRMPlusSection />
+
+
+     
       <WeatherCreationSection 
       />
       <WebSolutionsSection />

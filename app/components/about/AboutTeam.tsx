@@ -9,32 +9,13 @@ import type { ReactNode } from "react";
 import { Users, Linkedin, Github, Globe, Mail } from "lucide-react";
 
 /**
- * Put images under /public/team using these exact filenames:
- * deniz-oktay-tuncay.jpg
- * ulas-turgut.jpg
- * salih-kaan-koc.jpg
- * ezgi-akyol.jpg
- * buse-ozsari.jpg
- * nur-bahar.jpg
- * fatih-gurbuz.jpg
- * furkan-uysal.jpg
- * mehmet-emin-guzel.jpg
- * tanay-ozdemir.jpg
- * kubilay-kuplay.jpg
- * munevver-verim.jpg
- * yasin-sefa-aksoy.jpg
- * batuhan-muzafferoglu.jpg
- * ege-moroglu.jpg
- * melike-doga-kacaner.jpg
- * beyza-sezer.jpg
- * mert-cayli.jpg
- * mehmet-nazim-gunay.jpg
- * yunus-yilmaz.jpg
- * yagiz-atilay-tuncay.jpg
- * bora-sik.jpg
+ * Put images under /public/team using these filenames (or update below paths):
+ * deniz.png, ulas.png, kaan.png, ezgi.png, buse.png, fatih.png, furkan.png, mehmet.png,
+ * tanay.png, munevver.png, yasin.png, batuhan.png, ege.png, melike.png, beyza.png, mert.png,
+ * nazim.png, yunus.png, yagiz.jpg, bora.png
  */
 
-const HEADER_OFFSET = "20vh";
+const HEADER_OFFSET = "clamp(64px, 14vh, 20vh)";
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 const WRAP = {
@@ -133,7 +114,6 @@ const TEAM: Member[] = [
     image: img("buse.png"),
     socials: { linkedin: "https://www.linkedin.com/in/buse-ozsari/" },
   },
- 
 
   // Game Engine
   {
@@ -170,7 +150,6 @@ const TEAM: Member[] = [
   },
 
   // CRM & Web
-
   {
     id: "munevver-verim",
     name: "Münevver Verim",
@@ -250,13 +229,7 @@ const TEAM: Member[] = [
     image: img("yunus.png"),
     socials: { linkedin: "https://www.linkedin.com/in/yunusyilmazld/" },
   },
-  {
-    id: "yagiz-atilay-tuncay",
-    name: "Yağız Atılay Tunçay",
-    role: "Scriptwriter",
-    dept: "Rendering",
-    image: img("yagiz.jpg"),
-  },
+
   {
     id: "bora-sik",
     name: "Bora Şık",
@@ -284,20 +257,24 @@ export default function AboutTeam() {
   }, []);
 
   return (
-    <section id="team" className="relative" style={{ scrollMarginTop: HEADER_OFFSET }}>
-      {/* bg */}
-      <div className="pointer-events-none absolute inset-0">
+    <section
+      id="team"
+      className="relative overflow-x-hidden" // ← prevent horizontal scroll
+      style={{ scrollMarginTop: HEADER_OFFSET }}
+    >
+      {/* background (clipped) */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(rgba(255,255,255,.16)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.16)_1px,transparent_1px)] [background-size:26px_26px]" />
-        <div className="absolute -inset-x-16 top-1/3 h-48 rotate-[-2deg] bg-[linear-gradient(90deg,rgba(198,242,78,0.10),rgba(255,255,255,0.02),rgba(198,242,78,0.10))] blur-xl" />
+        <div className="absolute left-1/2 top-1/3 h-48 w-[140%] -translate-x-1/2 rotate-[-2deg] bg-[linear-gradient(90deg,rgba(198,242,78,0.10),rgba(255,255,255,0.02),rgba(198,242,78,0.10))] blur-xl" />
       </div>
 
-      <div className="relative z-[1] mx-auto max-w-[1450px] px-6 py-16 md:py-24">
+      <div className="relative z-[1] mx-auto max-w-[1450px] px-4 sm:px-6 py-12 sm:py-16 md:py-24">
         {/* header */}
         <motion.div
           variants={WRAP}
-          initial="hidden"
+          initial={false}
           whileInView="show"
-          viewport={{ once: false, amount: 0.25, margin: "-15% 0px -20% 0px" }}
+          viewport={{ once: true, amount: 0.25, margin: "-12% 0px -12% 0px" }}
           className="mb-6 md:mb-10"
         >
           <motion.div variants={CARD} className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] text-white/85">
@@ -315,9 +292,9 @@ export default function AboutTeam() {
         {/* filter chips */}
         <motion.div
           variants={WRAP}
-          initial="hidden"
+          initial={false}
           whileInView="show"
-          viewport={{ once: false, amount: 0.25, margin: "-15% 0px -20% 0px" }}
+          viewport={{ once: true, amount: 0.25, margin: "-12% 0px -12% 0px" }}
           className="mb-8 flex flex-wrap gap-2"
         >
           {DEPARTMENTS.map((d) => {
@@ -336,7 +313,7 @@ export default function AboutTeam() {
                     : "border-white/15 bg-white/10 text-white/80 hover:bg-white/15",
                 ].join(" ")}
               >
-                <span>{d}</span>
+                <span className="truncate">{d}</span>
                 <span
                   className={[
                     "rounded-md px-1.5 py-0.5 text-[11px] ring-1",
@@ -354,14 +331,14 @@ export default function AboutTeam() {
         <motion.ul
           key={active}
           variants={WRAP}
-          initial="hidden"
+          initial={false}
           animate="show"
           whileInView="show"
-          viewport={{ once: false, amount: 0.25, margin: "-15% 0px -20% 0px" }}
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          viewport={{ once: true, amount: 0.25, margin: "-12% 0px -12% 0px" }}
+          className="grid min-w-0 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
         >
           {filtered.map((m) => (
-            <motion.li key={m.id} variants={CARD} whileHover={{ y: -4, scale: 1.01 }}>
+            <motion.li key={m.id} variants={CARD} whileHover={{ y: -4, scale: 1.01 }} className="min-w-0">
               <TeamCard member={m} />
             </motion.li>
           ))}
@@ -370,9 +347,9 @@ export default function AboutTeam() {
         {/* CTA */}
         <motion.div
           variants={WRAP}
-          initial="hidden"
+          initial={false}
           whileInView="show"
-          viewport={{ once: false, amount: 0.25, margin: "-15% 0px -20% 0px" }}
+          viewport={{ once: true, amount: 0.25, margin: "-12% 0px -12% 0px" }}
           className="mt-10 flex justify-center"
         >
           <motion.div variants={CARD}>
@@ -420,7 +397,7 @@ function TeamCard({ member }: { member: Member }) {
         )}
 
         {/* top chips */}
-        <div className="absolute left-3 top-3 flex flex-wrap items-center gap-2">
+        <div className="absolute left-3 top-3 flex max-w-[calc(100%-1.5rem)] flex-wrap items-center gap-2">
           <span className="rounded-full bg-[#C6F24E]/80 px-2 py-0.5 text-[10px] font-medium text-black">
             {dept}
           </span>
@@ -440,12 +417,12 @@ function TeamCard({ member }: { member: Member }) {
       {/* body */}
       <div className="p-4">
         <div className="flex items-baseline justify-between gap-3">
-          <div>
-            <div className="text-white font-[500]">{name}</div>
-            <div className="text-[12px] text-white/65">{role}</div>
+          <div className="min-w-0">
+            <div className="truncate text-white font-[500]">{name}</div>
+            <div className="truncate text-[12px] text-white/65">{role}</div>
           </div>
           {/* socials */}
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2">
             {socials?.linkedin ? (
               <SocialLink href={socials.linkedin} label="LinkedIn">
                 <Linkedin className="h-4 w-4" />

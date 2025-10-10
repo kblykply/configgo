@@ -16,7 +16,6 @@ import {
   Sparkles,
   HeadphonesIcon,
   Handshake,
-  Info,
 } from "lucide-react";
 
 /* --- header offset for your fixed header (≈20vh) --- */
@@ -44,7 +43,6 @@ export default function AboutContact() {
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("sending");
-
     // TODO: replace with your /api/contact POST
     await new Promise((r) => setTimeout(r, 800));
     setStatus("sent");
@@ -53,21 +51,21 @@ export default function AboutContact() {
   return (
     <section
       id="contact"
-      className="relative"
+      className="relative overflow-x-hidden" // <- prevent mobile horizontal scroll
       style={{ scrollMarginTop: HEADER_OFFSET }}
     >
       {/* distinct bg: lime arc + micro-grid */}
-      <div className="pointer-events-none absolute inset-0">
+      <div className="pointer-events-none absolute inset-0 [contain:paint]">
         <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(rgba(255,255,255,.16)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.16)_1px,transparent_1px)] [background-size:26px_26px]" />
-        <div className="absolute -inset-x-16 top-10 h-44 rotate-[2deg] bg-[linear-gradient(90deg,rgba(198,242,78,0.12),rgba(255,255,255,0.02),rgba(198,242,78,0.12))] blur-xl" />
+        <div className="absolute top-10 h-44 rotate-[2deg] bg-[linear-gradient(90deg,rgba(198,242,78,0.12),rgba(255,255,255,0.02),rgba(198,242,78,0.12))] blur-xl -inset-x-8 md:-inset-x-16" />
         <div className="absolute inset-0 bg-[radial-gradient(70%_120%_at_50%_0%,rgba(198,242,78,0.06),rgba(0,0,0,0)_60%)]" />
       </div>
 
-      <div className="relative z-[1] mx-auto max-w-[1450px] px-6 py-16 md:py-24">
+      <div className="relative z-[1] mx-auto w-full max-w-[1450px] px-4 sm:px-6 py-16 md:py-24">
         {/* header */}
         <motion.div
           variants={WRAP}
-          initial="hidden"
+          initial={false}                 // <- visible immediately; still animates on enter
           whileInView="show"
           viewport={{ once: false, amount: 0.25, margin: "-15% 0px -20% 0px" }}
           className="mb-8 md:mb-12"
@@ -76,7 +74,7 @@ export default function AboutContact() {
             <Sparkles className="h-3.5 w-3.5 text-[#C6F24E]" />
             Contact / work with us
           </motion.p>
-          <motion.h2 variants={ITEM} className="typo-h2-md mt-2">
+          <motion.h2 variants={ITEM} className="typo-h2-md mt-2 break-words">
             Tell us what you’re <span className="text-[#C6F24E]">building</span>
           </motion.h2>
           <motion.p variants={ITEM} className="typo-small mt-2 max-w-[760px] text-white/70">
@@ -89,15 +87,15 @@ export default function AboutContact() {
           {/* form */}
           <motion.div
             variants={WRAP}
-            initial="hidden"
+            initial={false}
             whileInView="show"
             viewport={{ once: false, amount: 0.25, margin: "-10% 0px -20% 0px" }}
-            className="md:col-span-7"
+            className="md:col-span-7 min-w-0"
           >
             <motion.div variants={ITEM} className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-5 shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
-              <div className="mb-3 flex items-center justify-between">
+              <div className="mb-3 flex items-center justify-between gap-3">
                 <div className="text-white/85">Send us a message</div>
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-2 py-1 text-[11px] text-white/80">
+                <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/15 bg-white/10 px-2 py-1 text-[11px] text-white/80">
                   <ShieldCheck className="h-3.5 w-3.5 text-[#C6F24E]" />
                   Data is encrypted in transit
                 </span>
@@ -115,7 +113,7 @@ export default function AboutContact() {
                       id="name"
                       name="name"
                       required
-                      className="w-full rounded-xl border border-white/15 bg-white/10 px-3 py-2 text-sm text-white outline-none placeholder:white/50 focus:ring-2 focus:ring-[#C6F24E]/40"
+                      className="w-full rounded-xl border border-white/15 bg-white/10 px-3 py-2 text-sm text-white outline-none placeholder:text-white/50 focus:ring-2 focus:ring-[#C6F24E]/40"
                       placeholder="Jane Doe"
                     />
                   </Field>
@@ -126,7 +124,7 @@ export default function AboutContact() {
                       name="email"
                       type="email"
                       required
-                      className="w-full rounded-xl border border-white/15 bg-white/10 px-3 py-2 text-sm text-white outline-none placeholder:white/50 focus:ring-2 focus:ring-[#C6F24E]/40"
+                      className="w-full rounded-xl border border-white/15 bg-white/10 px-3 py-2 text-sm text-white outline-none placeholder:text-white/50 focus:ring-2 focus:ring-[#C6F24E]/40"
                       placeholder="jane@company.com"
                     />
                   </Field>
@@ -135,7 +133,7 @@ export default function AboutContact() {
                     <input
                       id="company"
                       name="company"
-                      className="w-full rounded-xl border border-white/15 bg-white/10 px-3 py-2 text-sm text-white outline-none placeholder:white/50 focus:ring-2 focus:ring-[#C6F24E]/40"
+                      className="w-full rounded-xl border border-white/15 bg-white/10 px-3 py-2 text-sm text-white outline-none placeholder:text-white/50 focus:ring-2 focus:ring-[#C6F24E]/40"
                       placeholder="Acme Developments"
                     />
                   </Field>
@@ -162,12 +160,12 @@ export default function AboutContact() {
                       name="message"
                       rows={5}
                       required
-                      className="w-full rounded-xl border border-white/15 bg-white/10 px-3 py-2 text-sm text-white outline-none placeholder:white/50 focus:ring-2 focus:ring-[#C6F24E]/40"
+                      className="w-full rounded-xl border border-white/15 bg-white/10 px-3 py-2 text-sm text-white outline-none placeholder:text-white/50 focus:ring-2 focus:ring-[#C6F24E]/40"
                       placeholder="Tell us about your project, timeline and goals…"
                     />
                   </Field>
 
-                  <div className="col-span-full flex items-center justify-between gap-3">
+                  <div className="col-span-full flex flex-wrap items-center justify-between gap-3">
                     <label className="inline-flex items-center gap-2 text-[12px] text-white/75">
                       <input type="checkbox" name="consent" required className="h-4 w-4 rounded border-white/20 bg-black" />
                       I agree to the{" "}
@@ -197,10 +195,10 @@ export default function AboutContact() {
           {/* direct lines & office */}
           <motion.div
             variants={WRAP}
-            initial="hidden"
+            initial={false}
             whileInView="show"
             viewport={{ once: false, amount: 0.25, margin: "-10% 0px -20% 0px" }}
-            className="md:col-span-5 grid grid-cols-1 gap-5"
+            className="md:col-span-5 grid grid-cols-1 gap-5 min-w-0"
           >
             {/* quick routes */}
             <motion.div variants={ITEM} className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -253,7 +251,7 @@ export default function AboutContact() {
                 <Building2 className="h-4 w-4 text-[#C6F24E]" />
                 Ankara HQ
               </div>
-              <div className="text-sm text-white/80">
+              <div className="text-sm text-white/80 break-words">
                 Mustafa Kemal Mah., Çankaya / Ankara<br />
                 <span className="text-white/60">Istanbul office: Maslak, Sarıyer / Istanbul</span>
               </div>
@@ -263,9 +261,6 @@ export default function AboutContact() {
                 </Link>
               </div>
             </motion.div>
-
-            {/* note */}
-        
           </motion.div>
         </div>
       </div>
@@ -310,18 +305,18 @@ function QuickCard({
   return (
     <Link
       href={href}
-      className="group flex items-center justify-between rounded-xl border border-white/15 bg-white/10 px-3 py-3 text-sm text-white/85 transition hover:bg-white/15"
+      className="group flex w-full min-w-0 items-center justify-between rounded-xl border border-white/15 bg-white/10 px-3 py-3 text-sm text-white/85 transition hover:bg-white/15"
     >
-      <span className="inline-flex items-center gap-2">
-        <span className="inline-grid h-8 w-8 place-items-center rounded-md bg-[#C6F24E]/15 text-[#C6F24E] ring-1 ring-[#C6F24E]/30">
+      <span className="inline-flex min-w-0 items-center gap-2">
+        <span className="inline-grid h-8 w-8 shrink-0 place-items-center rounded-md bg-[#C6F24E]/15 text-[#C6F24E] ring-1 ring-[#C6F24E]/30">
           {icon}
         </span>
-        <span>
+        <span className="min-w-0">
           <div className="text-white/90">{title}</div>
-          <div className="text-[11px] text-white/60">{k}</div>
+          <div className="text-[11px] text-white/60 break-words">{k}</div>
         </span>
       </span>
-      <ArrowRight className="h-4 w-4 opacity-80 transition group-hover:translate-x-0.5" />
+      <ArrowRight className="ml-2 h-4 w-4 shrink-0 opacity-80 transition group-hover:translate-x-0.5" />
     </Link>
   );
 }

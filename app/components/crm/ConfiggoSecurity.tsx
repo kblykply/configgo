@@ -1,8 +1,8 @@
 // app/components/configgo/ConfiggoSecurity.tsx
 "use client";
 
-import { motion, useAnimation, useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { useState, type ReactNode } from "react";
 import {
   ShieldCheck,
   Lock,
@@ -41,18 +41,13 @@ const PANEL = {
 
 // reserve space for your fixed header
 const HEADER_OFFSET = "clamp(72px, 16vh, 128px)";
+const VIEWPORT = { once: false, amount: 0.3, margin: "-15% 0% -25% 0%" } as const;
 
 export default function ConfiggoSecurity() {
-  const ref = useRef<HTMLElement | null>(null);
-  const inView = useInView(ref, { amount: 0.35, margin: "-15% 0px -25% 0px" });
-  const controls = useAnimation();
-  useEffect(() => { inView ? controls.start("show") : controls.set("hidden"); }, [inView, controls]);
-
   const [region, setRegion] = useState<"EU" | "US" | "TR" | "MENA">("EU");
 
   return (
     <section
-      ref={ref}
       id="security"
       className="relative"
       style={{ paddingTop: HEADER_OFFSET, scrollMarginTop: HEADER_OFFSET }}
@@ -60,9 +55,15 @@ export default function ConfiggoSecurity() {
       {/* glow */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_140%_at_50%_0%,rgba(198,242,78,0.07),rgba(0,0,0,0)_60%)]" />
 
-      <div className="relative z-[1] mx-auto max-w-[1450px] px-6 pb-16 md:pb-24">
+      <div className="relative z-[1] mx-auto max-w-[1450px] px-4 sm:px-6 pb-16 md:pb-24">
         {/* header */}
-        <motion.div variants={WRAP} initial="hidden" animate={controls} className="mb-10 text-center">
+        <motion.div
+          variants={WRAP}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT}
+          className="mb-10 text-center"
+        >
           <motion.p variants={ITEM} className="typo-small-heading text-white/70">Security & Compliance</motion.p>
           <motion.h2 variants={ITEM} className="typo-h2-md mt-2">
             Enterprise-grade protection, <span className="text-[#C6F24E]">by default</span>
@@ -74,7 +75,13 @@ export default function ConfiggoSecurity() {
         </motion.div>
 
         {/* top row: badges • nucleus • policy pack */}
-        <motion.div variants={WRAP} initial="hidden" animate={controls} className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-12">
+        <motion.div
+          variants={WRAP}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT}
+          className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-12"
+        >
           {/* badges */}
           <motion.div variants={PANEL} className="md:col-span-4 rounded-2xl border border-white/10 bg-white/[0.05] p-5">
             <div className="mb-3 flex items-center gap-2 text-sm text-white/85">
@@ -99,6 +106,7 @@ export default function ConfiggoSecurity() {
           <motion.div variants={PANEL} className="md:col-span-4">
             <div className="relative grid place-items-center overflow-hidden rounded-2xl border border-white/10 bg-black/40 p-8 shadow-[0_40px_100px_rgba(0,0,0,0.6)]">
               <motion.div
+                aria-hidden
                 className="absolute h-[380px] w-[380px] rounded-full"
                 style={{
                   background:
@@ -138,7 +146,13 @@ export default function ConfiggoSecurity() {
         </motion.div>
 
         {/* bottom row: region + encryption + data mgmt */}
-        <motion.div variants={WRAP} initial="hidden" animate={controls} className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-12">
+        <motion.div
+          variants={WRAP}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT}
+          className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-12"
+        >
           {/* residency */}
           <motion.div variants={PANEL} className="md:col-span-4 rounded-2xl border border-white/10 bg-white/[0.05] p-5">
             <div className="mb-3 flex items-center justify-between">
@@ -162,20 +176,16 @@ export default function ConfiggoSecurity() {
             </div>
             <div className="rounded-lg border border-white/10 bg-white/[0.04] p-4 text-sm text-white/80">
               {region === "EU" && (
-                <p><b className="text-white/90">Primary:</b> eu-central • <b className="text-white/90">Failover:</b> eu-west.  
-                SCCs supported for international transfers.</p>
+                <p><b className="text-white/90">Primary:</b> eu-central • <b className="text-white/90">Failover:</b> eu-west. SCCs supported for international transfers.</p>
               )}
               {region === "US" && (
-                <p><b className="text-white/90">Primary:</b> us-east • <b className="text-white/90">Failover:</b> us-west.  
-                Data remains within the US regions.</p>
+                <p><b className="text-white/90">Primary:</b> us-east • <b className="text-white/90">Failover:</b> us-west. Data remains within the US regions.</p>
               )}
               {region === "TR" && (
-                <p><b className="text-white/90">Primary:</b> Türkiye (ankara/istanbul zones).  
-                Residency for projects with local requirements.</p>
+                <p><b className="text-white/90">Primary:</b> Türkiye (ankara/istanbul zones). Residency for projects with local requirements.</p>
               )}
               {region === "MENA" && (
-                <p><b className="text-white/90">Primary:</b> me-central • <b className="text-white/90">Failover:</b> me-west.  
-                Low-latency access across GCC countries.</p>
+                <p><b className="text-white/90">Primary:</b> me-central • <b className="text-white/90">Failover:</b> me-west. Low-latency access across GCC countries.</p>
               )}
             </div>
           </motion.div>
@@ -218,10 +228,10 @@ function Badge({ label, desc }: { label: string; desc: string }) {
     </div>
   );
 }
-function Row({ icon, text }: { icon: React.ReactNode; text: string }) {
+function Row({ icon, text }: { icon: ReactNode; text: string }) {
   return <div className="flex items-center gap-2">{icon}<span>{text}</span></div>;
 }
-function Mini({ icon, label }: { icon: React.ReactNode; label: string }) {
+function Mini({ icon, label }: { icon: ReactNode; label: string }) {
   return (
     <div className="flex items-center justify-center gap-1 rounded-full border border-white/15 bg-white/10 px-2 py-1">
       <span className="text-white/85">{icon}</span>
