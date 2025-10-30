@@ -33,9 +33,11 @@ const DEFAULT_PROCESSING: ProcessingRow[] = [
   {
     purpose: "Provide, maintain, and secure the Services",
     nature: "Hosting, storage, transmission, display, backup, and support",
-    categoriesOfData: "Account data (name, email), usage logs, device/network metadata, customer-provided content",
+    categoriesOfData:
+      "Account data (name, email), usage logs, device/network metadata, customer-provided content",
     dataSubjects: "Customer personnel, end users authorized by Customer",
-    duration: "For the term of the Main Agreement, plus retention required for legal/defense obligations",
+    duration:
+      "For the term of the Main Agreement, plus retention required for legal/defense obligations",
   },
   {
     purpose: "Improve and analyze Service performance",
@@ -84,8 +86,14 @@ export default function DPASection({
       {/* subtle radial glow */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_120%_at_40%_0%,rgba(255,255,255,0.05),rgba(0,0,0,0)_60%)]" />
 
-      {/* widened container + header-safe top padding */}
-      <div className="relative z-[1] mx-auto max-w-[1450px] px-6 md:px-8 pt=[18vh] lg:pt-[22vh] pb-16 md:pb-24">
+      {/* widened container + header-safe top padding (mobile/tablet/desktop) */}
+      <div
+        className="
+          relative z-[1] mx-auto max-w-[1450px] px-6 md:px-8
+          pt-[16vh] sm:pt-[18vh] md:pt-[20vh] lg:pt-[22vh]
+          pb-16 md:pb-24
+        "
+      >
         {/* Header */}
         <header className="mb-10 md:mb-14 text-center">
           <p className="typo-small-heading text-white/70">Legal</p>
@@ -343,9 +351,9 @@ export default function DPASection({
             />
           </div>
 
-          {/* Mini TOC (sticks below header) */}
+          {/* Mini TOC (sticks below header on md+) */}
           <aside className="md:col-span-3">
-            <nav className="sticky top-[22vh] rounded-2xl bg-white/5 ring-1 ring-white/10 p-5">
+            <nav className="md:sticky md:top-[22vh] rounded-2xl bg-white/5 ring-1 ring-white/10 p-5">
               <p className="text-white/80 font-semibold">On this page</p>
               <ul className="mt-3 space-y-2 text-sm text-white/75">
                 {[
@@ -379,7 +387,7 @@ export default function DPASection({
           </aside>
         </div>
 
-        {/* Annex II — TOMs (expanded, optional: keep it visible for clarity) */}
+        {/* Annex II — TOMs */}
         <div className="mt-12 space-y-6">
           <h2 className="text-white text-xl font-semibold">
             <span
@@ -388,24 +396,41 @@ export default function DPASection({
             />
             Annex II — Technical & Organizational Measures
           </h2>
-          <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 p-6 md:p-7">
+          <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 p-6 md:pt-7 md:px-7">
             <ul className="list-disc pl-5 space-y-2">
-              <li><strong>Organization & Policies:</strong> Security governance, policies, training, vendor management.</li>
-              <li><strong>Access Control:</strong> MFA/SSO, least privilege, role separation, periodic reviews, immediate revocation.</li>
-              <li><strong>Encryption:</strong> TLS for data in transit; encryption at rest; secrets management.</li>
-              <li><strong>Hardening & Development:</strong> Secure coding, code review, dependency scanning, IaC baselines.</li>
-              <li><strong>Monitoring & Logging:</strong> Centralized logs, retention, anomaly detection, alerting.</li>
-              <li><strong>Vulnerability Management:</strong> Regular scanning, patch SLAs, penetration tests.</li>
-              <li><strong>Resilience:</strong> Backups, replication, DR testing, RPO/RTO objectives.</li>
-              <li><strong>Physical Security:</strong> Data centers with access control, surveillance, and environmental controls.</li>
-              <li><strong>Incident Response:</strong> Documented runbooks, roles, communication plans, post-incident review.</li>
-              <li><strong>Privacy by Design:</strong> Data minimization, purpose limitation, retention, pseudonymization where suitable.</li>
+              <li>
+                <strong>Organization & Policies:</strong> Security governance, policies, training, vendor management.
+              </li>
+              <li>
+                <strong>Access Control:</strong> MFA/SSO, least privilege, role separation, periodic reviews, immediate revocation.
+              </li>
+              <li>
+                <strong>Encryption:</strong> TLS for data in transit; encryption at rest; secrets management.
+              </li>
+              <li>
+                <strong>Hardening & Development:</strong> Secure coding, code review, dependency scanning, IaC baselines.
+              </li>
+              <li>
+                <strong>Monitoring & Logging:</strong> Centralized logs, retention, anomaly detection, alerting.
+              </li>
+              <li>
+                <strong>Vulnerability Management:</strong> Regular scanning, patch SLAs, penetration tests.
+              </li>
+              <li>
+                <strong>Resilience:</strong> Backups, replication, DR testing, RPO/RTO objectives.
+              </li>
+              <li>
+                <strong>Physical Security:</strong> Data centers with access control, surveillance, and environmental controls.
+              </li>
+              <li>
+                <strong>Incident Response:</strong> Documented runbooks, roles, communication plans, post-incident review.
+              </li>
+              <li>
+                <strong>Privacy by Design:</strong> Data minimization, purpose limitation, retention, pseudonymization where suitable.
+              </li>
             </ul>
           </div>
         </div>
-
-        {/* Annex I — Processing details table (rendered above inside #details) */}
-        {/* Annex III — Sub-processors table (rendered above inside #subprocessors) */}
       </div>
     </section>
   );
@@ -423,7 +448,13 @@ function Article({
   body: React.ReactNode;
 }) {
   return (
-    <article id={id} className="rounded-2xl bg-white/5 ring-1 ring-white/10 p-6 md:p-7">
+    <article
+      id={id}
+      className="
+        scroll-mt-[16vh] sm:scroll-mt-[18vh] md:scroll-mt-[20vh] lg:scroll-mt-[22vh]
+        rounded-2xl bg-white/5 ring-1 ring-white/10 p-6 md:p-7
+      "
+    >
       <h3 className="text-white text-lg font-semibold">
         <span
           className="mr-2 inline-block h-5 w-1.5 align-middle rounded-full"
@@ -444,9 +475,13 @@ function ProcessingTable({ rows }: { rows: ProcessingRow[] }) {
       <table className="min-w-full text-left text-sm text-white/85">
         <thead className="bg-white/5 text-white/80">
           <tr>
-            {["Purpose", "Nature", "Categories of Personal Data", "Data Subjects", "Duration"].map((h) => (
-              <th key={h} className="px-4 py-3 font-semibold">{h}</th>
-            ))}
+            {["Purpose", "Nature", "Categories of Personal Data", "Data Subjects", "Duration"].map(
+              (h) => (
+                <th key={h} className="px-4 py-3 font-semibold">
+                  {h}
+                </th>
+              ),
+            )}
           </tr>
         </thead>
         <tbody className="divide-y divide-white/10">
@@ -465,14 +500,22 @@ function ProcessingTable({ rows }: { rows: ProcessingRow[] }) {
   );
 }
 
-function SubProcessorTable({ rows, className = "" }: { rows: SubProcessorRow[]; className?: string }) {
+function SubProcessorTable({
+  rows,
+  className = "",
+}: {
+  rows: SubProcessorRow[];
+  className?: string;
+}) {
   return (
     <div className={`overflow-x-auto rounded-xl ring-1 ring-white/10 ${className}`}>
       <table className="min-w-full text-left text-sm text-white/85">
         <thead className="bg-white/5 text-white/80">
           <tr>
             {["Sub-processor", "Purpose", "Location", "Data Categories", "Safeguards"].map((h) => (
-              <th key={h} className="px-4 py-3 font-semibold">{h}</th>
+              <th key={h} className="px-4 py-3 font-semibold">
+                {h}
+              </th>
             ))}
           </tr>
         </thead>

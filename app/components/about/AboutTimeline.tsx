@@ -52,8 +52,8 @@ type Step = {
 
 const STEPS: Step[] = [
   { id: "founding", year: "Founding", title: "Founding & First CRM Integration", body: "Configgo founded; first unit added via CRM.", icon: <Flag className="h-4 w-4 text-[#C6F24E]" />, badge: "Origin", image: "/timeline/1.jpg" },
-  { id: "first-demo", year: "Demo", title: "First Demo Application", body: "The first demo app was created under the name “PRR”.", icon: <Rocket className="h-4 w-4 text-[#C6F24E]" />, image: "/timeline/2.jpg" },
-  { id: "rnd-cist", year: "R&D", title: "R&D (CIST)", body: "CIST built; auto unit cloning and Balcony added.", icon: <Beaker className="h-4 w-4 text-[#C6F24E]" />, image: "/timeline/3.jpg" },
+  { id: "first-demo", year: "Demo", title: "First Demo Application", body: "The first demo app was created under the name “PRR”.", icon: <Rocket className="h-4 w-4 text-[#C6F24E]" />, image: "/timeline/3.jpg" },
+  { id: "rnd-cist", year: "R&D", title: "R&D (CIST)", body: "CIST built; auto unit cloning and Balcony added.", icon: <Beaker className="h-4 w-4 text-[#C6F24E]" />, image: "/timeline/2.jpg" },
   { id: "baglica", year: "Bağlıca", title: "Bağlıca Project Improvements", body: "Surroundings optimized; FPS, TPS, Car modes added.", icon: <Car className="h-4 w-4 text-[#C6F24E]" />, image: "/timeline/4.jpg" },
   { id: "mega-suncity", year: "Projects", title: "Mega 1453 & Sun City", body: "Mega 1453 & Sun City; map Land Markers added.", icon: <Landmark className="h-4 w-4 text-[#C6F24E]" />, image: "/timeline/5.jpg" },
   { id: "vivasi", year: "Vivasi", title: "Vivasi Project", body: "Vivasi: new doc format; Blender imports supported.", icon: <FileBox className="h-4 w-4 text-[#C6F24E]" />, image: "/timeline/6.jpg" },
