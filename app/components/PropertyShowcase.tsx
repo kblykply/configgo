@@ -134,7 +134,7 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
   },
   p13: {
     description:
-      "",
+      "Suncity 2",
     slides: [
       { title: "See All Project Details", image: "/suncity/ui.jpg", caption: "Access all architectural and technical information of the project from a single panel" },
       { title: "Apartment Interior Tour", image: "/suncity/interior-tour.jpg", caption: "Enter a selected apartment and walk through every room with an interactive 3D tour." },
@@ -149,7 +149,7 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
   },
     p11: {
     description:
-      "",
+      "Mega 1453",
     slides: [
       { title: "See All Project Details", image: "/mega/ui.jpg", caption: "Access all architectural and technical information of the project from a single panel" },
       { title: "Apartment Interior Tour", image: "/mega/interior-tour.jpg", caption: "Enter a selected apartment and walk through every room with an interactive 3D tour." },
