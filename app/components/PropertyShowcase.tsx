@@ -39,7 +39,7 @@ const PROJECTS: Project[] = [
   { id: "p7", title: "ONYX Potre", developer: "ONYX", city: "Ankara", image: "/covers/onyx.jpg", href: "#" },
   { id: "p9", title: "Criter Bağlıca", developer: "Criter", city: "Ankara", image: "/covers/criter.jpg", href: "#" },
   { id: "p10", title: "Lagoon", developer: "DND", city: "Cyprus", image: "/covers/laggon.jpg", href: "#" },
-  { id: "p11", title: "Mega1453", developer: "Trinvest", city: "Ankara", image: "/covers/mega1453.jpg", href: "#" },
+  { id: "p11", title: "Mega1453", developer: "Trinvest", city: "Ankara", image: "/mega/Mega1453.jpg", href: "#" },
   { id: "p12", title: "Orion Tower", developer: "Kosavalı", city: "Ankara", image: "/covers/oriontower.jpg", href: "#" },
   { id: "p13", title: "Suncity 2", developer: "Trinvest", city: "Antalya", image: "/covers/suncity.jpg", href: "#" },
   { id: "p16", title: "Park Rest", developer: "Elite", city: "Cyprus", image: "/covers/prr.jpg", href: "#" },
@@ -134,10 +134,9 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
   },
   p13: {
     description:
-      "Bu proje; kentsel yaşamı akıllı altyapı, yeşil alanlar ve karma kullanımla birleştiren yeni nesil bir yerleşim yaklaşımı sunar. İlk etap; 3 blok, 240 konut ve zemin katta 18 ticari birimden oluşur. Güneye bakan geniş cepheler, rüzgâr ve ışık optimizasyonu için kademeli bir kütleyle çözülmüştür. Sosyal tesislerde kapalı havuz, çok amaçlı salon, çalışma alanları ve 7/24 güvenlik bulunmaktadır. Bağlantı yollarına 3 dk, metroya yürüme mesafesi…",
+      "",
     slides: [
       { title: "See All Project Details", image: "/suncity/ui.jpg", caption: "Access all architectural and technical information of the project from a single panel" },
-      { title: "Filter Apartments", image: "/suncity/filtre.jpg", caption: "Filter the apartments and choose the apartment that best suits your client." },
       { title: "Apartment Interior Tour", image: "/suncity/interior-tour.jpg", caption: "Enter a selected apartment and walk through every room with an interactive 3D tour." },
       { title: "See the Apartment’s View", image: "/suncity/view.jpg", caption: "Preview the exact panorama from windows and balconies before any site visit." },
       { title: "Sunlight by Hour", image: "/suncity/sunpath.jpg", caption: "Simulate sun position across the day to analyze light and shade in each room." },
@@ -150,10 +149,9 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
   },
     p11: {
     description:
-      "Bu proje; kentsel yaşamı akıllı altyapı, yeşil alanlar ve karma kullanımla birleştiren yeni nesil bir yerleşim yaklaşımı sunar. İlk etap; 3 blok, 240 konut ve zemin katta 18 ticari birimden oluşur. Güneye bakan geniş cepheler, rüzgâr ve ışık optimizasyonu için kademeli bir kütleyle çözülmüştür. Sosyal tesislerde kapalı havuz, çok amaçlı salon, çalışma alanları ve 7/24 güvenlik bulunmaktadır. Bağlantı yollarına 3 dk, metroya yürüme mesafesi…",
+      "",
     slides: [
       { title: "See All Project Details", image: "/mega/ui.jpg", caption: "Access all architectural and technical information of the project from a single panel" },
-      { title: "Filter Apartments", image: "/mega/filtre.jpg", caption: "Filter the apartments and choose the apartment that best suits your client." },
       { title: "Apartment Interior Tour", image: "/mega/interior-tour.jpg", caption: "Enter a selected apartment and walk through every room with an interactive 3D tour." },
       { title: "Sunlight by Hour", image: "/mega/sunpath.jpg", caption: "Simulate sun position across the day to analyze light and shade in each room." },
       { title: "Explore Site Amenities", image: "/mega/amenities.jpg", caption: "Browse gyms, pools, playgrounds, and shared spaces at a glance." },
